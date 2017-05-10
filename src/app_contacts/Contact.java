@@ -21,10 +21,6 @@ public class Contact implements Serializable {
 	public void modifications(String lastName, String firstName, String number, String imagePath) {
 
 	}
-	
-	public void saveContact(String lastName, String firstName, String number, String imagePath){
-		
-	}
 
 	// ***GETTERS***
 	public String getLastName() {
