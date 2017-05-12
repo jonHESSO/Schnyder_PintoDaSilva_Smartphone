@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Contact implements Serializable {
 
-	private String lastName; // nom du contact
-	private String firstName; // prénom du contact
-	private String number; // numéro de téléphone du contact
-	private String mail;
-	private String imagePath; // Chemin système de(s) image(s) associée(s) au contact
+	private String lastName; 	// nom du contact
+	private String firstName; 	// prenom du contact
+	private String number; 		// numero du contact
+	private String mail;		// mail du contact
+	private String imagePath; 	// Chemin systeme de(s) image(s) associee(s) au contact
 
 	// Constructeur pour contact
 	public Contact(String lastName, String firstName, String number) {
