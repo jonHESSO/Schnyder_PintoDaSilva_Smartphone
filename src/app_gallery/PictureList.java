@@ -29,5 +29,10 @@ public class PictureList implements Serializable
 		}
 		return iconList ;
 	}
+	
+	public Picture getPicture(int i)
+	{
+		return this.pictureList.get(i) ;
+	}
 
 }

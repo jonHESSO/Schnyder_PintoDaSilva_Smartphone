@@ -22,66 +22,87 @@ import ressources.Ressources;
 
 public class Picture implements Serializable
 {
-	private BufferedImage image ;
-	private String imageName ;
-	private final int width, heigth ;
+	private File file ;
+	private final int originalWidth, originalHeight ;
 	
 	/*
 	 * public constructor
+	 * uses a file as a parameter
+	 * and saves it with it's width and height
 	 */
 
 	public Picture(File file)
 	{
+		//creates a buffered image from the file
+		BufferedImage bImage = null ;
 		if (file == null) throw new IllegalArgumentException("constructor argument is null");
 		try
 		{
-			this.image = ImageIO.read(file) ;
+			bImage = ImageIO.read(file) ;
 		} catch (IOException ioe)
 		{
 			throw new IllegalArgumentException("could not open file: " + file, ioe) ;
 		}
-		if (this.image == null) throw new IllegalArgumentException("could not read file: " + file);
-		this.width = this.image.getWidth() ;
-		this.heigth = this.image.getHeight() ;
-		this.imageName = file.getName() ;
+		if (bImage == null) throw new IllegalArgumentException("could not read file: " + file);
+		//gets the image's width and height
+		this.originalWidth = bImage.getWidth() ;
+		this.originalHeight = bImage.getHeight() ;
+		this.file = file ;
 	}
 
-
+	/*
+	 * returns an icon from the image file
+	 * the size is standardized
+	 */
 	public ImageIcon getIcon(){
 
 		ImageIcon icon = null;
-
-		int originalWidth = this.image.getWidth();
-		int originalHeight = this.image.getHeight();
-
-		int x, y, w, h;
-
-		// portrait
-		if(originalHeight > originalWidth)
+		BufferedImage bImage = null ;
+		
+		try
 		{
-			w = originalWidth ;
-			h = originalWidth ;
-			x = 0;
-			y = (int)(originalHeight*0.5 - originalWidth*0.5) ;
+			bImage = ImageIO.read(file) ;
+		} catch (IOException ioe)
+		{
+			throw new IllegalArgumentException("could not open file: " + file, ioe) ;
 		}
 
-		// paysage ou carré
+		//parameters used for cropping
+		int x, y, w, h;
+
+		/*  Croppping  */
+		//if portrait
+		if(this.originalHeight > this.originalWidth)
+		{
+			w = this.originalWidth ;
+			h = this.originalWidth ;
+			x = 0;
+			y = (int)(this.originalHeight*0.5 - this.originalWidth*0.5) ;
+		}
+
+		//if landscape or square
 		else
 		{
-			w = originalHeight ;
-			h = originalHeight ;
-			x = (int)(originalWidth*0.5 - originalHeight*0.5) ;
+			w = this.originalHeight ;
+			h = this.originalHeight ;
+			x = (int)(this.originalWidth*0.5 - this.originalHeight*0.5) ;
 			y = 0;
 		}
 
+		//actual cropping and resizing
 		try{
-			BufferedImage imgCropped = this.image.getSubimage(x, y, w, h);
+			BufferedImage imgCropped = bImage.getSubimage(x, y, w, h);
 			icon = new ImageIcon(imgCropped.getScaledInstance(Ressources.GALLERY_IMAGE_WIDTH, Ressources.GALLERY_IMAGE_HEIGHT, Image.SCALE_FAST));
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
 		return icon ;
+	}
+	
+	public String toString()
+	{
+		return String.format("%s - width : %s - height : %s",this.file.getName(), this.originalWidth, this.originalHeight) ;
 	}
 
 }

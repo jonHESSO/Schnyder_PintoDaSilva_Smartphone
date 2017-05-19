@@ -8,6 +8,7 @@ package ressources;
 
 public class Ressources
 {
-	public static final int GALLERY_IMAGE_WIDTH = 200 ;
-	public static final int GALLERY_IMAGE_HEIGHT = 200 ;
+	public static final int GALLERY_IMAGE_WIDTH = 150 ;
+	public static final int GALLERY_IMAGE_HEIGHT = 150 ;
+	public static final String GALLERY_DIRECTORY = "gallery";
 }
