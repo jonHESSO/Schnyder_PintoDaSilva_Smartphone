@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ContactCreationJpanel extends JPanel {
+public abstract class ContactCreationJpanel extends JPanel {
 	
 	//Textfield --> attributs obligatoires pour un contact
     private JTextField fieldFirstName;
@@ -62,7 +62,8 @@ public class ContactCreationJpanel extends JPanel {
 	}
     
 
-
+	//Panel contenant les textfield
+	
     public JPanel contactFieldsPanel(){
     	JPanel panel = new JPanel(new FlowLayout());
     	//Ajout des textfields
