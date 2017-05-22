@@ -55,7 +55,7 @@ public class ContactCreationJpanel extends JPanel {
 			int ret = JOptionPane.showConfirmDialog(null, "Voulez-vous annuler la création du contact ?", "Confirmation d'annulation"
 													, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
-			if (ret == JOptionPane.YES_OPTION)
+		//	if (ret == JOptionPane.YES_OPTION)
 				//Ferme uniquement la fenêtre:
 				//a faire plus tard, revient sur la fenetre precedente (liste de contacts)
 		}
