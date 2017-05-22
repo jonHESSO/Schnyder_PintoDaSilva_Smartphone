@@ -112,7 +112,7 @@ public class TicTacToeStats implements Serializable
 	{
 		for (int i = 0; i < winrates.size(); i++)
 		{
-			int[] winrate = (int[])(winrates.get(i)) ;
+			int[] winrate = (int[])(winrates.get(i)) ; 
 			Date day = new Date(winrate[0]*(1000*60*60*24)) ;
 			System.out.println(day+" -- "+winrate[2]+"/"+winrate[1]);
 		}
