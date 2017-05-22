@@ -13,7 +13,7 @@ public class TicTacToeStatsTest
 
 	public static void main(String[] args)
 	{
-		TicTacToeStats stats = new TicTacToeStats() ;
+		TicTacToeStats stats = new TicTacToeStats() ; 
 		stats.AIWins() ;
 		stats.P1WinsVAI();
 		stats.AIWins();
