@@ -17,10 +17,6 @@ public class Contact implements Serializable {
 		this.number = number;
 	}
 
-	// Permet de modifier un contact existant
-	public void modifications(String lastName, String firstName, String number, String imagePath) {
-
-	}
 
 	// ***GETTERS***
 	public String getLastName() {
