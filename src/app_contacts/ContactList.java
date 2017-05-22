@@ -20,7 +20,7 @@ import java.util.*;
 public class ContactList implements Serializable
 {
 	//List containing every saved contact
-	protected List<Contact> contactList = new ArrayList<Contact>() ;
+	private List<Contact> contactList = new ArrayList<Contact>() ;
 	
 	//Method for adding a new contact to the list
 	public void addContact(String nom, String prenom, String numero)
