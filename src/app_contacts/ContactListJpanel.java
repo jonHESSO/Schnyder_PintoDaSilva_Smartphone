@@ -9,7 +9,7 @@ import ressources.Ressources;
 public class ContactListJpanel extends JPanel {
 
 	public ContactListJpanel(){
-		//Ajout des dimensions
+		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		
 		setLayout(new BorderLayout());
