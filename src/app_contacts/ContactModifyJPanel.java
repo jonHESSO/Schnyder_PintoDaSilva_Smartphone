@@ -9,6 +9,7 @@ public class ContactModifyJPanel extends ContactCreationJpanel {
 	
 	
 	public ContactModifyJPanel(String lastName, String firstName, String number, String imagePath) {
+	
 		
 	}
 }
