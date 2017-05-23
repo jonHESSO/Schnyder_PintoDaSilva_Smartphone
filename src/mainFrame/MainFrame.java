@@ -10,13 +10,15 @@ import javax.swing.*;
 
 import app_contacts.*;
 import app_gallery.*;
+import app_tictactoe.*;
 
 public class MainFrame extends JFrame
 {
 	public MainFrame()
 	{
-		add(new GalleryPanel()) ;
-		add(new ContactCreationJpanel()) ;
+//		add(new GalleryPanel()) ;
+//		add(new ContactCreationJpanel()) ;
+		add(new TicTacToePanel()) ;
 		pack() ;
 	}
 
