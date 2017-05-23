@@ -19,7 +19,8 @@ import ressources.Ressources;
 
 public class TicTacToePanel extends JPanel
 {
-	GameJPanel gamePanel = new GameJPanel("AI") ;
+	private TicTacToeStats stats ;
+	GameJPanel gamePanel = new GameJPanel() ;
 	Game game ;
 	JButton newGame = new JButton("New Game") ;
 	public TicTacToePanel() 
