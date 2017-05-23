@@ -17,6 +17,7 @@ public class TicTacToeStats implements Serializable
 	
 	private ArrayList<Score> scoreVP ;
 	private ArrayList<Score> scoreVAI ;
+	private DateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy") ;
 	
 	public TicTacToeStats()
 	{
@@ -113,8 +114,8 @@ public class TicTacToeStats implements Serializable
 		for (int i = 0; i < winrates.size(); i++)
 		{
 			int[] winrate = (int[])(winrates.get(i)) ; 
-			Date day = new Date(winrate[0]*(1000*60*60*24)) ;
-			System.out.println(day+" -- "+winrate[2]+"/"+winrate[1]);
+			Date day = new Date((long)winrate[0]*(1000*60*60*24)) ;
+			System.out.println(dateformat.format(day)+" -- "+winrate[2]+"/"+winrate[1]);
 		}
 	}
 	

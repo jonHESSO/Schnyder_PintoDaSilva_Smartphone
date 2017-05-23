@@ -12,12 +12,15 @@ import java.util.*;
 
 import javax.swing.*;
 
+import ressources.Ressources;
+
 public class GalleryPanel extends JPanel
 {
 	private File fileDirectory = new File(ressources.Ressources.GALLERY_DIRECTORY) ;
 	public GalleryPanel()
 	{
-		setLayout(new FlowLayout()) ;
+		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
+//		setLayout(new FlowLayout()) ;
 		List pictures = getPictureList() ;
 		System.out.println(pictures.size());
 		for (int i = 0; i < pictures.size(); i++)

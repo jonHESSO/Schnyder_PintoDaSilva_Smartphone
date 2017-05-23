@@ -15,4 +15,6 @@ public class Ressources
 	public static final String GALLERY_DIRECTORY = "gallery";
 	public static final Dimension CONTACT_TEXTFIELD_DIMENSION = new Dimension(50,20) ;
 	public static final Dimension DEFAULT_APP_JPANEL_DIMENSION= new Dimension (500, 800);
+	public static final Dimension TICTACTOE_APP_JPANEL_DIMENSION= new Dimension (300, 300) ;
+	public static final Dimension TICTACTOE_APP_FIELD_DIMENSION= new Dimension (100, 100) ;
 }
