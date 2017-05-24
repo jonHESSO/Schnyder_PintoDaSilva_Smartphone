@@ -112,7 +112,6 @@ public class GameJPanel extends JPanel
 			index = getIndex((JButton)e.getSource()) ;
 			play() ;
 			game.showMatrix();
-			System.out.println(game.hasWinner());
 			if (game.hasWinner())
 			{
 				JOptionPane.showMessageDialog(null, "Winner is "+game.getWinner());

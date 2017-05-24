@@ -18,6 +18,9 @@ public class TicTacToeStatsTest
 		stats.P1WinsVAI();
 		stats.AIWins();
 		stats.showStatsVAI();
+		
+		TestFrame tf = new TestFrame() ;
+		tf.setVisible(true);
 	}
 
 }

@@ -66,15 +66,12 @@ public class Game
 				sumCol+=playField[j][i] ;
 			}
 			sumDiagL+=playField[i][i] ;
-			sumDiagL+=playField[i][2-i] ;
+			sumDiagR+=playField[i][2-i] ;
 			
 			if (Math.abs(sumRow)==3) this.winner = sumRow/3 ;
 			if (Math.abs(sumCol)==3) this.winner = sumCol/3 ;
 			if (Math.abs(sumDiagL)==3) this.winner = sumDiagL/3 ;
-			if (Math.abs(sumDiagR)==3) this.winner = sumDiagR/3 ;
-			
-			System.out.printf("%d - %d\n", sumRow, sumCol);
-			
+			if (Math.abs(sumDiagR)==3) this.winner = sumDiagR/3 ;			
 		}
 		System.out.printf("%d - %d\n", sumDiagL, sumDiagR);
 		if (this.winner != 0) hasWinner = true ;
