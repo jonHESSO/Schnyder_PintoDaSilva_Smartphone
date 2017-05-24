@@ -19,7 +19,7 @@ public class ContactListJpanel extends JPanel {
 	
 	public JPanel IndividualContactPanel(Contact currentContact){
 		
-		//Panel contenant les infos du contact(sPanel) et l'image
+		//Panel contenant les infos du contact(sPanel) et l'image 
 		JPanel panel = new JPanel(new FlowLayout());
 		//Panel contenant les infos du contact, qui est contenu dans le Panel
 		JPanel sPanel = new JPanel(new FlowLayout());
