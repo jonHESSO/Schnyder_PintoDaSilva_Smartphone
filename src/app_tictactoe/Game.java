@@ -10,7 +10,7 @@ public class Game
 {
 	private int[][] playField ;
 
-	//player1 is 1, player2 is -1
+	//player1 is 1, player2 is -1 
 	private int winner ;
 	private boolean hasWinner ;
 	private boolean isADraw ;
