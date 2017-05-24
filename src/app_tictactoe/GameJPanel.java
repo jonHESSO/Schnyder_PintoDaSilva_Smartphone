@@ -92,9 +92,32 @@ public class GameJPanel extends JPanel
 
 
 	}
+	
+	private void testGameStatus()
+	{
+		if (game.getStatus()!=0)
+		{
+			displayFinishedGame() ;
+		}
+	}
 
 	private void displayFinishedGame()
 	{
+		String result = "" ;
+		switch (game.getStatus())
+		{
+		case -1 :
+			result = "Player2 wins" ;
+			break ;
+		case 1 : 
+			result = "Player1 wins" ;
+			break ;
+		case 2 : 
+			result = "Draw" ;
+			break ;
+			 
+		}
+		JOptionPane.showMessageDialog(null, result);
 
 	}
 
@@ -122,7 +145,6 @@ public class GameJPanel extends JPanel
 		{
 			if (game.getStatus()!=0) 
 			{
-				
 				return ;
 			}
 			else
@@ -130,6 +152,7 @@ public class GameJPanel extends JPanel
 				index = getIndex((JButton)e.getSource()) ;
 				play() ;
 			}
+			testGameStatus() ;
 
 		}		
 	}
