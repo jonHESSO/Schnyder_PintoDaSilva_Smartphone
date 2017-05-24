@@ -7,6 +7,7 @@
 package app_tictactoe;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.* ;
 
@@ -17,6 +18,8 @@ import ressources.Ressources;
 
 public class GameJPanel extends JPanel
 {
+	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
+	
 	private JButton[][] space = new JButton[3][3];
 	private Game game ;
 	private int[] index ;
@@ -25,7 +28,7 @@ public class GameJPanel extends JPanel
 	public GameJPanel()
 	{
 		this.player = 1 ;
-		setPreferredSize(Ressources.TICTACTOE_APP_JPANEL_DIMENSION); 
+		setPreferredSize(TICTACTOE_APP_JPANEL_DIMENSION); 
 		setLayout(new GridLayout(3,3));
 		for (int i = 0; i < 3; i++)
 		{
