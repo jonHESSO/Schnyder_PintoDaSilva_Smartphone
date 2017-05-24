@@ -23,11 +23,11 @@ public class GameJPanel extends JPanel
 	private JButton[][] space = new JButton[3][3];
 	private Game game ;
 	private int[] index ;
-	private int player ;
+	private int currentPlayer ;
 
 	public GameJPanel()
 	{
-		this.player = 1 ;
+		this.currentPlayer = 1 ;
 		setPreferredSize(TICTACTOE_APP_JPANEL_DIMENSION); 
 		setLayout(new GridLayout(3,3));
 		for (int i = 0; i < 3; i++)
@@ -45,24 +45,24 @@ public class GameJPanel extends JPanel
 
 	}
 
-	private void displayMove(int[] index, int player)
+	private void displayMove(int[] index, int currentPlayer)
 	{
-		String playerName = null ;
-		switch (player)
+		String currentPlayerName = null ;
+		switch (currentPlayer)
 		{
 		case -1 :
-			playerName = "O" ;
+			currentPlayerName = "O" ;
 			break ;
 		case 1 :
-			playerName = "X" ;
+			currentPlayerName = "X" ;
 			break ;
 		}
-		this.space[index[0]][index[1]].setText(playerName);
+		this.space[index[0]][index[1]].setText(currentPlayerName);
 	}
 
 	public void newGame()
 	{
-		this.player = 1 ;
+		this.currentPlayer = 1 ;
 		this.game = new Game() ;
 		for (int i = 0; i < 3; i++)
 		{
@@ -78,13 +78,13 @@ public class GameJPanel extends JPanel
 
 		try
 		{			
-			game.addMove(this.index[0], this.index[1], this.player) ;
-			displayMove(index,player) ;
+			game.addMove(this.index[0], this.index[1], this.currentPlayer) ;
+			displayMove(index,currentPlayer) ;
 			if(game.getStatus()!=0)
 			{
 
 			}
-			player*=-1 ;
+			currentPlayer*=-1 ;
 		} catch (Exception e)
 		{
 			//			e.printStackTrace();
@@ -120,7 +120,6 @@ public class GameJPanel extends JPanel
 
 		public void mouseClicked(MouseEvent e)
 		{
-			System.out.println("cliked, status is "+game.getStatus());
 			if (game.getStatus()!=0) 
 			{
 				
@@ -130,7 +129,6 @@ public class GameJPanel extends JPanel
 			{
 				index = getIndex((JButton)e.getSource()) ;
 				play() ;
-				System.out.println("played, status is "+game.getStatus());
 			}
 
 		}		
