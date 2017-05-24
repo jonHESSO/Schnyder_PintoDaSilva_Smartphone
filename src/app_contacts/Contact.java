@@ -7,7 +7,7 @@ public class Contact implements Serializable {
 	private String lastName; 	// nom du contact
 	private String firstName; 	// prenom du contact
 	private String number; 		// numero du contact
-	private String mail;		// mail du contact
+	private String email;		// mail du contact
 	private String imagePath; 	// Chemin systeme de(s) image(s) associee(s) au contact
 
 	// Constructeur pour contact
@@ -34,6 +34,10 @@ public class Contact implements Serializable {
 	public String getImagePath() {
 		return imagePath;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
 
 	// ***SETTERS***
 	public void setLastName(String lastName) {
@@ -46,6 +50,10 @@ public class Contact implements Serializable {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setImagePath(String imagePath) {
