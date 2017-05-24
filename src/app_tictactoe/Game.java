@@ -9,7 +9,7 @@ package app_tictactoe;
 public class Game
 {
 	private int[][] playField ;
-	//versus is either P2 or AI
+	//versus is either P2 or AI -- is not needed
 	private String versus ;
 	//player1 is 1, player2 is -1
 	private int winner ;
