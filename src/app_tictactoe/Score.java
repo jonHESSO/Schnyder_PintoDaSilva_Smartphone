@@ -20,9 +20,9 @@ public class Score implements Serializable
 	public Score(String winner)
 	{
 		this.winner = winner ;
-		//Date.getTime returns as a long the amount of milliseconds since 1970
+		//Date.getTime returns the current date as a long equal to the amount of milliseconds since 1970
 		//we don't care about miliseconds, we just want days, so we divide by 1000 milliseconds, 60 seconds, 60 minutes, 24 hours to get a value in days
-		this.dayNumber = (int)new Date().getTime()/(1000*60*60*24) ;
+		this.dayNumber = (int)(new Date().getTime()/(1000*60*60*24)) ;
 	}
 	
 	public int getDayNumber()
@@ -32,7 +32,12 @@ public class Score implements Serializable
 	
 	public String getWinner()
 	{
-		return this.getWinner() ;
+		return this.winner ;
+	}
+	
+	public String toString()
+	{
+		return dayNumber + " -- " + winner   ;
 	}
 
 }
