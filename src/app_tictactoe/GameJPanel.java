@@ -73,16 +73,16 @@ public class GameJPanel extends JPanel
 		}
 	}
 
-	private void play()
+	private void play(int[] cell)
 	{
 
 		try
 		{			
-			game.addMove(this.index[0], this.index[1], this.currentPlayer) ;
+			game.addMove(cell[0], cell[1], this.currentPlayer) ;
 			displayMove(index,currentPlayer) ;
 			if(game.getStatus()!=0)
 			{
-
+				testGameStatus() ;
 			}
 			currentPlayer*=-1 ;
 		} catch (Exception e)
@@ -143,16 +143,16 @@ public class GameJPanel extends JPanel
 
 		public void mouseClicked(MouseEvent e)
 		{
+			int[] cell =  getIndex((JButton)e.getSource()) ;
 			if (game.getStatus()!=0) 
 			{
 				return ;
 			}
 			else
 			{
-				index = getIndex((JButton)e.getSource()) ;
-				play() ;
+				play(index) ;
 			}
-			testGameStatus() ;
+			
 
 		}		
 	}

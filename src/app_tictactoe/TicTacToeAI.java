@@ -10,47 +10,80 @@ public class TicTacToeAI
 {
 	Game currentGame ;
 
-	public void play(Game game)
+	public TicTacToeAI(Game game)
 	{
 		this.currentGame = game ;
 	}
 
-	private void testStatus()
+	public int[] getBestCell()
 	{
-		for (int i = 0; i < currentGame.getGameState().length ; i++)
+		int line ;
+		
+		int[] bestCell = new int[2] ;
+		for (line = 0; line < currentGame.getGameState().length ; line++)
 		{
 			//if the AI can win now
-			if(currentGame.getGameState()[i]==-2)
+			if(currentGame.getGameState()[line]==-2)
 			{
-				playFirstAvailableCell(i) ;
+				bestCell = searchFirstAvailableCell(line) ;
+				return ;
 			}
 			//if the player could win next turn
+			if(currentGame.getGameState()[line]==2)
+			{
+				searchFirstAvailableCell(line) ;
+				return ;
+			}
+			if(currentGame.getGameState()[line]==1)
+			{
+				searchFirstAvailableCell(line) ;
+				return ;
+			}
+			if(currentGame.getGameState()[line]==-1)
+			{
+				searchFirstAvailableCell(line) ;
+				return ;
+			}
+			searchFirstAvailableCell(line) ;
+			return ;
 
 		}
 	}
+	
+	private boolean AICanWin()
 
-	private void playFirstAvailableCell(int state)
+	private int[] searchFirstAvailableCell(int line)
 	{
+		int[] cell = new int[2] ;
 		for (int i = 0; i < 3; i++)
 		{
-		if(state/3==0 && currentGame.getPlayField()[state][i]!=0)
-		{
-			//row
-			return ;
-			
+			if(line/3==0 && currentGame.getPlayField()[line][i]!=0)
+			{
+				cell[0] = line ;
+				cell[1] = i ;
+			}
+			if(line/3==1 && currentGame.getPlayField()[i][line]!=0)
+			{
+				cell[0]=i ;
+				cell[1]=line-3 ;
+			}
+			if(line/3==2)
+			{
+				if (line==6 && currentGame.getPlayField()[i][i]!=0)
+				{
+					cell[0]=i ;
+					cell[1]=i ;
+				}
+				if (line==6 && currentGame.getPlayField()[i][i]!=0)
+				{
+					cell[0]=i ;
+					cell[1]=2-i ;
+				}
+
+			}
 		}
-		if(state/3==1 && currentGame.getPlayField()[i][state]!=0)
-		{
-			//column
-			return ;
-		}
-		if(state/3==2)
-		{
-			//diagonal
-			return ;
-		}
-		}
-		
+		return cell ;
+
 
 	}
 
