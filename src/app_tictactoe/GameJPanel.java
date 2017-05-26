@@ -22,8 +22,8 @@ public class GameJPanel extends JPanel
 	
 	private JButton[][] space = new JButton[3][3];
 	private Game game ;
-	private int[] index ;
 	private int currentPlayer ;
+	private TicTacToeAI bot ;
 
 	public GameJPanel()
 	{
@@ -45,7 +45,7 @@ public class GameJPanel extends JPanel
 
 	}
 
-	private void displayMove(int[] index, int currentPlayer)
+	private void displayMove(int[] cell, int currentPlayer)
 	{
 		String currentPlayerName = null ;
 		switch (currentPlayer)
@@ -57,13 +57,14 @@ public class GameJPanel extends JPanel
 			currentPlayerName = "X" ;
 			break ;
 		}
-		this.space[index[0]][index[1]].setText(currentPlayerName);
+		this.space[cell[0]][cell[1]].setText(currentPlayerName);
 	}
 
 	public void newGame()
 	{
 		this.currentPlayer = 1 ;
 		this.game = new Game() ;
+		this.bot = new TicTacToeAI(this.game) ;
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -79,7 +80,7 @@ public class GameJPanel extends JPanel
 		try
 		{			
 			game.addMove(cell[0], cell[1], this.currentPlayer) ;
-			displayMove(index,currentPlayer) ;
+			displayMove(cell,currentPlayer) ;
 			if(game.getStatus()!=0)
 			{
 				testGameStatus() ;
@@ -91,6 +92,16 @@ public class GameJPanel extends JPanel
 		}
 
 
+	}
+	
+	private void playVSAI(int[] cell)
+	{
+		play(cell) ;
+		if (game.getStatus()==0)
+		{
+			System.out.println(bot.getBestCell()[0]+" "+bot.getBestCell()[1]);
+			play(bot.getBestCell()) ;
+		}
 	}
 	
 	private void testGameStatus()
@@ -150,7 +161,7 @@ public class GameJPanel extends JPanel
 			}
 			else
 			{
-				play(index) ;
+				playVSAI(cell) ;
 			}
 			
 

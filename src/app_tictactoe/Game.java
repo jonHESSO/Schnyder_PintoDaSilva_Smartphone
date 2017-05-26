@@ -122,10 +122,6 @@ public class Game
 
 	public int getStatus()
 	{
-		if (status==0) 
-		{
-			status = 0 ;
-		}
 		if (isADraw==true)
 		{
 			status = 2 ;

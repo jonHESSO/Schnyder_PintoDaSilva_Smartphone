@@ -18,63 +18,96 @@ public class TicTacToeAI
 	public int[] getBestCell()
 	{
 		int line ;
-		
-		int[] bestCell = new int[2] ;
-		for (line = 0; line < currentGame.getGameState().length ; line++)
-		{
-			//if the AI can win now
-			if(currentGame.getGameState()[line]==-2)
-			{
-				bestCell = searchFirstAvailableCell(line) ;
-				return ;
-			}
-			//if the player could win next turn
-			if(currentGame.getGameState()[line]==2)
-			{
-				searchFirstAvailableCell(line) ;
-				return ;
-			}
-			if(currentGame.getGameState()[line]==1)
-			{
-				searchFirstAvailableCell(line) ;
-				return ;
-			}
-			if(currentGame.getGameState()[line]==-1)
-			{
-				searchFirstAvailableCell(line) ;
-				return ;
-			}
-			searchFirstAvailableCell(line) ;
-			return ;
 
+		//pick the first available cell 
+		int[] bestCell = firstAvailableCell(firstAvailableRow()) ;
+		
+		//if the player could win next turn
+		if(player1CanWin()!=-1)
+		{
+			bestCell = firstAvailableCell(player1CanWin()) ;
 		}
+		//if the AI can win now
+		if(AICanWin()!=-1)
+		{
+			bestCell = firstAvailableCell(AICanWin()) ;
+		}
+		
+		return bestCell ;
+
 	}
 	
-	private boolean AICanWin()
+	private int player1CanWin()
+	{
+		int line = -1 ;
+		for (int i = 0; i < currentGame.getGameState().length ; i++)
+		{
+			//if the AI can win now
+			if(currentGame.getGameState()[i]==2)
+			{
+				line = i ;
+			}
+		}
+		return line ;
+		
+	}
 
-	private int[] searchFirstAvailableCell(int line)
+	private int AICanWin()
+	{
+		int line = -1 ;
+		for (int i = 0; i < currentGame.getGameState().length ; i++)
+		{
+			//if the AI can win now
+			if(currentGame.getGameState()[i]==-2)
+			{
+				line = i ;
+			}
+		}
+		return line ;
+	}
+
+	private int firstAvailableRow()
+	{
+		int row = 2;
+		for (int i = 0; i < 3 ; i++)
+		{
+			if(firstAvailableCell(i)!=null)
+			{
+				row = i ;
+			}
+		}
+		return row ;
+	}
+
+	private int[] firstAvailableCell(int line)
 	{
 		int[] cell = new int[2] ;
 		for (int i = 0; i < 3; i++)
 		{
-			if(line/3==0 && currentGame.getPlayField()[line][i]!=0)
+			if(line/3==0)
 			{
+				if(currentGame.getPlayField()[line][i]==0)
+				{
 				cell[0] = line ;
 				cell[1] = i ;
+				}
 			}
 			if(line/3==1 && currentGame.getPlayField()[i][line]!=0)
 			{
+				if(currentGame.getPlayField()[i][line-3]==0)
+				{
 				cell[0]=i ;
 				cell[1]=line-3 ;
+				}
 			}
 			if(line/3==2)
 			{
-				if (line==6 && currentGame.getPlayField()[i][i]!=0)
+				if (line==6 && currentGame.getPlayField()[i][i]==0)
 				{
 					cell[0]=i ;
 					cell[1]=i ;
 				}
-				if (line==6 && currentGame.getPlayField()[i][i]!=0)
+				if (line==7 && currentGame.getPlayField()[i][2-i]!=0)
 				{
 					cell[0]=i ;
 					cell[1]=2-i ;
