@@ -7,6 +7,7 @@
 package app_tictactoe;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.* ;
 
@@ -17,17 +18,17 @@ import ressources.Ressources;
 
 public class GameJPanel extends JPanel
 {
+	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
+	
 	private JButton[][] space = new JButton[3][3];
-	private String versus ;
 	private Game game ;
 	private int[] index ;
-	private int player ;
-	
-	public GameJPanel(String versus)
+	private int currentPlayer ;
+
+	public GameJPanel()
 	{
-		this.versus = versus ;
-		this.player = 1 ;
-		setPreferredSize(Ressources.TICTACTOE_APP_JPANEL_DIMENSION); 
+		this.currentPlayer = 1 ;
+		setPreferredSize(TICTACTOE_APP_JPANEL_DIMENSION); 
 		setLayout(new GridLayout(3,3));
 		for (int i = 0; i < 3; i++)
 		{
@@ -35,34 +36,34 @@ public class GameJPanel extends JPanel
 			{
 				space[i][j] = new JButton(" ") ;
 				space[i][j].addMouseListener(new MoveListener());
-//				space[i][j].setPreferredSize(Ressources.TICTACTOE_APP_FIELD_DIMENSION) ;
+				//				space[i][j].setPreferredSize(Ressources.TICTACTOE_APP_FIELD_DIMENSION) ;
 				add(space[i][j]);
 			}
-			
-			
+
+
 		}
-		
+
 	}
-	
-	private void displayMove(int[] index, int player)
+
+	private void displayMove(int[] index, int currentPlayer)
 	{
-		String playerName = null ;
-		switch (player)
+		String currentPlayerName = null ;
+		switch (currentPlayer)
 		{
 		case -1 :
-			playerName = "O" ;
+			currentPlayerName = "O" ;
 			break ;
 		case 1 :
-			playerName = "X" ;
+			currentPlayerName = "X" ;
 			break ;
 		}
-		this.space[index[0]][index[1]].setText(playerName);
+		this.space[index[0]][index[1]].setText(currentPlayerName);
 	}
-	
+
 	public void newGame()
 	{
-		this.player = 1 ;
-		this.game = new Game(this.versus) ;
+		this.currentPlayer = 1 ;
+		this.game = new Game() ;
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -71,23 +72,55 @@ public class GameJPanel extends JPanel
 			}
 		}
 	}
-	
+
 	private void play()
 	{
-		
+
 		try
 		{			
-			game.addMove(this.index[0], this.index[1], this.player) ;
-			displayMove(index,player) ;
-			player*=-1 ;
+			game.addMove(this.index[0], this.index[1], this.currentPlayer) ;
+			displayMove(index,currentPlayer) ;
+			if(game.getStatus()!=0)
+			{
+
+			}
+			currentPlayer*=-1 ;
 		} catch (Exception e)
 		{
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 	
+	private void testGameStatus()
+	{
+		if (game.getStatus()!=0)
+		{
+			displayFinishedGame() ;
+		}
+	}
+
+	private void displayFinishedGame()
+	{
+		String result = "" ;
+		switch (game.getStatus())
+		{
+		case -1 :
+			result = "Player2 wins" ;
+			break ;
+		case 1 : 
+			result = "Player1 wins" ;
+			break ;
+		case 2 : 
+			result = "Draw" ;
+			break ;
+			 
+		}
+		JOptionPane.showMessageDialog(null, result);
+
+	}
+
 	private int[] getIndex(JButton field)
 	{
 		int[] index = new int[2];
@@ -104,20 +137,24 @@ public class GameJPanel extends JPanel
 		}
 		return index ;
 	}
-	
+
+
 	class MoveListener extends MouseAdapter{
 
 		public void mouseClicked(MouseEvent e)
-		 {
-			index = getIndex((JButton)e.getSource()) ;
-			play() ;
-			game.showMatrix();
-			if (game.hasWinner())
+		{
+			if (game.getStatus()!=0) 
 			{
-				JOptionPane.showMessageDialog(null, "Winner is "+game.getWinner());
+				return ;
 			}
-		}
-		
+			else
+			{
+				index = getIndex((JButton)e.getSource()) ;
+				play() ;
+			}
+			testGameStatus() ;
+
+		}		
 	}
 
 }
