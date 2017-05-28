@@ -6,6 +6,10 @@
 
 package app_tictactoe;
 
+import java.util.Arrays;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class TicTacToeAI
 {
 	Game currentGame ;
@@ -45,7 +49,7 @@ public class TicTacToeAI
 			//if the AI can win now
 			if(currentGame.getGameState()[i]==2)
 			{
-				line = i ;
+				return i ;
 			}
 		}
 		return line ;
@@ -60,7 +64,7 @@ public class TicTacToeAI
 			//if the AI can win now
 			if(currentGame.getGameState()[i]==-2)
 			{
-				line = i ;
+				return i ;
 			}
 		}
 		return line ;
@@ -68,53 +72,67 @@ public class TicTacToeAI
 
 	private int firstAvailableRow()
 	{
-		int row = 2;
+		int row = 0 ;
+		int[] noAvailableCell = {-1,-1} ;
 		for (int i = 0; i < 3 ; i++)
 		{
-			if(firstAvailableCell(i)!=null)
+			if(Arrays.equals(firstAvailableCell(i),noAvailableCell)==false)
 			{
-				row = i ;
+				System.out.println("first available row is : "+i) ;
+				return i ;
 			}
 		}
 		return row ;
 	}
+	
 
 	private int[] firstAvailableCell(int line)
 	{
-		int[] cell = new int[2] ;
-		for (int i = 0; i < 3; i++)
+		int[] cell = {-1,-1};
+		boolean availableCell = false ;
+		int row = 0 ;
+		while (availableCell==false && row<3)
 		{
 			if(line/3==0)
 			{
-				if(currentGame.getPlayField()[line][i]==0)
+				if(currentGame.getPlayField()[line][row]==0)
 				{
-				cell[0] = line ;
-				cell[1] = i ;
+					cell[0] = line ;
+					cell[1] = row ;
+					availableCell = true ;
 				}
 			}
-			if(line/3==1 && currentGame.getPlayField()[i][line]!=0)
+			if(line/3==1)
 			{
-				if(currentGame.getPlayField()[i][line-3]==0)
+				if(currentGame.getPlayField()[row][line-3]==0)
 				{
-				cell[0]=i ;
+				cell[0]=row ;
 				cell[1]=line-3 ;
+				availableCell = true ;
 				}
 			}
 			if(line/3==2)
 			{
-				if (line==6 && currentGame.getPlayField()[i][i]==0)
+				if (line==6 && currentGame.getPlayField()[row][row]==0)
 				{
-					cell[0]=i ;
-					cell[1]=i ;
+					cell[0]=row ;
+					cell[1]=row ;
+					availableCell = true ;
 				}
-				if (line==7 && currentGame.getPlayField()[i][2-i]!=0)
+				if (line==7 && currentGame.getPlayField()[row][2-row]==0)
 				{
-					cell[0]=i ;
-					cell[1]=2-i ;
+					cell[0]=row ;
+					cell[1]=2-row ;
+					availableCell = true ;
 				}
 
 			}
+			row++ ;
 		}
+//		if (availableCell = true)
+//		{
+//			return cell ;			
+//		}
 		return cell ;
 
 

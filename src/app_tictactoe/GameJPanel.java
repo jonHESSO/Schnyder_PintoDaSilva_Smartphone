@@ -19,7 +19,7 @@ import ressources.Ressources;
 public class GameJPanel extends JPanel
 {
 	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
-	
+
 	private JButton[][] space = new JButton[3][3];
 	private Game game ;
 	private int currentPlayer ;
@@ -74,7 +74,7 @@ public class GameJPanel extends JPanel
 		}
 	}
 
-	private void play(int[] cell)
+	private void play(int[] cell) throws Exception
 	{
 
 		try
@@ -88,22 +88,28 @@ public class GameJPanel extends JPanel
 			currentPlayer*=-1 ;
 		} catch (Exception e)
 		{
-			//			e.printStackTrace();
+			throw new Exception("Cell not available") ;
 		}
 
 
 	}
-	
+
 	private void playVSAI(int[] cell)
 	{
-		play(cell) ;
-		if (game.getStatus()==0)
+		try
 		{
-			System.out.println(bot.getBestCell()[0]+" "+bot.getBestCell()[1]);
-			play(bot.getBestCell()) ;
+			play(cell) ;
+			if (game.getStatus()==0)
+			{
+				System.out.println(bot.getBestCell()[0]+" "+bot.getBestCell()[1]);
+				play(bot.getBestCell()) ;
+			}
+		} catch (Exception e)
+		{
+//			e.printStackTrace();
 		}
 	}
-	
+
 	private void testGameStatus()
 	{
 		if (game.getStatus()!=0)
@@ -126,7 +132,7 @@ public class GameJPanel extends JPanel
 		case 2 : 
 			result = "Draw" ;
 			break ;
-			 
+
 		}
 		JOptionPane.showMessageDialog(null, result);
 
@@ -163,7 +169,7 @@ public class GameJPanel extends JPanel
 			{
 				playVSAI(cell) ;
 			}
-			
+
 
 		}		
 	}
