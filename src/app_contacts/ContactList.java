@@ -29,6 +29,16 @@ public class ContactList implements Serializable
 		contactList.add(new Contact(nom, prenom, numero)) ;
 	}
 	
+	public Contact getContact(int index)
+	{
+		return this.contactList.get(index);
+	}
+	
+	public List<Contact> getContactList()
+	{
+		return this.contactList;
+	}
+	
 	//sorts the list by alphabetical order (LastName)
 	public void sortByLastName(){
 		Collections.sort(contactList, compareLastName());

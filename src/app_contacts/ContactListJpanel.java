@@ -2,34 +2,50 @@ package app_contacts;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import ressources.Ressources;
 
 public class ContactListJpanel extends JPanel {
+	
+	private ContactList list = new ContactList();
+	private List<Contact> contactList = list.getContactList();
+		
+	
 
 	public ContactListJpanel(){
 		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
+		setLayout(new FlowLayout());
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		add(createIndividualPanels()) ;
 		
-		setLayout(new BorderLayout());
-	
 	}
 	
-	public JPanel IndividualContactPanel(Contact currentContact){
+	
+	private JTable createIndividualPanels()
+	{
+		DefaultTableModel model = new DefaultTableModel() ;
+		String[] contactTitle = {"First Name", "Last Name", "Image"};
+		JTable contactTable = new JTable(model);
 		
-		//Panel contenant les infos du contact(sPanel) et l'image 
-		JPanel panel = new JPanel(new FlowLayout());
-		//Panel contenant les infos du contact, qui est contenu dans le Panel
-		JPanel sPanel = new JPanel(new FlowLayout());
+		model.addColumn("First Name") ;
+		model.addColumn("Last Name") ;
+		model.addColumn("Image") ;
 		
-		panel.add(sPanel);
-		sPanel.add(new JLabel(currentContact.getFirstName()));
-		sPanel.add(new JLabel(currentContact.getLastName()));
-		sPanel.add(new JLabel(currentContact.getNumber()));
-		sPanel.add(new JLabel(currentContact.getEmail()));
-		
-		return panel;
+		model.addRow(contactTitle);
+		for (int i = 0; i< contactList.size();i++){
+			String [] contactData = {list.getContact(i).getFirstName(),list.getContact(i).getLastName(),list.getContact(i).getImagePath()} ;
+			
+			model.addRow(contactData) ;
+		} 
+		return contactTable ;
 	}
 }
