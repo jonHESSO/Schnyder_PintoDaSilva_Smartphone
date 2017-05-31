@@ -78,7 +78,6 @@ public class TicTacToeAI
 		{
 			if(Arrays.equals(firstAvailableCell(i),noAvailableCell)==false)
 			{
-				System.out.println("first available row is : "+i) ;
 				return i ;
 			}
 		}
