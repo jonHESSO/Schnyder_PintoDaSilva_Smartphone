@@ -2,11 +2,14 @@ package app_contacts;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import app_contacts.ContactIndividualJPanel.Modif_Click;
 import ressources.Ressources;
 
 public class ContactListJpanel extends JPanel {
@@ -14,7 +17,6 @@ public class ContactListJpanel extends JPanel {
 	private ContactList list = new ContactList();
 	private List<Contact> contactList = list.getContactList();
 		
-	
 
 	public ContactListJpanel(){
 		//Ajout des dimensions 
@@ -25,27 +27,107 @@ public class ContactListJpanel extends JPanel {
 		list.addContact("a", "b", "8");
 		list.addContact("a", "b", "8");
 		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
+		list.addContact("a", "b", "8");
 		add(createIndividualPanels()) ;
+		
+		add(CreationButtonPanel(), BorderLayout.SOUTH);
 		
 	}
 	
 	
-	private JTable createIndividualPanels()
+	private JScrollPane createIndividualPanels()
 	{
 		DefaultTableModel model = new DefaultTableModel() ;
-		String[] contactTitle = {"First Name", "Last Name", "Image"};
-		JTable contactTable = new JTable(model);
+		final JTable contactTable = new JTable(model);
+		JScrollPane scrollPane = new JScrollPane(contactTable);
 		
+		contactTable.setEnabled(false);
 		model.addColumn("First Name") ;
 		model.addColumn("Last Name") ;
 		model.addColumn("Image") ;
+		contactTable.addMouseListener(new java.awt.event.MouseAdapter() {
+			
+		    @Override
+		    public void mouseClicked(java.awt.event.MouseEvent e) {
+		        int row = contactTable.rowAtPoint(e.getPoint());
+		        if (row >= 0) { 
+		        JFrame jf =  new JFrame() ;
+		        jf.add(new ContactIndividualJPanel(list.getContact(row)));
+		        jf.pack();
+		        jf.setVisible(true);
+		        }
+		    }
+		});
 		
-		model.addRow(contactTitle);
 		for (int i = 0; i< contactList.size();i++){
 			String [] contactData = {list.getContact(i).getFirstName(),list.getContact(i).getLastName(),list.getContact(i).getImagePath()} ;
 			
 			model.addRow(contactData) ;
 		} 
-		return contactTable ;
+		return scrollPane ;
+		
 	}
+	
+	private JPanel CreationButtonPanel() {
+		JPanel panel = new JPanel(new FlowLayout());
+		JButton CreationButton = new JButton ("Nouveau");
+		
+		CreationButton.addActionListener(new Create_Click());
+		panel.add((CreationButton), BorderLayout.EAST);
+		
+		return panel;
+	}
+	
+	class Create_Click implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+				JFrame jf =  new JFrame() ;
+		        jf.add(new ContactCreationJpanel());
+		        jf.pack();
+		        jf.setVisible(true);
+			}
+		}
 }

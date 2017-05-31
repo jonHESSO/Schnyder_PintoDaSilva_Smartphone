@@ -18,16 +18,16 @@ import ressources.Ressources;
 public class ContactCreationJpanel extends JPanel {
 	
 	// Textfield --> attributs obligatoires pour un contact
-	JTextField fieldFirstName = new JTextField(15);
-	JTextField fieldLastName = new JTextField(15);
-	JTextField fieldNumber = new JTextField(15);
+	protected JTextField fieldFirstName = new JTextField(15);
+	protected JTextField fieldLastName = new JTextField(15);
+	protected JTextField fieldNumber = new JTextField(15);
 
 	// Textfield --> attributs optionnels pour un contact
-	JTextField fieldEmail = new JTextField(15);
-	JTextField fieldImagePath = new JTextField(15);
+	protected JTextField fieldEmail = new JTextField(15);
+	protected JTextField fieldImagePath = new JTextField(15);
 	
 	//Création de la liste de contacts
-	ContactList cl = new ContactList() ;
+	protected ContactList cl = new ContactList() ;
 
 	// Panel accueillant le panel avec les JTexfields et celui avec les JButtons
 	public ContactCreationJpanel() {
