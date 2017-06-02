@@ -8,8 +8,16 @@ import javax.swing.JTextField;
 public class ContactModifyJPanel extends ContactCreationJpanel {
 	
 	
-	public ContactModifyJPanel(String lastName, String firstName, String number, String imagePath) {
-	
+	public ContactModifyJPanel(Contact contact) {
+		super ();
+		
+		fieldFirstName.setText(contact.getFirstName()); 
+		fieldLastName.setText(contact.getLastName()); 
+		fieldNumber.setText(contact.getNumber()); 
+
+		// Textfield --> attributs optionnels pour un contact
+		fieldEmail.setText(contact.getEmail()); 
+		fieldImagePath.setText(contact.getImagePath()); 
 		
 	}
 }
