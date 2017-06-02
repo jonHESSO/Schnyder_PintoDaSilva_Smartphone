@@ -43,7 +43,6 @@ public class ContactCreationJpanel extends JPanel {
 		// principal
 		add(fieldsLabelsPanel(), BorderLayout.WEST);
 		add(contactFieldsPanel(), BorderLayout.EAST);
-		add(buttonsPanel(), BorderLayout.SOUTH);
 	}
 
 	// Panel accueillant les labels des textFields
@@ -75,57 +74,18 @@ public class ContactCreationJpanel extends JPanel {
 
 		return panel;
 	}
+	
+	public void createNewContact()
+	{
+		String nom = fieldLastName.getText();
+		String prenom = fieldFirstName.getText();
+		String numero = fieldNumber.getText();
 
-	// Panel accueillant les buttons "Ok" et "Cancel"
-	public JPanel buttonsPanel() {
-
-		// Création et ajout du panel pour les buttons
-		JPanel panel = new JPanel(new FlowLayout());
-
-		// Ajout des buttons "OK" et "Cancel"
-		JButton okButton = new JButton("OK");
-		JButton cancelButton = new JButton("Cancel");
-
-		// ajout de listener
-		okButton.addActionListener(new Ok_Click());
-		cancelButton.addActionListener(new Cancel_Click());
-
-		// Ajout des buttons
-		panel.add(okButton);
-		panel.add(cancelButton);
-
-		return panel;
+		// Ajout du contact à la ContactList (cl)
+		cl.addContact(nom, prenom, numero);
 	}
 
-	// Listener du button de creation de contact
-	class Ok_Click implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
 
-			// Ajout des listener sur chaque texfield pour l'ajout à la
-			// ContactList
-			String nom = fieldLastName.getText();
-			String prenom = fieldFirstName.getText();
-			String numero = fieldNumber.getText();
 
-			// Ajout du contact à la ContactList (cl)
-			cl.addContact(nom, prenom, numero);
-			System.out.println(cl.toString());
-		}
-	}
-
-	// Listener du button de confirmation de quitter la ContactCreation
-	class Cancel_Click implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			int reponse = JOptionPane.showConfirmDialog(null,
-	                "Voulez-vous quitter l'application",
-	                "Confirmation",
-	                JOptionPane.YES_NO_OPTION,
-	                JOptionPane.QUESTION_MESSAGE);
-			if(reponse == JOptionPane.YES_OPTION ){
-			}
-			
-		}
-
-	}
 
 }
