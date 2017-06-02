@@ -95,6 +95,7 @@ public class ContactListJpanel extends JPanel {
 		        JFrame jf =  new JFrame() ;
 		        
 		        //needs correction, sorry sam
+
 		        jf.add(new ContactIndividualJPanel(list.getContact(row)));
 		        jf.pack();
 		        jf.setVisible(true);

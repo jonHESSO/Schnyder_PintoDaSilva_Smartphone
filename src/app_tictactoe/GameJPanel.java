@@ -6,129 +6,260 @@
 
 package app_tictactoe;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.* ;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.plaf.OptionPaneUI;
 
 import ressources.Ressources;
+import ressources.Serializer;
 
 public class GameJPanel extends JPanel
 {
-	private JButton[][] space = new JButton[3][3];
-	private Game game ;
-	private int[] index ;
-	private int player ;
+	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
+
+	private JButton[][] cells = new JButton[3][3];
+	protected Game game ;
+	private int currentPlayer ;
+	private TicTacToeAI bot ;
+	private boolean isVSAI ;
+	private String scoresPath = Ressources.TICTACTOE_DIRECTORY ;
+	private TicTacToeStats scores ;
 
 	public GameJPanel()
 	{
-		this.player = 1 ;
-		setPreferredSize(Ressources.TICTACTOE_APP_JPANEL_DIMENSION); 
+		this.currentPlayer = 1 ;
+		loadStats();
+		setPreferredSize(TICTACTOE_APP_JPANEL_DIMENSION); 
 		setLayout(new GridLayout(3,3));
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				space[i][j] = new JButton(" ") ;
-				space[i][j].addMouseListener(new MoveListener());
-				//				space[i][j].setPreferredSize(Ressources.TICTACTOE_APP_FIELD_DIMENSION) ;
-				add(space[i][j]);
+				cells[i][j] = new JButton(" ") ;
+				cells[i][j].addMouseListener(new MoveListener());
+				//				cells[i][j].setPreferredSize(Ressources.TICTACTOE_APP_FIELD_DIMENSION) ;
+				add(cells[i][j]);
 			}
-
-
 		}
-
 	}
 
-	private void displayMove(int[] index, int player)
+	private void displayMove(int[] cell, int currentPlayer)
 	{
-		String playerName = null ;
-		switch (player)
+		String currentPlayerName = null ;
+		switch (currentPlayer)
 		{
 		case -1 :
-			playerName = "O" ;
+			currentPlayerName = "O" ;
 			break ;
 		case 1 :
-			playerName = "X" ;
+			currentPlayerName = "X" ;
 			break ;
 		}
-		this.space[index[0]][index[1]].setText(playerName);
+		this.cells[cell[0]][cell[1]].setText(currentPlayerName);
 	}
 
-	public void newGame()
+	public void newGame(boolean isVSAI)
 	{
-		this.player = 1 ;
+		this.currentPlayer = 1 ;
+		this.isVSAI=isVSAI ;
 		this.game = new Game() ;
+		if (isVSAI == true)
+		{
+			this.bot = new TicTacToeAI(this.game) ;
+		}
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				space[i][j].setText(" ") ;
+				cells[i][j].setText(" ") ;
 			}
 		}
 	}
+	
+	public void play(int[] cell)
+	{
+		if (isVSAI==true)
+		{
+			playVSAI(cell) ;
+		}
+		else
+		{
+			playVSPlayer2(cell) ;
+		}
+	}
 
-	private void play()
+	private void playMove(int[] cell) throws Exception
 	{
 
 		try
 		{			
-			game.addMove(this.index[0], this.index[1], this.player) ;
-			displayMove(index,player) ;
+			game.addMove(cell[0], cell[1], this.currentPlayer) ;
+			displayMove(cell,currentPlayer) ;
 			if(game.getStatus()!=0)
 			{
-
+				testGameStatus() ;
 			}
-			player*=-1 ;
+			currentPlayer*=-1 ;
 		} catch (Exception e)
 		{
-			//			e.printStackTrace();
+			throw new Exception("Cell not available") ;
 		}
 
 
+	}
+	
+	protected void playVSPlayer2(int[] cell)
+	{
+		try
+		{
+			playMove(cell) ;
+		} catch (Exception e)
+		{
+//			e.printStackTrace();
+		}
+	}
+
+	protected void playVSAI(int[] cell)
+	{
+		try
+		{
+			playMove(cell) ;
+			if (game.getStatus()==0)
+			{
+				playMove(bot.getBestCell()) ;
+			}
+		} catch (Exception e)
+		{
+//			e.printStackTrace();
+		}
+	}
+
+	private void testGameStatus()
+	{
+		if (game.getStatus()!=0)
+		{
+			displayFinishedGame() ;
+		}
 	}
 
 	private void displayFinishedGame()
 	{
+		String result = "" ;
+		switch (game.getStatus())
+		{
+		case -1 :
+			result = "Player2 wins" ;
+			saveScoreP2() ;
+			break ;
+		case 1 : 
+			result = "Player1 wins" ;
+			saveScoreP1() ;
+			break ;
+		case 2 : 
+			result = "Draw" ;
+			break ;
+
+		}
+		JOptionPane.showMessageDialog(null, result);
 
 	}
-
-	private int[] getIndex(JButton field)
+	
+	private void saveScore()
 	{
-		int[] index = new int[2];
+		try
+		{
+			Serializer.serializableObject(scores, scoresPath);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void saveScoreP2()
+	{
+		if (isVSAI==true)
+		{
+			scores.AIWins();
+		}
+		else
+		{
+			scores.P2Wins();
+		}
+		saveScore() ;
+		
+	}
+	
+	private void saveScoreP1()
+	{
+		if (isVSAI==true)
+		{
+			scores.P1WinsVAI();
+		}
+		else
+		{
+			scores.P1WinsVP();
+		}
+		saveScore() ;
+	}
+
+	private int[] getCell(JButton clickedCell)
+	{
+		int[] cell = new int[2];
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if (space[i][j] == field)
+				if (cells[i][j] == clickedCell)
 				{
-					index[0]=i ;
-					index[1]=j ;
+					cell[0]=i ;
+					cell[1]=j ;
 				}
 			}
 		}
-		return index ;
+		return cell ;
+	}
+	
+	private void loadStats()
+	{
+		File stats = new File(scoresPath) ;
+		if(stats.exists()!=true)
+		{
+			try
+			{
+				Serializer.serializableObject(new TicTacToeStats(), scoresPath);
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		try
+		{
+			scores = (TicTacToeStats) Serializer.deserializableObject(scoresPath) ;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 
-	class MoveListener extends MouseAdapter{
+	private class MoveListener extends MouseAdapter{
 
 		public void mouseClicked(MouseEvent e)
 		{
-			System.out.println("cliked, status is "+game.getStatus());
+			int[] cell =  getCell((JButton)e.getSource()) ;
 			if (game.getStatus()!=0) 
 			{
-				
 				return ;
 			}
 			else
 			{
-				index = getIndex((JButton)e.getSource()) ;
-				play() ;
-				System.out.println("played, status is "+game.getStatus());
+				play(cell) ;
 			}
+
 
 		}		
 	}

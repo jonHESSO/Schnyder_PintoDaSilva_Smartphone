@@ -2,6 +2,7 @@
 Thumbs.db
 ehthumbs.db
 
+
 #Folders
 bin/
 bin\
@@ -9,6 +10,7 @@ bin\
 /data
 data/
 data\
+
 
 # Folder config file
 Desktop.ini
@@ -77,3 +79,5 @@ Temporary Items
 *.rar
 
 
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

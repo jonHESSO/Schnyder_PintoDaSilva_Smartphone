@@ -37,7 +37,9 @@ public class Score implements Serializable
 	
 	public String toString()
 	{
-		return dayNumber + " -- " + winner   ;
+		DateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy") ;
+		Date day = new Date((long)dayNumber*(1000*60*60*24)) ;
+		return dateformat.format(day) + " -- " + winner   ;
 	}
 
 }

@@ -19,18 +19,22 @@ import ressources.Ressources;
 
 public class TicTacToePanel extends JPanel
 {
-	private TicTacToeStats stats ;
 	GameJPanel gamePanel = new GameJPanel() ;
 	Game game ;
+	boolean isVSAI ;
 	JButton newGame = new JButton("New Game") ;
+	JCheckBox vsAI = new JCheckBox() ;
 	public TicTacToePanel() 
 	{
+		isVSAI=false ;
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION); 
 		setLayout(new FlowLayout());
 		add(gamePanel) ;
 		newGame.addActionListener(new NewGameListener());
 		add(newGame);
-		gamePanel.newGame();
+		vsAI.addActionListener(new vsAIListener());
+		add(vsAI) ;
+		gamePanel.newGame(isVSAI);
 		
 	}
 	
@@ -38,7 +42,23 @@ public class TicTacToePanel extends JPanel
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gamePanel.newGame(); ;
+			gamePanel.newGame(isVSAI); ;
+		}
+		
+	}
+	
+	class vsAIListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(vsAI.isSelected())
+			{
+				isVSAI = true ;
+			}
+			else
+			{
+				isVSAI = false ;
+			}
 		}
 		
 	}
