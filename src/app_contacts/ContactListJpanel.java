@@ -73,11 +73,8 @@ public class ContactListJpanel extends JPanel {
 		list.addContact("a", "b", "8");
 		list.addContact("a", "b", "8");
 		add(createIndividualPanels()) ;
-		
 		add(CreationButtonPanel(), BorderLayout.SOUTH);
-		
 	}
-	
 	
 	private JScrollPane createIndividualPanels()
 	{
@@ -109,7 +106,6 @@ public class ContactListJpanel extends JPanel {
 			model.addRow(contactData) ;
 		} 
 		return scrollPane ;
-		
 	}
 	
 	private JPanel CreationButtonPanel() {
@@ -126,6 +122,7 @@ public class ContactListJpanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 				JFrame jf =  new JFrame() ;
 		        jf.add(new ContactCreationJpanel());
+		        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        jf.pack();
 		        jf.setVisible(true);
 			}

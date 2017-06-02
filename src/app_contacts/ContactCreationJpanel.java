@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 
 //imports J***
 import javax.swing.*;
+
+import com.sun.corba.se.pept.protocol.ServerRequestDispatcher;
+
 import ressources.Ressources;
 
 public class ContactCreationJpanel extends JPanel {
@@ -25,18 +28,19 @@ public class ContactCreationJpanel extends JPanel {
 	// Textfield --> attributs optionnels pour un contact
 	protected JTextField fieldEmail = new JTextField(15);
 	protected JTextField fieldImagePath = new JTextField(15);
-	
-	//Création de la liste de contacts
-	protected ContactList cl = new ContactList() ;
+
+	// Création de la liste de contacts
+	protected ContactList cl = new ContactList();
 
 	// Panel accueillant le panel avec les JTexfields et celui avec les JButtons
 	public ContactCreationJpanel() {
 		
-		//Ajout des dimensions
+		// Ajout des dimensions
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new BorderLayout());
-		
-		//Ajout des panels de labels, de textfields et de buttons au panel principal
+
+		// Ajout des panels de labels, de textfields et de buttons au panel
+		// principal
 		add(fieldsLabelsPanel(), BorderLayout.WEST);
 		add(contactFieldsPanel(), BorderLayout.EAST);
 		add(buttonsPanel(), BorderLayout.SOUTH);
@@ -68,24 +72,24 @@ public class ContactCreationJpanel extends JPanel {
 		// attributs optionnels pour un contact
 		panel.add(fieldEmail).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		panel.add(fieldImagePath).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-		
+
 		return panel;
 	}
 
 	// Panel accueillant les buttons "Ok" et "Cancel"
 	public JPanel buttonsPanel() {
-		
-		//Création et ajout du panel pour les buttons
+
+		// Création et ajout du panel pour les buttons
 		JPanel panel = new JPanel(new FlowLayout());
-		
-		//Ajout des buttons "OK" et "Cancel"
+
+		// Ajout des buttons "OK" et "Cancel"
 		JButton okButton = new JButton("OK");
 		JButton cancelButton = new JButton("Cancel");
-		
-		//ajout de listener
+
+		// ajout de listener
 		okButton.addActionListener(new Ok_Click());
 		cancelButton.addActionListener(new Cancel_Click());
-		
+
 		// Ajout des buttons
 		panel.add(okButton);
 		panel.add(cancelButton);
@@ -93,33 +97,35 @@ public class ContactCreationJpanel extends JPanel {
 		return panel;
 	}
 
-	//Listener du button de creation de contact
-	class Ok_Click implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			
-			//Ajout des listener sur chaque texfield pour l'ajout à la ContactList
+	// Listener du button de creation de contact
+	class Ok_Click implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+			// Ajout des listener sur chaque texfield pour l'ajout à la
+			// ContactList
 			String nom = fieldLastName.getText();
-			String prenom = fieldFirstName.getText() ;
-			String numero = fieldNumber.getText() ;
-			
-			//Ajout du contact à la ContactList (cl)
+			String prenom = fieldFirstName.getText();
+			String numero = fieldNumber.getText();
+
+			// Ajout du contact à la ContactList (cl)
 			cl.addContact(nom, prenom, numero);
 			System.out.println(cl.toString());
 		}
 	}
-	
-	//Listener du button de confirmation de quitter la ContactCreation
+
+	// Listener du button de confirmation de quitter la ContactCreation
 	class Cancel_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			int ret = JOptionPane.showConfirmDialog(null, "Voulez-vous annuler la création du contact ?",
-					"Confirmation d'annulation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-		
-			// if (ret == JOptionPane.YES_OPTION)
-			// Ferme uniquement la fenêtre:
-			// a faire plus tard, revient sur la fenetre precedente (liste de
-			// contacts)
+			int reponse = JOptionPane.showConfirmDialog(null,
+	                "Voulez-vous quitter l'application",
+	                "Confirmation",
+	                JOptionPane.YES_NO_OPTION,
+	                JOptionPane.QUESTION_MESSAGE);
+			if(reponse == JOptionPane.YES_OPTION ){
+			}
+			
 		}
+
 	}
 
 }
