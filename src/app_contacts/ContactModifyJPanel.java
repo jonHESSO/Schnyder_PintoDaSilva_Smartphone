@@ -15,7 +15,7 @@ public class ContactModifyJPanel extends ContactCreationJpanel {
 		fieldLastName.setText(contact.getLastName()); 
 		fieldNumber.setText(contact.getNumber()); 
 
-		// Textfield --> attributs optionnels pour un contact
+		// Textfield --> attributs optionnels pour un contact 
 		fieldEmail.setText(contact.getEmail()); 
 		fieldImagePath.setText(contact.getImagePath()); 
 		
