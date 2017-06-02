@@ -93,6 +93,9 @@ public class ContactListJpanel extends JPanel {
 		        int row = contactTable.rowAtPoint(e.getPoint());
 		        if (row >= 0) { 
 		        JFrame jf =  new JFrame() ;
+		        
+		        //needs correction, sorry sam
+
 		        jf.add(new ContactIndividualJPanel(list.getContact(row)));
 		        jf.pack();
 		        jf.setVisible(true);
