@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
+#Compiled classes and data folders
+bin/
+data/
+
 # Folder config file
 Desktop.ini
 
@@ -70,6 +74,3 @@ Temporary Items
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-bin/ressources/Ressources.class
-*.class
-bin/app_contacts/Contact.class
