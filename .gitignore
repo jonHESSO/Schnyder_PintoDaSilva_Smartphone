@@ -4,7 +4,11 @@ ehthumbs.db
 
 #Folders
 bin/
+bin\
+/bin
+/data
 data/
+data\
 
 # Folder config file
 Desktop.ini
