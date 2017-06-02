@@ -1,15 +1,12 @@
 package app_contacts;
 
-import java.awt.event.*;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import ressources.Ressources;
+import app_contacts.Contact ;
 
 public class ContactIndividualJPanel extends JPanel {
 	

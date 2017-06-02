@@ -18,7 +18,7 @@ public class Contact implements Serializable {
 	}
 
 
-	// ***GETTERS***
+	// ***GETTERS*** 
 	public String getLastName() {
 		return lastName;
 	}
