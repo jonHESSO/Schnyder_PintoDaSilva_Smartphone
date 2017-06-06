@@ -123,11 +123,10 @@ public class ContactListJpanel extends JPanel {
 	
 	class Create_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				JFrame jf =  new JFrame() ;
-		        jf.add(new ContactCreationJpanel());
-		        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        jf.pack();
-		        jf.setVisible(true);
+				JFrame cf =  new ContactCreationFrame() ;
+		        
+		        cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        cf.setVisible(true);
 			}
 		}
 }
