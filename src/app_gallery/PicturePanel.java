@@ -6,6 +6,7 @@
 
 package app_gallery;
 
+import java.awt.BorderLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +23,19 @@ public class PicturePanel extends JPanel
 	Picture currentPicture ;
 	JButton deleteButton = new JButton("Delete") ;
 	GalleryPanel parentPanel ;
+	JPanel buttons ;
+	
 
 	public PicturePanel(Picture selectedPicture, GalleryPanel parentPanel){
 		this.parentPanel=parentPanel ;
 		this.currentPicture = selectedPicture ;
+		setLayout(new BorderLayout());
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		ImageIcon bImage = selectedPicture.getPicture() ;
 		JLabel picLabel = new JLabel(bImage);
 		picLabel.setVerticalAlignment(JLabel.CENTER);
-		add(picLabel);
+		add(picLabel, BorderLayout.CENTER);
+		deleteButton.setSize(Ressources.DEFAULT_BUTTON_DIMENSION);
 		deleteButton.addActionListener(new ActionListener()
 		{
 
@@ -46,7 +51,7 @@ public class PicturePanel extends JPanel
 
 			}
 		});
-		add(deleteButton) ;
+		add(deleteButton, BorderLayout.SOUTH) ;
 	}
 	
 

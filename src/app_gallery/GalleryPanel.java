@@ -6,7 +6,9 @@
 
 package app_gallery;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +33,7 @@ public class GalleryPanel extends JPanel
 	public GalleryPanel()
 	{
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
+		
 		
 //		setLayout(new FlowLayout()) ;
 		fetchIcons() ;
@@ -66,6 +69,11 @@ public class GalleryPanel extends JPanel
 		{
 			removeAll();
 		}
+		JPanel iconPanel = new JPanel() ;
+		iconPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+		iconPanel.setPreferredSize(Ressources.GALLERY_APP_ICONPANEL);
+		
+		
 		pictures = getPictureList() ;
 		icons = new ArrayList<JLabel>() ;
 		for (int i = 0; i < pictures.size(); i++)
@@ -73,7 +81,7 @@ public class GalleryPanel extends JPanel
 			Picture tPicture = (Picture) pictures.get(i) ;
 			ImageIcon tIcon = tPicture.getIcon() ;
 			icons.add(new JLabel(tIcon)) ;	
-			add(icons.get(i)).addMouseListener(new MouseAdapter()
+			iconPanel.add(icons.get(i)).addMouseListener(new MouseAdapter()
 			{
 				@Override
 				public void mouseClicked(MouseEvent e)
@@ -86,8 +94,10 @@ public class GalleryPanel extends JPanel
 				}
 			}) ;
 		}
+		add(iconPanel,BorderLayout.NORTH) ;
 		revalidate() ;
 		repaint() ;
+		
 	}
 	
 	public void deletePicture(Picture currentPicture)

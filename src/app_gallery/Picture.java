@@ -58,12 +58,12 @@ public class Picture implements Serializable
 		int h =this.originalHeight, w =this.originalWidth ;
 		try
 		{
-			if (this.originalHeight>Ressources.DEFAULT_APP_JPANEL_HEIGHT || this.originalWidth>Ressources.DEFAULT_APP_JPANEL_WIDTH) 
+			if (this.originalHeight>Ressources.GALLERY_PICTURE_HEIGHT || this.originalWidth>Ressources.DEFAULT_APP_JPANEL_WIDTH) 
 			{
 				//height is higher than the ratio
 				if(ratio>Ressources.DEFAULT_PICTURE_RATIO)
 				{
-					h = Ressources.DEFAULT_APP_JPANEL_HEIGHT ;
+					h = Ressources.GALLERY_PICTURE_HEIGHT ;
 					w = (int)(h/ratio) ;
 				}
 				else
@@ -124,7 +124,7 @@ public class Picture implements Serializable
 		//actual cropping and resizing
 		try{
 			BufferedImage imgCropped = bImage.getSubimage(x, y, w, h);
-			icon = new ImageIcon(imgCropped.getScaledInstance(Ressources.GALLERY_IMAGE_WIDTH, Ressources.GALLERY_IMAGE_HEIGHT, Image.SCALE_FAST));
+			icon = new ImageIcon(imgCropped.getScaledInstance(Ressources.GALLERY_ICON_WIDTH, Ressources.GALLERY_ICON_HEIGHT, Image.SCALE_FAST));
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
