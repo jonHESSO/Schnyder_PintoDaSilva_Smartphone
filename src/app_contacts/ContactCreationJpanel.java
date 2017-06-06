@@ -8,18 +8,20 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 //imports J***
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import com.sun.corba.se.pept.protocol.ServerRequestDispatcher;
 
 import ressources.Ressources;
 
 public class ContactCreationJpanel extends JPanel {
-	
+
 	// Textfield --> attributs obligatoires pour un contact
 	protected JTextField fieldFirstName = new JTextField(15);
 	protected JTextField fieldLastName = new JTextField(15);
@@ -34,9 +36,9 @@ public class ContactCreationJpanel extends JPanel {
 
 	// Panel accueillant le panel avec les JTexfields et celui avec les JButtons
 	public ContactCreationJpanel() {
-		
+
 		// Ajout des dimensions
-		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
+		this.setPreferredSize(Ressources.CONTACT_APP_CREATIONPANEL);
 		setLayout(new BorderLayout());
 
 		// Ajout des panels de labels, de textfields et de buttons au panel
@@ -47,6 +49,7 @@ public class ContactCreationJpanel extends JPanel {
 
 	// Panel accueillant les labels des textFields
 	public JPanel fieldsLabelsPanel() {
+		setBorder(new EmptyBorder(10, 10, 10, 10));
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setPreferredSize(new Dimension(50, 500));
 		panel.add(new JLabel("Prénom")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
@@ -74,9 +77,8 @@ public class ContactCreationJpanel extends JPanel {
 
 		return panel;
 	}
-	
-	public void createNewContact()
-	{
+
+	public void createNewContact() {
 		String nom = fieldLastName.getText();
 		String prenom = fieldFirstName.getText();
 		String numero = fieldNumber.getText();
@@ -84,8 +86,5 @@ public class ContactCreationJpanel extends JPanel {
 		// Ajout du contact à la ContactList (cl)
 		cl.addContact(nom, prenom, numero);
 	}
-
-
-
 
 }
