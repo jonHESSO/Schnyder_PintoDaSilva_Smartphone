@@ -6,6 +6,8 @@
 
 package mainFrame;
 
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 import app_contacts.*;
@@ -16,9 +18,11 @@ public class MainFrame extends JFrame
 {
 	public MainFrame()
 	{
-		add(new GalleryPanel()) ;
+//		add(new GalleryPanel()) ;
 //		add(new ContactCreationJpanel()) ;
 //		add(new TicTacToePanel()) ;
+		add(new StatusBarPanel(),BorderLayout.NORTH) ;
+		add(new ButtonBarPanel(),BorderLayout.SOUTH) ;
 		pack() ;
 	}
 

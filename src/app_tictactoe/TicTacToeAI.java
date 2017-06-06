@@ -19,7 +19,7 @@ public class TicTacToeAI
 		this.currentGame = game ;
 	}
 
-	public int[] getBestCell()
+	int[] getBestCell()
 	{
 		int line ;
 
