@@ -39,10 +39,4 @@ public class ContactCreationJpanel extends ContactEditPanel {
 
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
-
-	// Listener du button Cancel
-	@Override
-	public void cancelAction() {
-		ContactCreationJpanel.this.setVisible(false);
-	}
 }

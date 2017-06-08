@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import ressources.Ressources;
 import ressources.Serializer;
 
-//Permet de modifier un contact dÈj‡ existant
+//Permet de modifier un contact d√©j√† existant
 public class ContactModifyJPanel extends ContactEditPanel {
 
 	private Contact currentContact;
@@ -45,9 +45,3 @@ public class ContactModifyJPanel extends ContactEditPanel {
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
 
-	@Override
-	public void cancelAction()
-	{
-	}
-
-}
