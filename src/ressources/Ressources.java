@@ -43,6 +43,7 @@ public class Ressources
 	public static final Dimension CONTACT_TEXTFIELD_DIMENSION = new Dimension(50,20) ;
 	public static final Dimension DEFAULT_FRAME_DIMENSION = new Dimension(DEFAULT_FRAME_WIDTH,DEFAULT_FRAME_HEIGHT) ;
 	public static final Dimension DEFAULT_APP_JPANEL_DIMENSION= new Dimension (DEFAULT_APP_JPANEL_WIDTH, DEFAULT_APP_JPANEL_HEIGHT);
+	public static final Dimension CONTACT_APP_CREATIONPANEL = new Dimension(500,DEFAULT_APP_JPANEL_HEIGHT-DEFAULT_BUTTON_HEIGHT) ;
 	public static final Dimension GALLERY_APP_ICONPANEL = new Dimension(465,DEFAULT_APP_JPANEL_HEIGHT) ;
 	public static final Dimension TICTACTOE_APP_JPANEL_DIMENSION= new Dimension (300, 300) ;
 	public static final Dimension TICTACTOE_APP_FIELD_DIMENSION= new Dimension (100, 100) ;

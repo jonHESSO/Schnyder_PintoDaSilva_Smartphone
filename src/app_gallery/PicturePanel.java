@@ -26,7 +26,7 @@ public class PicturePanel extends JPanel
 	JPanel buttons ;
 	
 
-	public PicturePanel(Picture selectedPicture, GalleryPanel parentPanel){
+	public PicturePanel(final Picture selectedPicture, final GalleryPanel parentPanel){
 		this.parentPanel=parentPanel ;
 		this.currentPicture = selectedPicture ;
 		setLayout(new BorderLayout());

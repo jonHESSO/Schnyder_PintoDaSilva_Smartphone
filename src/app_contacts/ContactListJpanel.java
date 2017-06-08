@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.*;
 
 import javax.swing.*;
@@ -11,18 +12,42 @@ import javax.swing.table.DefaultTableModel;
 
 import app_contacts.ContactIndividualJPanel.Modif_Click;
 import ressources.Ressources;
+import ressources.Serializer;
 
 public class ContactListJpanel extends JPanel {
 	
+
 	private ContactList list = Ressources.CONTACTLIST;		
 
 	public ContactListJpanel(){
+		File f = new File(contactPath) ;
+		if (f.exists()==false)
+		{
+			try{
+				 Serializer.serializableObject(new ContactList(),contactPath);
+				}
+				 catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+		}
+		try{
+			 list = (ContactList)Serializer.deserializableObject(contactPath);
+			 contactList = list.getContactList();
+			}
+			 catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		
 		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new FlowLayout());
+
 		
 		add(contactListPane()) ;
 		add(ButtonPanel(), BorderLayout.SOUTH);
+
 	}
 	
 	private JScrollPane contactListPane()
@@ -44,7 +69,6 @@ public class ContactListJpanel extends JPanel {
 		        JFrame jf =  new JFrame() ;
 		        
 		        //needs correction, sorry sam
-
 		        jf.add(new ContactIndividualJPanel(list.getContact(row)));
 		        jf.pack();
 		        jf.setVisible(true);
