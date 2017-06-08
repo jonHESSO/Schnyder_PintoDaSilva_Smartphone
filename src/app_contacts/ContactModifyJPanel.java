@@ -40,15 +40,4 @@ public class ContactModifyJPanel extends ContactEditPanel {
 		this.currentContact.modify();
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
-
-	// Listener du button Cancel
-	@Override
-	public void cancelAction() {
-		int reponse = JOptionPane.showConfirmDialog(null, "Realy want to quit bro?", "Confirmation",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		if (reponse == JOptionPane.YES_OPTION) {
-			ContactModifyJPanel.this.setVisible(false);
-		}
-		
-	}
 }

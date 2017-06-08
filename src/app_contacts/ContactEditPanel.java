@@ -33,6 +33,8 @@ public abstract class ContactEditPanel extends JPanel {
 	protected JButton okButton = new JButton("OK");
 	protected JButton cancelButton = new JButton("Cancel");
 	protected JButton imageButton = new JButton();
+	
+	protected boolean closeNow = false;
 
 	// Panel accueillant le panel avec les JTexfields, celui avec les labels et celui avec les JButtons
 	public ContactEditPanel() {
@@ -122,8 +124,11 @@ public abstract class ContactEditPanel extends JPanel {
 	}
 	
 	//Methode d'action du listener du okButton
-	public abstract void cancelAction();
+	public void cancelAction(){
 		
+		firePropertyChange("Close Now", closeNow, true) ;
+			
 	}
+}
 
 
