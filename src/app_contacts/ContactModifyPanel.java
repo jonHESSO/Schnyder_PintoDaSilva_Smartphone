@@ -45,10 +45,5 @@ public class ContactModifyPanel extends ContactEditPanel {
 		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, null);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
-
-	@Override
-	public void cancelAction()
-	{
-	}
 }
 
