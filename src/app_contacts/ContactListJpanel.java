@@ -72,7 +72,6 @@ public class ContactListJpanel extends JPanel {
 	
 	class Create_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				
 			}
 		}
 }
