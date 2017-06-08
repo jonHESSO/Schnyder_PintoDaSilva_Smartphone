@@ -15,12 +15,12 @@ import ressources.Ressources;
 import ressources.Serializer;
 
 //Permet de modifier un contact déjà existant
-public class ContactModifyPanel extends ContactEditPanel {
+public class ContactModifyJPanel extends ContactEditPanel {
 
 	private Contact currentContact;
 
 	// Constructeur du panel
-	public ContactModifyPanel(Contact contact) {
+	public ContactModifyJPanel(Contact contact) {
 		super();
 
 		this.currentContact = contact;
@@ -43,6 +43,11 @@ public class ContactModifyPanel extends ContactEditPanel {
 		String email = fieldEmail.getText() ;
 		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, null);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
+	}
+
+	@Override
+	public void cancelAction()
+	{
 	}
 
 }
