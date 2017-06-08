@@ -16,12 +16,9 @@ import ressources.Serializer;
 
 public class ContactListJpanel extends JPanel {
 	
-	protected String contactPath = Ressources.CONTACT_DIRECTORY ;
-	private ContactList list ;
-	
-		
-	private List<Contact> contactList ;
-	
+
+	private ContactList list = Ressources.CONTACTLIST;		
+
 	public ContactListJpanel(){
 		File f = new File(contactPath) ;
 		if (f.exists()==false)
@@ -46,61 +43,14 @@ public class ContactListJpanel extends JPanel {
 		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new FlowLayout());
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-//		list.addContact("a", "b", "8");
-		add(createIndividualPanels()) ;
-		add(CreationButtonPanel(), BorderLayout.SOUTH);
+
+		
+		add(contactListPane()) ;
+		add(ButtonPanel(), BorderLayout.SOUTH);
+
 	}
 	
-	private JScrollPane createIndividualPanels()
+	private JScrollPane contactListPane()
 	{
 		DefaultTableModel model = new DefaultTableModel() ;
 		final JTable contactTable = new JTable(model);
@@ -126,15 +76,15 @@ public class ContactListJpanel extends JPanel {
 		    }
 		});
 		
-		for (int i = 0; i< contactList.size();i++){
-			String [] contactData = {list.getContact(i).getFirstName(),list.getContact(i).getLastName(),list.getContact(i).getImagePath()} ;
+		for (int i = 0; i< list.getContactList().size();i++){
+			Object [] contactData = {list.getContact(i).getFirstName(),list.getContact(i).getLastName(),list.getContact(i).getPicture()} ;
 			
 			model.addRow(contactData) ;
 		} 
 		return scrollPane ;
 	}
 	
-	private JPanel CreationButtonPanel() {
+	private JPanel ButtonPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		JButton CreationButton = new JButton ("Nouveau");
 		
@@ -146,10 +96,6 @@ public class ContactListJpanel extends JPanel {
 	
 	class Create_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				JFrame cf =  new ContactCreationFrame() ;
-		        
-		        cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        cf.setVisible(true);
 			}
 		}
 }
