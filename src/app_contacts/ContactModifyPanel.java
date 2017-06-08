@@ -15,12 +15,12 @@ import ressources.Ressources;
 import ressources.Serializer;
 
 //Permet de modifier un contact déjà existant
-public class ContactModifyJPanel extends ContactEditPanel {
+public class ContactModifyPanel extends ContactEditPanel {
 
 	private Contact currentContact;
 
 	// Constructeur du panel
-	public ContactModifyJPanel(Contact contact) {
+	public ContactModifyPanel(Contact contact) {
 		super();
 
 		this.currentContact = contact;
