@@ -14,13 +14,14 @@ import javax.swing.JTextField;
 import ressources.Ressources;
 import ressources.Serializer;
 
-//Permet de modifier un contact d√©j√† existant
-public class ContactModifyJPanel extends ContactEditPanel {
+//Permet de modifier un contact dÈj‡ existant
+public class ContactModifyPanel extends ContactEditPanel {
+
 
 	private Contact currentContact;
 
 	// Constructeur du panel
-	public ContactModifyJPanel(Contact contact) {
+	public ContactModifyPanel(Contact contact) {
 		super();
 
 		this.currentContact = contact;
@@ -44,4 +45,10 @@ public class ContactModifyJPanel extends ContactEditPanel {
 		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, null);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
+
+	@Override
+	public void cancelAction()
+	{
+	}
+}
 
