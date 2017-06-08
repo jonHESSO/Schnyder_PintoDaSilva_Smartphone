@@ -11,8 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import app_contacts.ContactCreationFrame.Cancel_Click;
-import app_contacts.ContactCreationFrame.Ok_Click;
 import ressources.Ressources;
 import ressources.Serializer;
 
@@ -21,40 +19,36 @@ public class ContactModifyJPanel extends ContactEditPanel {
 
 	private Contact currentContact;
 
-
+	// Constructeur du panel
 	public ContactModifyJPanel(Contact contact) {
 		super();
-	
+
 		this.currentContact = contact;
 
+		// Ajout des informations du contact dans les textfield
 		fieldFirstName.setText(contact.getFirstName());
 		fieldLastName.setText(contact.getLastName());
 		fieldNumber.setText(contact.getNumber());
-
-		// Textfield --> attributs optionnels pour un contact
 		fieldEmail.setText(contact.getEmail());
 		fieldImagePath.setText(contact.getImagePath());
 	}
 
-
-
-
-	// Listener du button de confirmation de quitter la ContactCreation
-	class Cancel_Click implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			int reponse = JOptionPane.showConfirmDialog(null, "Voulez-vous quitter l'application", "Confirmation",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-			if (reponse == JOptionPane.YES_OPTION) {
-				ContactModifyJPanel.this.setVisible(false);
-			}
-
-		}
-
-	}
-
+	// Listener du cancelButton
 	@Override
 	public void okAction() {
-		this.currentContact.modify() ;
+		//Sauvegarde des modif.
+		this.currentContact.modify();
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
+	}
+
+	// Listener du button Cancel
+	@Override
+	public void cancelAction() {
+		int reponse = JOptionPane.showConfirmDialog(null, "Realy want to quit bro?", "Confirmation",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (reponse == JOptionPane.YES_OPTION) {
+			ContactModifyJPanel.this.setVisible(false);
+		}
+		
 	}
 }

@@ -26,19 +26,23 @@ public class ContactCreationJpanel extends ContactEditPanel {
 	// Panel accueillant le panel avec les JTexfields et celui avec les JButtons
 	public ContactCreationJpanel() {
 		super();
+	}
 
-}
-
+	// Enregistrement du contact en cliquant sur le okButton
 	@Override
 	public void okAction() {
-		Ressources.CONTACTLIST.add(new Contact(fieldFirstName.getText())) ;
-		Ressources.CONTACTLIST.add(new Contact(fieldLastName.getText())) ;
-		Ressources.CONTACTLIST.add(new Contact(fieldNumber.getText())) ;
-		Ressources.CONTACTLIST.add(new Contact(fieldEmail.getText())) ;
-		Ressources.CONTACTLIST.add(new Contact(fieldImagePath.getText())) ;
-		
-		
+		Ressources.CONTACTLIST.add(new Contact(fieldFirstName.getText()));
+		Ressources.CONTACTLIST.add(new Contact(fieldLastName.getText()));
+		Ressources.CONTACTLIST.add(new Contact(fieldNumber.getText()));
+		Ressources.CONTACTLIST.add(new Contact(fieldEmail.getText()));
+		Ressources.CONTACTLIST.add(new Contact(fieldImagePath.getText()));
+
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
-		
+	}
+
+	// Listener du button Cancel
+	@Override
+	public void cancelAction() {
+		ContactCreationJpanel.this.setVisible(false);
 	}
 }
