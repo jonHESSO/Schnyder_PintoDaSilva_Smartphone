@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,7 +43,9 @@ public class ContactModifyPanel extends ContactEditPanel {
 		String firstName = fieldFirstName.getText() ;
 		String number = fieldNumber.getText() ;
 		String email = fieldEmail.getText() ;
-		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, null);
+		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
+		
+		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
 }

@@ -31,12 +31,13 @@ public class ContactCreationJpanel extends ContactEditPanel {
 	// Enregistrement du contact en cliquant sur le okButton
 	@Override
 	public void okAction() {
-		Ressources.CONTACTLIST.add(new Contact(fieldFirstName.getText()));
-		Ressources.CONTACTLIST.add(new Contact(fieldLastName.getText()));
-		Ressources.CONTACTLIST.add(new Contact(fieldNumber.getText()));
-		Ressources.CONTACTLIST.add(new Contact(fieldEmail.getText()));
-		Ressources.CONTACTLIST.add(new Contact(fieldImagePath.getText()));
-
+		String lastName = fieldLastName.getText() ;
+		String firstName = fieldFirstName.getText() ;
+		String number = fieldNumber.getText() ;
+		String email = fieldEmail.getText() ;
+		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
+		
+		Ressources.CONTACTLIST.addContact(lastName, firstName, number, email, picture);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
 	}
 }

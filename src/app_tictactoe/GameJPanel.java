@@ -170,13 +170,7 @@ public class GameJPanel extends JPanel
 	
 	private void saveScore()
 	{
-		try
-		{
-			Serializer.serializableObject(scores, scoresPath);
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		Serializer.serializableObject(scores, scoresPath);
 	}
 	
 	private void saveScoreP2()
@@ -228,21 +222,10 @@ public class GameJPanel extends JPanel
 		File stats = new File(scoresPath) ;
 		if(stats.exists()!=true)
 		{
-			try
-			{
 				Serializer.serializableObject(new TicTacToeStats(), scoresPath);
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
 		}
-		try
-		{
-			scores = (TicTacToeStats) Serializer.deserializableObject(scoresPath) ;
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		scores = (TicTacToeStats) Serializer.deserializableObject(scoresPath) ;
+
 	}
 
 
