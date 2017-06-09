@@ -5,10 +5,15 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -81,6 +86,7 @@ public abstract class ContactEditPanel extends JPanel {
 		panel.add(fieldImagePath).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		
 		//Bouton d'ajout d'image
+		imageButton.addActionListener(new setPictureListener());
 		panel.add(imageButton).setPreferredSize(new Dimension (150,150));
 
 		return panel;
@@ -125,9 +131,40 @@ public abstract class ContactEditPanel extends JPanel {
 	
 	//Methode d'action du listener du okButton
 	public void cancelAction(){
-		
+		 
 		firePropertyChange("Close Now", closeNow, true) ;
 			
+	}
+	
+	class setPictureListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			JFrame jf = new JFrame() ;
+			ContactSelectPicturePanel cspp = new ContactSelectPicturePanel() ;
+			cspp.addPropertyChangeListener(new SelectedPictureListener());
+			jf.add(cspp) ;
+			jf.setVisible(true);
+		}
+		
+	}
+	
+	class SelectedPictureListener implements PropertyChangeListener
+	{
+
+		@Override
+		public void propertyChange(PropertyChangeEvent evt)
+		{
+			if (evt.getPropertyName().equals("selectedPicture"))
+					{
+						System.out.println(evt.getNewValue().toString());
+						imageButton.setIcon((Icon)((ImageIcon)evt.getNewValue()));
+					}
+			
+		}
+		
 	}
 }
 
