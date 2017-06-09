@@ -30,7 +30,7 @@ public class ContactIndividualJPanel extends JPanel {
 	private JPanel PicturePanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setPreferredSize(new Dimension(450, 450));
-		panel.add(new JLabel(currentContact.getImagePath()));
+		panel.add(new JLabel(currentContact.getPicture()));
 		return panel;
 	}
 
@@ -63,7 +63,7 @@ public class ContactIndividualJPanel extends JPanel {
 	class Modif_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 				JFrame jf =  new JFrame() ;
-		        jf.add(new ContactModifyJPanel(currentContact));
+		        jf.add(new ContactModifyPanel(currentContact));
 		        jf.pack();
 		        jf.setVisible(true);
 			}

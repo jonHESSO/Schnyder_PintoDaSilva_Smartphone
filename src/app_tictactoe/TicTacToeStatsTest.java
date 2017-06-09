@@ -19,18 +19,9 @@ public class TicTacToeStatsTest
 	{
 		String scoresPath = Ressources.TICTACTOE_DIRECTORY ;
 		TicTacToeStats stats;
-		try
-		{
 			stats = (TicTacToeStats) Serializer.deserializableObject(scoresPath);
 			stats.showScoresVAI();
-			stats.showRatiosVAI();
-		} catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		} ; 
+			stats.showRatiosVAI(); 
 
 		
 		TestFrame tf = new TestFrame() ;
