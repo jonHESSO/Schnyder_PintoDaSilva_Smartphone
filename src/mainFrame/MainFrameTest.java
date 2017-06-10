@@ -6,14 +6,15 @@
 
 package mainFrame;
 
+import ressources.Ressources;
 
 public class MainFrameTest
 {
 
 	public static void main(String[] args)
 	{
-		MainFrame m = new MainFrame() ;
-		m.setVisible(true);
+		Ressources.MAINFRAME = new MainFrame() ;
+		Ressources.MAINFRAME.setVisible(true);
 		
 
 	}

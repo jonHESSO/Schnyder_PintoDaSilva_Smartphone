@@ -84,8 +84,8 @@ public abstract class GalleryIconListPanel extends JPanel
 				@Override
 				public void mouseClicked(MouseEvent e)
 				{
-					selectionAction(pictures.get(getIndex(e.getSource()))) ;
 					selectedPicture = pictures.get(getIndex(e.getSource())).getIcon() ;
+					selectionAction(pictures.get(getIndex(e.getSource()))) ;					
 				}
 			}) ;
 		}

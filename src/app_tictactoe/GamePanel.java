@@ -17,7 +17,7 @@ import javax.swing.*;
 import ressources.Ressources;
 import ressources.Serializer;
 
-public class GameJPanel extends JPanel
+public class GamePanel extends JPanel
 {
 	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
 
@@ -29,7 +29,7 @@ public class GameJPanel extends JPanel
 	private String scoresPath = Ressources.TICTACTOE_DIRECTORY ;
 	private TicTacToeStats scores ;
 
-	public GameJPanel()
+	public GamePanel()
 	{
 		this.currentPlayer = 1 ;
 		loadStats();
