@@ -6,7 +6,7 @@ public class TestMainFrame extends JFrame {
 	
 	public TestMainFrame()
 	{
-		add(new ContactListJpanel()) ;
+		add(new ContactListPanel()) ;
 		pack() ;
 	}
 

@@ -19,7 +19,7 @@ import ressources.Ressources;
 
 public class TicTacToePanel extends JPanel
 {
-	GameJPanel gamePanel = new GameJPanel() ;
+	GamePanel gamePanel = new GamePanel() ;
 	Game game ;
 	boolean isVSAI ;
 	JButton newGame = new JButton("New Game") ;

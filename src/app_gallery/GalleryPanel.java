@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.*;
 
@@ -36,12 +38,23 @@ public class GalleryPanel extends GalleryIconListPanel
 	}
 	
 	@Override
-	protected  void selectionAction(Picture selectedPicture){
-		JFrame f = new JFrame() ;
-		PicturePanel p = new PicturePanel(selectedPicture,GalleryPanel.this);
-		f.add(p) ;
-		f.pack();
-		f.setVisible(true);
+	protected  void selectionAction(){
+		JPanel selectedPicturePanel = new PicturePanel(pictures.get(selectedIndex));
+		selectedPicturePanel.addPropertyChangeListener(new PropertyChangeListener()
+		{
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt)
+			{
+				if(evt.getPropertyName().equals("pictureDeleted"))
+				{
+					deletePicture(pictures.get(selectedIndex)) ;
+					Ressources.GALLERYAPP.removePanel(selectedPicturePanel);
+				}
+					
+			}
+		});
+		Ressources.GALLERYAPP.addPanel(selectedPicturePanel);
 	}
 	
 	

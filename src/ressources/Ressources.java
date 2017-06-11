@@ -9,7 +9,14 @@ package ressources;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.JFrame;
+
+import app_contacts.ContactApplication;
 import app_contacts.ContactList;
+import app_gallery.GalleryApplication;
+import app_home.HomeApplication;
+import app_tictactoe.TicTacToeApplication;
+import mainFrame.MainFrame;
 
 public class Ressources
 {
@@ -55,5 +62,13 @@ public class Ressources
 	public static final Font DEFAULT_FONT = new Font("Comic Sans MS", Font.BOLD, 11) ;
 	
 	public static ContactList CONTACTLIST = (ContactList) Serializer.deserializableObject(CONTACT_DIRECTORY) ;
+	
+	public static MainFrame MAINFRAME ;
+	
+	public static DefaultApplication ACTIVEAPPLICATION ;
+	public static DefaultApplication CONTACTAPP ;
+	public static DefaultApplication GALLERYAPP ;
+	public static DefaultApplication TICTACTOEAPP ;
+	public static DefaultApplication HOMEAPP ;
 	
 }

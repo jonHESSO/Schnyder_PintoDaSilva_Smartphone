@@ -20,6 +20,7 @@ public class ContactModifyPanel extends ContactEditPanel {
 
 
 	private Contact currentContact;
+	private boolean contactModified = false ;
 
 	// Constructeur du panel
 	public ContactModifyPanel(Contact contact) {
@@ -47,6 +48,9 @@ public class ContactModifyPanel extends ContactEditPanel {
 		
 		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
+		boolean oldProperty = false ;
+		contactModified = true ;
+		firePropertyChange("contactModified", oldProperty, contactModified);
 	}
 }
 

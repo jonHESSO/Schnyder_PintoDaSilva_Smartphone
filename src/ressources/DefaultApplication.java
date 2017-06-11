@@ -11,18 +11,29 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public abstract class DefaultApplication
+import app_home.HomeApplication;
+
+public abstract class DefaultApplication extends JComponent
+
 {
-	protected static List<JPanel> openPanels = new ArrayList<JPanel>() ;
+	protected List<JPanel> openPanels ;
+	JPanel activePanel ;
 	
-	public static JPanel getActivePanel()
+	public DefaultApplication()
 	{
-		return openPanels.get(openPanels.size()-1) ;
+		openPanels = new ArrayList<JPanel>() ;
 	}
 	
-	public static void addPanel(JPanel panel)
+	public JPanel getActivePanel()
+	{
+			return openPanels.get(openPanels.size()-1) ;
+		
+	}
+	
+	public void addPanel(JPanel panel)
 	{
 		panel.addPropertyChangeListener(new PropertyChangeListener(){
 
@@ -35,12 +46,46 @@ public abstract class DefaultApplication
 			
 		});
 		openPanels.add(panel) ;
+		activePanelChanged() ;
 	}
 	
-	public static void removePanel(JPanel panel)
+	public void removePanel(JPanel panel)
 	{
-		openPanels.remove(panel) ;
+		if ((Ressources.ACTIVEAPPLICATION instanceof HomeApplication)==false)
+		{
+
+			openPanels.remove(panel) ;
+			if (openPanels.isEmpty())
+			{
+				String className = DefaultApplication.this.getClass().getSimpleName() ;
+				switch (className)
+				{
+				case "GalleryApplication":
+					Ressources.GALLERYAPP = null ;
+					break;
+				case "ContactApplication":
+					Ressources.CONTACTAPP = null ;
+					break;
+				case "TicTacToeApplication":
+					Ressources.TICTACTOEAPP = null ;
+					break;
+				default:
+					break;
+				}
+				Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
+			}
+			activePanelChanged() ;
+		}
+		
+		
+		
 	}
+	
+	public void activePanelChanged()
+	{
+		Ressources.MAINFRAME.reloadCenterPanel();
+	}
+	
 	
 	
 	
