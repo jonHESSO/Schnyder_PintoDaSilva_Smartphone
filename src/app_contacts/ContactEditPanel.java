@@ -40,6 +40,8 @@ public abstract class ContactEditPanel extends JPanel {
 	protected JButton imageButton = new JButton();
 	
 	protected boolean closeNow = false;
+	
+	private boolean isActive = false ;
 
 	// Panel accueillant le panel avec les JTexfields, celui avec les labels et celui avec les JButtons
 	public ContactEditPanel() {
@@ -52,6 +54,8 @@ public abstract class ContactEditPanel extends JPanel {
 		add(fieldsLabelsPanel(), BorderLayout.WEST);
 		add(contactFieldsPanel(), BorderLayout.EAST);
 		add(buttonPanel(), BorderLayout.SOUTH);
+		isActive = true ;
+		firePropertyChange("isActive", false, true);
 	}
 
 	// Panel contenant les labels des textFields
@@ -142,11 +146,9 @@ public abstract class ContactEditPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0)
 		{
-			JFrame jf = new JFrame() ;
-			ContactSelectPicturePanel cspp = new ContactSelectPicturePanel() ;
-			cspp.addPropertyChangeListener(new SelectedPictureListener());
-			jf.add(cspp) ;
-			jf.setVisible(true);
+			JPanel pictureSelection = new ContactSelectPicturePanel() ;
+			pictureSelection.addPropertyChangeListener(new SelectedPictureListener());
+			Ressources.CONTACTAPP.addPanel(pictureSelection);
 		}
 		
 	}
@@ -161,6 +163,7 @@ public abstract class ContactEditPanel extends JPanel {
 					{
 						System.out.println(evt.getNewValue().toString());
 						imageButton.setIcon((Icon)((ImageIcon)evt.getNewValue()));
+						Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel());
 					}
 			
 		}

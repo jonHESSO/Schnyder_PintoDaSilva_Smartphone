@@ -21,10 +21,12 @@ import com.sun.corba.se.pept.protocol.ServerRequestDispatcher;
 import ressources.Ressources;
 import ressources.Serializer;
 
-public class ContactCreationJpanel extends ContactEditPanel {
+public class ContactCreationPanel extends ContactEditPanel {
+	
+	private boolean contactCreated = false;
 
 	// Panel accueillant le panel avec les JTexfields et celui avec les JButtons
-	public ContactCreationJpanel() {
+	public ContactCreationPanel() {
 		super();
 	}
 
@@ -39,5 +41,11 @@ public class ContactCreationJpanel extends ContactEditPanel {
 		
 		Ressources.CONTACTLIST.addContact(lastName, firstName, number, email, picture);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
+		
+		Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel()) ;
+		
+		boolean oldProperty = false ;
+		contactCreated = true ;
+		firePropertyChange("contactCreated", oldProperty, contactCreated);
 	}
 }

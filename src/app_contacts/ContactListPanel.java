@@ -4,22 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import app_contacts.ContactIndividualJPanel.Modif_Click;
 import ressources.Ressources;
 import ressources.Serializer;
 
-public class ContactListJpanel extends JPanel {
+public class ContactListPanel extends JPanel {
 	
 
 	private ContactList list ;	
+	private boolean newActivePanel = false ;
 
-	public ContactListJpanel(){
+	public ContactListPanel(){
 		
 		if(Ressources.CONTACTLIST==null)
 		{
@@ -29,9 +33,10 @@ public class ContactListJpanel extends JPanel {
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new FlowLayout());
 
+		reload() ;
+		firePropertyChange("isActive", false, true);
 		
-		add(contactListPane()) ;
-		add(ButtonPanel(), BorderLayout.SOUTH);
+		
 
 	}
 	
@@ -62,18 +67,27 @@ public class ContactListJpanel extends JPanel {
 		
 		contactTable.setEnabled(false);
 
-		contactTable.addMouseListener(new java.awt.event.MouseAdapter() {
+		contactTable.addMouseListener(new MouseAdapter() {
 			
 		    @Override
-		    public void mouseClicked(java.awt.event.MouseEvent e) {
+		    public void mouseClicked(MouseEvent e) {
 		        int row = contactTable.rowAtPoint(e.getPoint());
 		        if (row >= 0) { 
-		        JFrame jf =  new JFrame() ;
-		        
-		        //needs correction, sorry sam
-		        jf.add(new ContactIndividualJPanel(Ressources.CONTACTLIST.getContact(row)));
-		        jf.pack();
-		        jf.setVisible(true);
+		        Contact currentContact = Ressources.CONTACTLIST.getContact(row) ;
+		        JPanel individualPanel = new ContactIndividualPanel(currentContact) ;
+		        individualPanel.addPropertyChangeListener(new PropertyChangeListener()
+				{
+					
+					@Override
+					public void propertyChange(PropertyChangeEvent evt)
+					{
+						if (evt.getPropertyName().equals("contactModified"))
+						{
+							reload() ;
+						}
+					}
+				});
+		        Ressources.CONTACTAPP.addPanel(individualPanel) ;
 		        }
 		    }
 		});
@@ -94,9 +108,33 @@ public class ContactListJpanel extends JPanel {
 	
 	class Create_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JFrame jf = new JFrame() ;
-			jf.add(new ContactCreationJpanel()) ;
-			jf.setVisible(true);
+			JPanel creationPanel = new ContactCreationPanel() ;
+			creationPanel.addPropertyChangeListener(new PropertyChangeListener()
+			{
+				
+				@Override
+				public void propertyChange(PropertyChangeEvent evt)
+				{
+					if (evt.getPropertyName().equals("contactCreated"))
+					{
+						ContactListPanel.this.reload() ;
+						Ressources.CONTACTAPP.removePanel(creationPanel) ;
+					}
+				}
+			});
+			Ressources.CONTACTAPP.addPanel(creationPanel) ;
 			}
 		}
+	private void reload()
+	{
+		if(getComponentCount()>0)
+		{
+			removeAll();
+		}
+		add(contactListPane(),BorderLayout.NORTH) ;
+		add(ButtonPanel(), BorderLayout.SOUTH);
+		revalidate() ;
+		repaint() ;
+	}
+	
 }

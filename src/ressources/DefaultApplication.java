@@ -11,18 +11,26 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public abstract class DefaultApplication
+public abstract class DefaultApplication extends JComponent
+
 {
 	protected static List<JPanel> openPanels = new ArrayList<JPanel>() ;
+	JPanel activePanel ;
+	boolean activePanelChanged = false ;
 	
-	public static JPanel getActivePanel()
+	public DefaultApplication()
+	{
+	}
+	
+	public JPanel getActivePanel()
 	{
 		return openPanels.get(openPanels.size()-1) ;
 	}
 	
-	public static void addPanel(JPanel panel)
+	public void addPanel(JPanel panel)
 	{
 		panel.addPropertyChangeListener(new PropertyChangeListener(){
 
@@ -35,12 +43,22 @@ public abstract class DefaultApplication
 			
 		});
 		openPanels.add(panel) ;
+		activePanel = getActivePanel() ;
+		activePanelChanged() ;
 	}
 	
-	public static void removePanel(JPanel panel)
+	public void removePanel(JPanel panel)
 	{
 		openPanels.remove(panel) ;
+		activePanel = getActivePanel() ;
+		activePanelChanged() ;
 	}
+	
+	public void activePanelChanged()
+	{
+		firePropertyChange("panelChanged", null, activePanel);
+	}
+	
 	
 	
 	

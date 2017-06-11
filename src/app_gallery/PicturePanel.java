@@ -21,13 +21,11 @@ import ressources.Ressources;
 public class PicturePanel extends JPanel
 {
 	Picture currentPicture ;
-	JButton deleteButton = new JButton("Delete") ;
-	GalleryPanel parentPanel ;
+	JButton deleteButton = new JButton("Delete") ;;
 	JPanel buttons ;
 	
 
-	public PicturePanel(final Picture selectedPicture, final GalleryPanel parentPanel){
-		this.parentPanel=parentPanel ;
+	public PicturePanel(Picture selectedPicture){
 		this.currentPicture = selectedPicture ;
 		setLayout(new BorderLayout());
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
@@ -44,8 +42,7 @@ public class PicturePanel extends JPanel
 			{
 				int ret = JOptionPane.showConfirmDialog(null,"Etes vous sur ?");
 				if (ret == JOptionPane.YES_OPTION){
-					SwingUtilities.getWindowAncestor(PicturePanel.this).dispose() ;
-					parentPanel.deletePicture( selectedPicture );
+					PicturePanel.this.firePropertyChange("pictureDeleted", false, true);
 				}
 
 
