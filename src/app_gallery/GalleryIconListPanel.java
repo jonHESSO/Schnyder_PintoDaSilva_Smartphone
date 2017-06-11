@@ -30,7 +30,8 @@ public abstract class GalleryIconListPanel extends JPanel
 	private File fileDirectory = new File(ressources.Ressources.GALLERY_DIRECTORY) ;
 	protected List<Picture> pictures ;
 	List<JLabel> icons ;
-	public ImageIcon selectedPicture ;
+	public ImageIcon selectedIcon ;
+	protected int selectedIndex ;
 	
 
 	public GalleryIconListPanel()
@@ -96,8 +97,9 @@ public abstract class GalleryIconListPanel extends JPanel
 						@Override
 						public void mouseClicked(MouseEvent e)
 						{
-							selectedPicture = pictures.get(getIndex(e.getSource())).getIcon() ;
-							selectionAction(pictures.get(getIndex(e.getSource()))) ;					
+							selectedIcon = (ImageIcon) ((JLabel) e.getSource()).getIcon() ;
+							selectedIndex = getIndex(e.getSource()) ;
+							selectionAction() ;					
 						}
 					}) ;
 
@@ -127,7 +129,7 @@ public abstract class GalleryIconListPanel extends JPanel
 	}
 	
 
-	protected abstract void selectionAction(Picture selectedPicture) ;
+	protected abstract void selectionAction() ;
 
 
 

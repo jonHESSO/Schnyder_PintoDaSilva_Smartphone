@@ -6,11 +6,13 @@
 
 package app_home;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -18,6 +20,7 @@ import app_contacts.ContactApplication;
 import app_gallery.GalleryApplication;
 import app_tictactoe.TicTacToeApplication;
 import ressources.DefaultApplication;
+import ressources.DesignButton;
 import ressources.Ressources;
 
 public class HomePanel extends JPanel
@@ -29,9 +32,9 @@ public class HomePanel extends JPanel
 	public HomePanel()
 	{
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
-		galleryButton = new JButton("gallery") ;
-		contactButton = new JButton("Contact") ;
-		tictactoeButton = new JButton("morpion") ;
+		galleryButton = new DesignButton(new ImageIcon("data/Icons/App_Icons/Gallery.png")) ;
+		contactButton = new DesignButton(new ImageIcon("data/Icons/App_Icons/Contacts.png")) ;
+		tictactoeButton = new DesignButton(new ImageIcon("data/Icons/App_Icons/Morpion.png")) ;
 		
 		ActionListener listener = new ButtonListener() ;
 		
@@ -51,46 +54,58 @@ public class HomePanel extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent ae)
 		{
-			DefaultApplication oldValue = Ressources.ACTIVEAPPLICATION ;
+//			DefaultApplication oldValue = Ressources.ACTIVEAPPLICATION ;
 			if(ae.getSource()==galleryButton)
 			{
 				if (Ressources.GALLERYAPP == null)
+				{
 					Ressources.GALLERYAPP = new GalleryApplication() ;
+//					Ressources.GALLERYAPP.addPropertyChangeListener(new ActivePanelListener());
+				}
 				Ressources.ACTIVEAPPLICATION = Ressources.GALLERYAPP ;	
-				Ressources.GALLERYAPP.addPropertyChangeListener(new ActivePanelListener());
+				Ressources.MAINFRAME.reloadCenterPanel();
+
 			}
 			if(ae.getSource()==contactButton)
 			{
 				if (Ressources.CONTACTAPP == null)
+				{
 					Ressources.CONTACTAPP = new ContactApplication() ;
-				Ressources.ACTIVEAPPLICATION = Ressources.CONTACTAPP ;	
-				Ressources.CONTACTAPP.addPropertyChangeListener(new ActivePanelListener());
+//					Ressources.CONTACTAPP.addPropertyChangeListener(new ActivePanelListener());
+				}
+				Ressources.ACTIVEAPPLICATION = Ressources.CONTACTAPP ;
+				Ressources.MAINFRAME.reloadCenterPanel();
+				
 			}
 			if(ae.getSource()==tictactoeButton)
 			{
 				if (Ressources.TICTACTOEAPP == null)
+				{
 					Ressources.TICTACTOEAPP = new TicTacToeApplication() ;
+//					Ressources.TICTACTOEAPP.addPropertyChangeListener(new ActivePanelListener());
+				}
 				Ressources.ACTIVEAPPLICATION = Ressources.TICTACTOEAPP ;
-				Ressources.TICTACTOEAPP.addPropertyChangeListener(new ActivePanelListener());
+				Ressources.MAINFRAME.reloadCenterPanel();
+				
 			}
 			
-			firePropertyChange("activeApp", oldValue, Ressources.ACTIVEAPPLICATION);
+//			firePropertyChange("activeAppChanged", oldValue, Ressources.ACTIVEAPPLICATION);
 		}
 		
 	}
 	
-	class ActivePanelListener implements PropertyChangeListener
-	{
-
-		@Override
-		public void propertyChange(PropertyChangeEvent evt)
-		{
-			if (evt.getPropertyName().equals("panelChanged"))
-			{
-				Ressources.MAINFRAME.reloadCenterPanel();
-			}
-		}
-		
-	}
+//	class ActivePanelListener implements PropertyChangeListener
+//	{
+//
+//		@Override
+//		public void propertyChange(PropertyChangeEvent evt)
+//		{
+//			if (evt.getPropertyName().equals("panelChanged"))
+//			{
+//				Ressources.MAINFRAME.reloadCenterPanel();
+//			}
+//		}
+//		
+//	}
 
 }

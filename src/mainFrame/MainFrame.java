@@ -47,33 +47,48 @@ public class MainFrame extends JFrame
 
 	public void reloadCenterPanel()
 	{
-		JFrame jf = new JFrame() ;
 		centerPanel.removeAll();
 		
-		JPanel activePanel = Ressources.ACTIVEAPPLICATION.getActivePanel() ;
-		System.out.println(activePanel.toString());
+//		JPanel activePanel = Ressources.ACTIVEAPPLICATION.getActivePanel() ;
+//		System.out.println(Ressources.ACTIVEAPPLICATION);
 		
-		activePanel.addPropertyChangeListener(new PropertyChangeListener(){
+//		activePanel.addPropertyChangeListener(new PropertyChangeListener(){
+//
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt)
+//			{
+//				if(evt.getPropertyName().equals("activeApp")||evt.getPropertyName().equals("activePanelChanged"))
+//				{
+////					System.out.println("Halp");
+//					reloadCenterPanel() ;
+////					JFrame jf = new JFrame() ;
+////					jf.add((JPanel)Ressources.ACTIVEAPPLICATION.getActivePanel()) ;
+////					jf.setVisible(true);
+//				}
+//			}
+//		});
 
-			@Override
-			public void propertyChange(PropertyChangeEvent evt)
-			{
-				if(evt.getPropertyName().equals("activeApp")||evt.getPropertyName().equals("activePanelChanged"))
-				{
-//					System.out.println("Halp");
-					reloadCenterPanel() ;
-//					JFrame jf = new JFrame() ;
-//					jf.add((JPanel)Ressources.ACTIVEAPPLICATION.getActivePanel()) ;
-//					jf.setVisible(true);
-				}
-			}
-		});
-
-		centerPanel.add(activePanel) ;
+		centerPanel.add(Ressources.ACTIVEAPPLICATION.getActivePanel()) ;
 		centerPanel.revalidate();
 		centerPanel.repaint();
 		revalidate();
 		repaint();
 	}
+	
+	public void addCustomPanel(JPanel panel)
+	{
+		centerPanel.removeAll();
+		centerPanel.add(panel) ;
+		centerPanel.revalidate();
+		centerPanel.repaint();
+		revalidate();
+		repaint();
+	}
+	
+//	public void activeApplicationChanged(DefaultApplication app){
+//		DefaultApplication previousApp = Ressources.ACTIVEAPPLICATION ;
+//		Ressources.ACTIVEAPPLICATION = app ;
+//		firePropertyChange("activeAppChanged", previousApp, app);
+//	}
 
 }

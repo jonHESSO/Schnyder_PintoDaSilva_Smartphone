@@ -9,6 +9,8 @@ package ressources;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.JFrame;
+
 import app_contacts.ContactApplication;
 import app_contacts.ContactList;
 import app_gallery.GalleryApplication;
@@ -64,9 +66,9 @@ public class Ressources
 	public static MainFrame MAINFRAME ;
 	
 	public static DefaultApplication ACTIVEAPPLICATION ;
-	public static ContactApplication CONTACTAPP ;
-	public static GalleryApplication GALLERYAPP ;
-	public static TicTacToeApplication TICTACTOEAPP ;
-	public static HomeApplication HOMEAPP ;
+	public static DefaultApplication CONTACTAPP ;
+	public static DefaultApplication GALLERYAPP ;
+	public static DefaultApplication TICTACTOEAPP ;
+	public static DefaultApplication HOMEAPP ;
 	
 }
