@@ -13,11 +13,10 @@ public class ContactSelectPicturePanel extends GalleryIconListPanel
 {
 
 	@Override
-	protected void selectionAction(Picture selectedPicture)
+	protected void selectionAction()
 	{
-		this.selectedPicture = selectedPicture.getIcon() ;
 		System.out.println("Picture clicked");
-		ContactSelectPicturePanel.this.firePropertyChange("selectedPicture", null, selectedPicture.getIcon());
+		ContactSelectPicturePanel.this.firePropertyChange("selectedPicture", null, selectedIcon);
 		
 	}
 

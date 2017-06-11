@@ -14,20 +14,23 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import app_home.HomeApplication;
+
 public abstract class DefaultApplication extends JComponent
 
 {
-	protected static List<JPanel> openPanels = new ArrayList<JPanel>() ;
+	protected List<JPanel> openPanels ;
 	JPanel activePanel ;
-	boolean activePanelChanged = false ;
 	
 	public DefaultApplication()
 	{
+		openPanels = new ArrayList<JPanel>() ;
 	}
 	
 	public JPanel getActivePanel()
 	{
-		return openPanels.get(openPanels.size()-1) ;
+			return openPanels.get(openPanels.size()-1) ;
+		
 	}
 	
 	public void addPanel(JPanel panel)
@@ -43,20 +46,44 @@ public abstract class DefaultApplication extends JComponent
 			
 		});
 		openPanels.add(panel) ;
-		activePanel = getActivePanel() ;
 		activePanelChanged() ;
 	}
 	
 	public void removePanel(JPanel panel)
 	{
-		openPanels.remove(panel) ;
-		activePanel = getActivePanel() ;
-		activePanelChanged() ;
+		if ((Ressources.ACTIVEAPPLICATION instanceof HomeApplication)==false)
+		{
+
+			openPanels.remove(panel) ;
+			if (openPanels.isEmpty())
+			{
+				String className = DefaultApplication.this.getClass().getSimpleName() ;
+				switch (className)
+				{
+				case "GalleryApplication":
+					Ressources.GALLERYAPP = null ;
+					break;
+				case "ContactApplication":
+					Ressources.CONTACTAPP = null ;
+					break;
+				case "TicTacToeApplication":
+					Ressources.TICTACTOEAPP = null ;
+					break;
+				default:
+					break;
+				}
+				Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
+			}
+			activePanelChanged() ;
+		}
+		
+		
+		
 	}
 	
 	public void activePanelChanged()
 	{
-		firePropertyChange("panelChanged", null, activePanel);
+		Ressources.MAINFRAME.reloadCenterPanel();
 	}
 	
 	

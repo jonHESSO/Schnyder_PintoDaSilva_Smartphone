@@ -38,8 +38,8 @@ public class GalleryPanel extends GalleryIconListPanel
 	}
 	
 	@Override
-	protected  void selectionAction(Picture selectedPicture){
-		JPanel selectedPicturePanel = new PicturePanel(selectedPicture);
+	protected  void selectionAction(){
+		JPanel selectedPicturePanel = new PicturePanel(pictures.get(selectedIndex));
 		selectedPicturePanel.addPropertyChangeListener(new PropertyChangeListener()
 		{
 			
@@ -48,7 +48,7 @@ public class GalleryPanel extends GalleryIconListPanel
 			{
 				if(evt.getPropertyName().equals("pictureDeleted"))
 				{
-					deletePicture(selectedPicture) ;
+					deletePicture(pictures.get(selectedIndex)) ;
 					Ressources.GALLERYAPP.removePanel(selectedPicturePanel);
 				}
 					

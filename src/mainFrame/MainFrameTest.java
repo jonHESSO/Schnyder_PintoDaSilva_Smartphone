@@ -14,7 +14,7 @@ public class MainFrameTest
 	public static void main(String[] args)
 	{
 		Ressources.MAINFRAME = new MainFrame() ;
-		Ressources.MAINFRAME.setVisible(true);
+		Ressources.MAINFRAME.setVisible(true);		
 		
 
 	}
