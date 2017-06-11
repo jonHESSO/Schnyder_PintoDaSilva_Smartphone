@@ -24,7 +24,7 @@ public class Ressources
 	public static final int GALLERY_ICON_HEIGHT = 150 ;
 	public static final int DEFAULT_BUTTON_HEIGHT = 20 ;	
 	public static final int DEFAULT_FRAME_HEIGHT = 800 ;	
-	public static final int BUTTONBAR_HEIGHT = 50 ;
+	public static final int BUTTONBAR_HEIGHT = 60 ;
 	public static final int STATUSBAR_HEIGHT = 20 ;
 	public static final int DEFAULT_APP_JPANEL_HEIGHT = DEFAULT_FRAME_HEIGHT - (BUTTONBAR_HEIGHT+STATUSBAR_HEIGHT) ;
 	public static final int GALLERY_PICTURE_HEIGHT = DEFAULT_APP_JPANEL_HEIGHT-DEFAULT_BUTTON_HEIGHT ;	
