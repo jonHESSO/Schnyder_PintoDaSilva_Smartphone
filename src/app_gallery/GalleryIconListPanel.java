@@ -50,8 +50,14 @@ public abstract class GalleryIconListPanel extends JPanel
 		List<Picture> pictures = new ArrayList<Picture>()  ;
 		for (int i = 0; i < files.length; i++)
 		{
+			try{
 			Picture tPicture = new Picture(files[i]) ;
 			pictures.add(tPicture);
+			}
+			catch (Exception e)
+			{
+				
+			}
 		}
 		return pictures ;
 	}
