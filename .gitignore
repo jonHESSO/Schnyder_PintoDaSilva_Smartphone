@@ -7,10 +7,6 @@ ehthumbs.db
 bin/
 bin\
 /bin
-/data
-data/
-data\
-
 
 # Folder config file
 Desktop.ini
