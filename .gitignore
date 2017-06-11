@@ -8,6 +8,8 @@ bin/
 bin\
 /bin
 
+data/
+
 # Folder config file
 Desktop.ini
 
