@@ -25,10 +25,7 @@ public class ContactListPanel extends JPanel {
 
 	public ContactListPanel(){
 		
-		if(Ressources.CONTACTLIST==null)
-		{
-			Ressources.CONTACTLIST = new ContactList() ;
-		}
+		
 		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new FlowLayout());
