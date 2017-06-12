@@ -7,6 +7,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
+
+import ressources.ContactIndividualLabel;
+import ressources.ContactIndividualTitle;
 import ressources.Ressources;
 import app_contacts.Contact ;
 
@@ -22,19 +25,20 @@ public class ContactIndividualPanel extends JPanel {
 		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new BorderLayout());
+		reload() ;
 		//Ajout des panels pour la photo, des infos et du modifyButton
-		add(picturePanel(),BorderLayout.NORTH) ;
-		add(informationPanel(),BorderLayout.CENTER) ;
-		add(modifyButtonPanel(),BorderLayout.SOUTH) ;
+//		add(picturePanel(),BorderLayout.NORTH) ;
+//		add(informationPanel(),BorderLayout.CENTER) ;
+//		add(modifyButtonPanel(),BorderLayout.SOUTH) ;
 		
 	}
 
 	//Panel accueillant la photo
 	private JPanel picturePanel() {
 		
-		JPanel panel = new JPanel(new FlowLayout());
-		panel.setPreferredSize(new Dimension(450, 450));
-		panel.add(new JLabel(currentContact.getPicture()));
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(450, 300));
+		panel.add(new JLabel(currentContact.getPicture()),BorderLayout.CENTER);
 		return panel;
 	}
 
@@ -43,23 +47,29 @@ public class ContactIndividualPanel extends JPanel {
 		JPanel panel = new JPanel(new FlowLayout());
 
 		//Dimensionnement du panel
-		panel.setPreferredSize(new Dimension(450, 150));
-
+		panel.setPreferredSize(new Dimension(450, 160));
+		
 		//Ajout des attributs du currentContact
-		panel.add(new JLabel(currentContact.getFirstName()));
-		panel.add(new JLabel(currentContact.getLastName()));
-		panel.add(new JLabel(currentContact.getNumber()));
-		panel.add(new JLabel(currentContact.getEmail()));
+		panel.add(new ContactIndividualTitle("Prénom:"));
+		panel.add(new ContactIndividualLabel(currentContact.getFirstName()));
+		panel.add(new ContactIndividualTitle("Nom:"));
+		panel.add(new ContactIndividualLabel(currentContact.getLastName()));
+		panel.add(new ContactIndividualTitle("Numéro:"));
+		panel.add(new ContactIndividualLabel(currentContact.getNumber()));
+		panel.add(new ContactIndividualTitle("E-Mail:"));
+		panel.add(new ContactIndividualLabel(currentContact.getEmail()));
 
 		return panel;
 	}
 
 	private JPanel modifyButtonPanel() {
-		JPanel panel = new JPanel(new FlowLayout());
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(450, 90));
 		JButton modifButton = new JButton ("Modifier\n contact");
 
 		modifButton.addActionListener(new Modif_Click());
-		panel.add((modifButton), BorderLayout.EAST);
+		modifButton.setFont(Ressources.DEFAULT_FONT);
+		panel.add((modifButton), BorderLayout.CENTER);
 
 		return panel;
 	}

@@ -18,21 +18,23 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import ressources.ContactIndividualTitle;
+import ressources.ContactTextField;
 import ressources.Ressources;
 import ressources.Serializer;
 
 public abstract class ContactEditPanel extends JPanel {
 
 	// Textfield --> attributs obligatoires pour un contact
-	protected JTextField fieldFirstName = new JTextField(15);
-	protected JTextField fieldLastName = new JTextField(15);
-	protected JTextField fieldNumber = new JTextField(15);
+	protected JTextField fieldFirstName = new ContactTextField(15);
+	protected JTextField fieldLastName = new ContactTextField(15);
+	protected JTextField fieldNumber = new ContactTextField(15);
 
 	// Textfield --> attributs optionnels pour un contact
-	protected JTextField fieldEmail = new JTextField(15);
-	protected JTextField fieldImagePath = new JTextField(15);
+	protected JTextField fieldEmail = new ContactTextField(15);
 
 	// Ajout des buttons "OK" et "Cancel"
 	protected JButton okButton = new JButton("OK");
@@ -64,13 +66,13 @@ public abstract class ContactEditPanel extends JPanel {
 		//Creation du panel
 		JPanel panel = new JPanel(new FlowLayout());
 		//Dimensionnement du panel
-		panel.setPreferredSize(new Dimension(50, 500));
+		panel.setPreferredSize(new Dimension(100, 400));
 		//Ajout des labels au panel
-		panel.add(new JLabel("Prénom")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-		panel.add(new JLabel("Nom")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-		panel.add(new JLabel("Numéro")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-		panel.add(new JLabel("E-Mail")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-		panel.add(new JLabel("Image")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
+		panel.add(new ContactIndividualTitle("Prénom")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
+		panel.add(new ContactIndividualTitle("Nom")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
+		panel.add(new ContactIndividualTitle("Numéro")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
+		panel.add(new ContactIndividualTitle("E-Mail")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
+		panel.add(new ContactIndividualTitle("Image")).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 
 		return panel;
 	}
@@ -80,16 +82,17 @@ public abstract class ContactEditPanel extends JPanel {
 		//Création du panel
 		JPanel panel = new JPanel(new FlowLayout());
 		//Dimensionnement du panel
-		panel.setPreferredSize(new Dimension(200, 500));
+		panel.setPreferredSize(new Dimension(200, 400));
 		
 		// Ajout des JTextfield
 		panel.add(fieldFirstName).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		panel.add(fieldLastName).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		panel.add(fieldNumber).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		panel.add(fieldEmail).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-		panel.add(fieldImagePath).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
+	
 		
 		//Bouton d'ajout d'image
+		imageButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		imageButton.addActionListener(new setPictureListener());
 		panel.add(imageButton).setPreferredSize(new Dimension (150,150));
 
@@ -100,9 +103,13 @@ public abstract class ContactEditPanel extends JPanel {
 	public JPanel buttonPanel() {
 		// Création du panel
 		JPanel panel = new JPanel(new FlowLayout());
+		panel.setPreferredSize(new Dimension(150, 100));
 		// Ajout des listener aux buttons
 		okButton.addActionListener(new Ok_Click());
 		cancelButton.addActionListener(new cancel_Click());
+		//modification du font des buttons
+		okButton.setFont(Ressources.DEFAULT_FONT);
+		cancelButton.setFont(Ressources.DEFAULT_FONT);
 		// Ajout des buttons au panel
 		panel.add(okButton);
 		panel.add(cancelButton);
@@ -135,8 +142,7 @@ public abstract class ContactEditPanel extends JPanel {
 	
 	//Methode d'action du listener du okButton
 	public void cancelAction(){
-		 
-		firePropertyChange("Close Now", closeNow, true) ;
+		Ressources.ACTIVEAPPLICATION.removePanel(Ressources.ACTIVEAPPLICATION.getActivePanel());
 			
 	}
 	

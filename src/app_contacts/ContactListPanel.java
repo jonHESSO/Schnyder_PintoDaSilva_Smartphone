@@ -1,6 +1,7 @@
 package app_contacts;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,6 +43,8 @@ public class ContactListPanel extends JPanel {
 		Object[][] contactData = new Object[Ressources.CONTACTLIST.getContactList().size()][3] ;
 		String[] columnNames = {"Last Name", "First Name", "Image"} ;
 		DefaultTableModel model = new DefaultTableModel(){
+			
+
 		    @Override
 		    public Class<?> getColumnClass(int column) {
 		        switch (column) {
@@ -50,7 +53,7 @@ public class ContactListPanel extends JPanel {
 		        }
 		    }
 		};
-
+		
 		model.addColumn("First Name") ;
 		model.addColumn("Last Name") ;
 		model.addColumn("Image") ;
@@ -60,7 +63,10 @@ public class ContactListPanel extends JPanel {
 		} 
 		final JTable contactTable = new JTable(model);
 		contactTable.setShowGrid(false);
+		contactTable.setRowHeight(150);
+		contactTable.setFont(Ressources.CONTACT_FONT_TITLE);
 		JScrollPane scrollPane = new JScrollPane(contactTable);
+		scrollPane.setPreferredSize(new Dimension (480,620));
 		
 		contactTable.setEnabled(false);
 
@@ -97,6 +103,7 @@ public class ContactListPanel extends JPanel {
 		JPanel panel = new JPanel(new FlowLayout());
 		JButton creationButton = new JButton ("Nouveau");
 		
+		creationButton.setFont(Ressources.DEFAULT_FONT);
 		creationButton.addActionListener(new Create_Click());
 		panel.add((creationButton), BorderLayout.EAST);
 		
