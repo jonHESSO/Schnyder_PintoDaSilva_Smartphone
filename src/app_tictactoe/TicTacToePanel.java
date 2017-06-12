@@ -6,6 +6,8 @@
 
 package app_tictactoe;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -27,7 +29,7 @@ public class TicTacToePanel extends JPanel
 	public TicTacToePanel() 
 	{
 		isVSAI=false ;
-		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION); 
+//		setPreferredSize(new Dimension(300,600)); 
 		setLayout(new FlowLayout());
 		add(gamePanel) ;
 		newGame.addActionListener(new NewGameListener());

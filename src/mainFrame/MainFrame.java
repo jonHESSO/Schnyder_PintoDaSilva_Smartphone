@@ -27,6 +27,7 @@ public class MainFrame extends JFrame
 
 	public MainFrame()
 	{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		Ressources.HOMEAPP = new HomeApplication() ;
 		Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
 

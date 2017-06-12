@@ -11,7 +11,9 @@ import javax.swing.*;
 import ressources.ContactIndividualLabel;
 import ressources.ContactIndividualTitle;
 import ressources.Ressources;
+import ressources.Serializer;
 import app_contacts.Contact ;
+import app_gallery.PicturePanel;
 
 public class ContactIndividualPanel extends JPanel {
 
@@ -36,7 +38,7 @@ public class ContactIndividualPanel extends JPanel {
 	//Panel accueillant la photo
 	private JPanel picturePanel() {
 		
-		//Création du panel
+		//CrÃ©ation du panel
 		JPanel panel = new JPanel();
 		
 		//Dimensionnement du panel
@@ -49,18 +51,18 @@ public class ContactIndividualPanel extends JPanel {
 
 	//Panel contenant les informations du contact
 	private JPanel informationPanel() {
-		//Création du panel contenant les informations
+		//CrÃ©ation du panel contenant les informations
 		JPanel panel = new JPanel(new FlowLayout());
 
 		//Dimensionnement du panel
 		panel.setPreferredSize(new Dimension(450, 160));
 		
 		//Ajout des attributs du currentContact
-		panel.add(new ContactIndividualTitle("Prénom:"));
+		panel.add(new ContactIndividualTitle("PrÃ©nom:"));
 		panel.add(new ContactIndividualLabel(currentContact.getFirstName()));
 		panel.add(new ContactIndividualTitle("Nom:"));
 		panel.add(new ContactIndividualLabel(currentContact.getLastName()));
-		panel.add(new ContactIndividualTitle("Numéro:"));
+		panel.add(new ContactIndividualTitle("NumÃ©ro:"));
 		panel.add(new ContactIndividualLabel(currentContact.getNumber()));
 		panel.add(new ContactIndividualTitle("E-Mail:"));
 		panel.add(new ContactIndividualLabel(currentContact.getEmail()));
@@ -68,28 +70,43 @@ public class ContactIndividualPanel extends JPanel {
 		return panel;
 	}
 
+
 	//Panel content le modifButton et le deleteButton
 	private JPanel modifyButtonPanel() {
 		
-		//création du panel
+		//crÃ©ation du panel
+
 		JPanel panel = new JPanel();
 		//dimensionnement du panel
 		panel.setPreferredSize(new Dimension(450, 90));
-		//Création du modifButton 
+
+		//CrÃ©ation du modifButton 
 		JButton modifButton = new JButton ("Modifier");
 		//ajout du listener au modifbutton
-		modifButton.addActionListener(new Modif_Click());
+    		modifButton.addActionListener(new Modif_Click());
+
+		JButton deleteButton = new JButton("Supprimer") ;
+		
+		deleteButton.addActionListener(new Delete_Click());
+		deleteButton.setFont(Ressources.DEFAULT_FONT);
+
+
+
 		//ajout du Font au modifbutton
 		modifButton.setFont(Ressources.DEFAULT_FONT);
+
 		//ajout du modifbutton au panel
-		panel.add((modifButton), BorderLayout.CENTER);
+
+
+		panel.add(modifButton);
+		panel.add(deleteButton) ;
 
 		return panel;
 	}
 	// listener Modif_Click
 	class Modif_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			//Création d'un ContactModifyPanel
+			//CrÃ©ation d'un ContactModifyPanel
 			JPanel modifyPanel = new ContactModifyPanel(currentContact);
 			modifyPanel.addPropertyChangeListener(new PropertyChangeListener()
 			{
@@ -104,10 +121,10 @@ public class ContactIndividualPanel extends JPanel {
 						ContactIndividualPanel.this.reload() ;
 						// On supprime le modifyPanel
 						Ressources.CONTACTAPP.removePanel(modifyPanel) ;
-						// On indique que le contact a été modifié
+						// On indique que le contact a Ã©tÃ© modifiÃ©
 						contactModified = (boolean) evt.getNewValue() ;
 						boolean oldValue = false ;
-						// On lance un nouvel event pour indiquer au panel parent (contactListPanel) que le contact a été modifié 
+						// On lance un nouvel event pour indiquer au panel parent (contactListPanel) que le contact a Ã©tÃ© modifiÃ© 
 						ContactIndividualPanel.this.firePropertyChange("contactModified", oldValue, contactModified);
 					}
 				}
@@ -116,8 +133,21 @@ public class ContactIndividualPanel extends JPanel {
 			Ressources.CONTACTAPP.addPanel(modifyPanel) ;
 		}
 	}
+	
+	class Delete_Click implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int ret = JOptionPane.showConfirmDialog(Ressources.MAINFRAME,"Etes vous sur ?");
+			if (ret == JOptionPane.YES_OPTION)
+			{
+				Ressources.CONTACTLIST.deleteContact(currentContact);
+				Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
+				ContactIndividualPanel.this.firePropertyChange("contactDeleted", false, true);
+			}
+			
+		}
+	}
 
-	// Méthode permettant de rafraichir le panel
+	// MÃ©thode permettant de rafraichir le panel
 	private void reload()
 	{
 		if(getComponentCount()>0)

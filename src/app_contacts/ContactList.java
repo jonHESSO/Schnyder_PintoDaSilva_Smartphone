@@ -40,6 +40,11 @@ public class ContactList implements Serializable
 		currentContact.setPicture(picture);
 	}
 	
+	public void deleteContact(Contact deletedContact)
+	{
+		contactList.remove(deletedContact) ;
+	}
+	
 	public Contact getContact(int index)
 	{
 		return this.contactList.get(index);
