@@ -88,6 +88,11 @@ public class ContactListPanel extends JPanel {
 						{
 							reload() ;
 						}
+						if (evt.getPropertyName().equals("contactDeleted"))
+						{
+							ContactListPanel.this.reload() ;
+							Ressources.CONTACTAPP.removePanel(individualPanel) ;
+						}
 					}
 				});
 		        Ressources.CONTACTAPP.addPanel(individualPanel) ;
