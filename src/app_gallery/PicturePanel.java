@@ -7,6 +7,8 @@
 package app_gallery;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,12 +29,16 @@ public class PicturePanel extends JPanel
 
 	public PicturePanel(Picture selectedPicture){
 		this.currentPicture = selectedPicture ;
-		setLayout(new BorderLayout());
+		setLayout(new FlowLayout());
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
+		JPanel pictureContainer = new JPanel() ;
+		pictureContainer.setPreferredSize(Ressources.GALLERY_PICTUREPANEL_DIMENSION);
 		ImageIcon bImage = selectedPicture.getPicture() ;
 		JLabel picLabel = new JLabel(bImage);
-		picLabel.setVerticalAlignment(JLabel.CENTER);
-		add(picLabel, BorderLayout.CENTER);
+//		picLabel.setVerticalAlignment(JLabel.CENTER);
+		pictureContainer.add(picLabel,BorderLayout.CENTER);
+		add(pictureContainer) ;
+		JPanel buttonContainer = new JPanel() ;
 		deleteButton.setSize(Ressources.DEFAULT_BUTTON_DIMENSION);
 		deleteButton.setFont(Ressources.DEFAULT_FONT);
 		deleteButton.addActionListener(new ActionListener()		
@@ -41,7 +47,7 @@ public class PicturePanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				int ret = JOptionPane.showConfirmDialog(null,"Etes vous sur ?");
+				int ret = JOptionPane.showConfirmDialog(Ressources.MAINFRAME,"Etes vous sur ?");
 				if (ret == JOptionPane.YES_OPTION){
 					PicturePanel.this.firePropertyChange("pictureDeleted", false, true);
 				}
@@ -49,7 +55,8 @@ public class PicturePanel extends JPanel
 
 			}
 		});
-		add(deleteButton, BorderLayout.SOUTH) ;
+		buttonContainer.add(deleteButton) ;
+		add(buttonContainer, BorderLayout.SOUTH) ;
 	}
 	
 

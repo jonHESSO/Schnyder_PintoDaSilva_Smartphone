@@ -11,7 +11,9 @@ import javax.swing.*;
 import ressources.ContactIndividualLabel;
 import ressources.ContactIndividualTitle;
 import ressources.Ressources;
+import ressources.Serializer;
 import app_contacts.Contact ;
+import app_gallery.PicturePanel;
 
 public class ContactIndividualPanel extends JPanel {
 
@@ -62,14 +64,19 @@ public class ContactIndividualPanel extends JPanel {
 		return panel;
 	}
 
-	private JPanel modifyButtonPanel() {
+	private JPanel buttonPanel() {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(450, 90));
 		JButton modifButton = new JButton ("Modifier\n contact");
+		JButton deleteButton = new JButton("Supprimer") ;
+		
+		deleteButton.addActionListener(new Delete_Click());
+		deleteButton.setFont(Ressources.DEFAULT_FONT);
 
 		modifButton.addActionListener(new Modif_Click());
 		modifButton.setFont(Ressources.DEFAULT_FONT);
-		panel.add((modifButton), BorderLayout.CENTER);
+		panel.add(modifButton);
+		panel.add(deleteButton) ;
 
 		return panel;
 	}
@@ -97,6 +104,19 @@ public class ContactIndividualPanel extends JPanel {
 			Ressources.CONTACTAPP.addPanel(modifyPanel) ;
 		}
 	}
+	
+	class Delete_Click implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int ret = JOptionPane.showConfirmDialog(Ressources.MAINFRAME,"Etes vous sur ?");
+			if (ret == JOptionPane.YES_OPTION)
+			{
+				Ressources.CONTACTLIST.deleteContact(currentContact);
+				Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
+				ContactIndividualPanel.this.firePropertyChange("contactDeleted", false, true);
+			}
+			
+		}
+	}
 
 
 	private void reload()
@@ -107,7 +127,7 @@ public class ContactIndividualPanel extends JPanel {
 		}
 		add(picturePanel(), BorderLayout.NORTH);
 		add(informationPanel(), BorderLayout.CENTER);
-		add(modifyButtonPanel(), BorderLayout.SOUTH);
+		add(buttonPanel(), BorderLayout.SOUTH);
 		revalidate() ;
 		repaint() ;
 	}
