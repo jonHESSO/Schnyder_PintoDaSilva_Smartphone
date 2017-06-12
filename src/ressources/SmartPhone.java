@@ -39,7 +39,7 @@ public class SmartPhone
 
 	}
 
-	private static void verifyDependencies()
+	public static void verifyDependencies()
 	{
 		//gallery
 		File galleryDirectory = new File(Ressources.GALLERY_DIRECTORY) ;

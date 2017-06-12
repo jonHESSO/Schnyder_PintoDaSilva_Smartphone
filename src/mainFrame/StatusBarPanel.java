@@ -13,18 +13,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import ressources.DefaultTextLabel;
 import ressources.Kernel32;
 import ressources.Ressources;
+import ressources.SmallTextLabel;
 
 public class StatusBarPanel extends JPanel implements ActionListener
 {
-	DefaultTextLabel time ;
-	DefaultTextLabel batteryPercent ;
-	DefaultTextLabel batteryState ;
+	JLabel time ;
+	JLabel batteryPercent ;
+	JLabel batteryState ;
 	DateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy - hh:mm") ;
 	Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
 	
@@ -41,16 +43,17 @@ public class StatusBarPanel extends JPanel implements ActionListener
 		
 		Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
 		
-		batteryPercent = new DefaultTextLabel(getBatteryPercent());
+		batteryPercent = new SmallTextLabel(getBatteryPercent()+"  "+getBatteryState());
 //		batteryPercent.setFont(new Font("Comic Sans MS", Font.PLAIN, 10)) ;
-		batteryState = new DefaultTextLabel(getBatteryState()) ;
-		time = new DefaultTextLabel(getDate()) ;
+//		batteryState = new SmallTextLabel(getBatteryState()) ;
+		time = new SmallTextLabel(getDate()) ;
 		
 		JPanel batteryPanel = new JPanel() ;
 		add(time,BorderLayout.WEST) ;
-		batteryPanel.add(batteryState);
-		batteryPanel.add(batteryPercent) ;
-		add(batteryPanel,BorderLayout.EAST) ;
+		add(batteryPercent,BorderLayout.EAST) ;
+//		batteryPanel.add(batteryState);
+//		batteryPanel.add(batteryPercent) ;
+//		add(batteryPanel,BorderLayout.EAST) ;
 		
 	}
 	
@@ -58,8 +61,8 @@ public class StatusBarPanel extends JPanel implements ActionListener
 		if(ev.getSource()==timer){
 			Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
 			time.setText(getDate());// this will call at every 1 second
-			batteryPercent.setText(getBatteryPercent());
-			batteryState.setText(getBatteryState());
+			batteryPercent.setText(getBatteryPercent()+"  "+getBatteryState());
+//			batteryState.setText(getBatteryState());
 		}
 	}
 
