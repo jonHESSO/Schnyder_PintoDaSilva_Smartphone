@@ -40,8 +40,8 @@ public class ContactListPanel extends JPanel {
 	
 	private JScrollPane contactListPane()
 	{
-		Object[][] contactData = new Object[Ressources.CONTACTLIST.getContactList().size()][3] ;
-		String[] columnNames = {"Last Name", "First Name", "Image"} ;
+//		Object[][] contactData = new Object[Ressources.CONTACTLIST.getContactList().size()][3] ;
+//		String[] columnNames = {"Last Name", "First Name", "Image"} ;
 		DefaultTableModel model = new DefaultTableModel(){
 			
 
@@ -87,6 +87,11 @@ public class ContactListPanel extends JPanel {
 						if (evt.getPropertyName().equals("contactModified"))
 						{
 							reload() ;
+						}
+						if (evt.getPropertyName().equals("contactDeleted"))
+						{
+							ContactListPanel.this.reload() ;
+							Ressources.CONTACTAPP.removePanel(individualPanel) ;
 						}
 					}
 				});
