@@ -16,6 +16,7 @@ public class ContactSelectPicturePanel extends GalleryIconListPanel
 	protected void selectionAction()
 	{
 		System.out.println("Picture clicked");
+		//indique une modification des propriétés de l'image
 		ContactSelectPicturePanel.this.firePropertyChange("selectedPicture", null, selectedIcon);
 		
 	}
