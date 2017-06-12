@@ -49,25 +49,6 @@ public class MainFrame extends JFrame
 	public void reloadCenterPanel()
 	{
 		centerPanel.removeAll();
-		
-//		JPanel activePanel = Ressources.ACTIVEAPPLICATION.getActivePanel() ;
-//		System.out.println(Ressources.ACTIVEAPPLICATION);
-		
-//		activePanel.addPropertyChangeListener(new PropertyChangeListener(){
-//
-//			@Override
-//			public void propertyChange(PropertyChangeEvent evt)
-//			{
-//				if(evt.getPropertyName().equals("activeApp")||evt.getPropertyName().equals("activePanelChanged"))
-//				{
-////					System.out.println("Halp");
-//					reloadCenterPanel() ;
-////					JFrame jf = new JFrame() ;
-////					jf.add((JPanel)Ressources.ACTIVEAPPLICATION.getActivePanel()) ;
-////					jf.setVisible(true);
-//				}
-//			}
-//		});
 
 		centerPanel.add(Ressources.ACTIVEAPPLICATION.getActivePanel()) ;
 		centerPanel.revalidate();
