@@ -31,6 +31,7 @@ public class TicTacToePanel extends JPanel
 		setLayout(new FlowLayout());
 		add(gamePanel) ;
 		newGame.addActionListener(new NewGameListener());
+		newGame.setFont(Ressources.DEFAULT_FONT);
 		add(newGame);
 		vsAI.addActionListener(new vsAIListener());
 		add(vsAI) ;

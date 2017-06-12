@@ -47,7 +47,7 @@ public class Ressources
 	public static final float DEFAULT_PICTURE_RATIO = (float)GALLERY_PICTURE_HEIGHT/DEFAULT_APP_JPANEL_WIDTH ;
 	
 	//component dimensions
-	public static final Dimension CONTACT_TEXTFIELD_DIMENSION = new Dimension(50,20) ;
+	public static final Dimension CONTACT_TEXTFIELD_DIMENSION = new Dimension(100,40) ;
 	public static final Dimension DEFAULT_FRAME_DIMENSION = new Dimension(DEFAULT_FRAME_WIDTH,DEFAULT_FRAME_HEIGHT) ;
 	public static final Dimension DEFAULT_APP_JPANEL_DIMENSION= new Dimension (DEFAULT_APP_JPANEL_WIDTH, DEFAULT_APP_JPANEL_HEIGHT);
 	public static final Dimension CONTACT_APP_CREATIONPANEL = new Dimension(500,DEFAULT_APP_JPANEL_HEIGHT-DEFAULT_BUTTON_HEIGHT) ;
@@ -59,7 +59,10 @@ public class Ressources
 	public static final Dimension DEFAULT_BUTTON_DIMENSION = new Dimension(100,DEFAULT_BUTTON_HEIGHT) ;
 	public static final Dimension GALLERY_ICON_DIMENSION = new Dimension(GALLERY_ICON_WIDTH,GALLERY_ICON_HEIGHT) ;
 	
-	public static final Font DEFAULT_FONT = new Font("Comic Sans MS", Font.BOLD, 11) ;
+	public static final Font STATURBAR_FONT = new Font("Comic Sans MS", Font.BOLD, 11) ;
+	public static final Font DEFAULT_FONT = new Font("Comic Sans MS", Font.BOLD, 15) ;
+	public static final Font CONTACT_FONT_TITLE = new Font("Comic Sans MS", Font.BOLD, 20) ;
+
 	
 	public static ContactList CONTACTLIST = (ContactList) Serializer.deserializableObject(CONTACT_DIRECTORY) ;
 	

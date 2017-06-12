@@ -34,7 +34,8 @@ public class PicturePanel extends JPanel
 		picLabel.setVerticalAlignment(JLabel.CENTER);
 		add(picLabel, BorderLayout.CENTER);
 		deleteButton.setSize(Ressources.DEFAULT_BUTTON_DIMENSION);
-		deleteButton.addActionListener(new ActionListener()
+		deleteButton.setFont(Ressources.DEFAULT_FONT);
+		deleteButton.addActionListener(new ActionListener()		
 		{
 
 			@Override
