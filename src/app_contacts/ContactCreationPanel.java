@@ -37,7 +37,15 @@ public class ContactCreationPanel extends ContactEditPanel {
 		String firstName = fieldFirstName.getText() ;
 		String number = fieldNumber.getText() ;
 		String email = fieldEmail.getText() ;
-		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
+		ImageIcon picture = null ;
+		if (imageButton.getIcon() == null)
+		{
+			picture = new ImageIcon("data/Icons/contact_icons/doge.jpg") ;
+		}
+		else{
+			picture = (ImageIcon)imageButton.getIcon() ;
+		}
+		
 		
 		Ressources.CONTACTLIST.addContact(lastName, firstName, number, email, picture);
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
