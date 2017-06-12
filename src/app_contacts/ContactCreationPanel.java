@@ -33,27 +33,35 @@ public class ContactCreationPanel extends ContactEditPanel {
 	// Enregistrement du contact en cliquant sur le okButton
 	@Override
 	public void okAction() {
-		String lastName = fieldLastName.getText() ;
+		String lastName = fieldLastName.getText() ; 
 		String firstName = fieldFirstName.getText() ;
 		String number = fieldNumber.getText() ;
 		String email = fieldEmail.getText() ;
 		ImageIcon picture = null ;
+		
+		//Mise en place d'une image par défaut
+		// Si il n'y a pas d'image
 		if (imageButton.getIcon() == null)
 		{
+			//utilise cette image
 			picture = new ImageIcon("data/Icons/contact_icons/doge.jpg") ;
 		}
 		else{
+			//sinon utilise l'image sélectionnée
 			picture = (ImageIcon)imageButton.getIcon() ;
 		}
 		
-		
+		//Ajoute le contact à la CONTACTLIST
 		Ressources.CONTACTLIST.addContact(lastName, firstName, number, email, picture);
+		//Appelle la méthode de sérialization avec pour paramètres la CONTACTLIST et le fichier de sérialization
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
 		
+		//Ferme le panel une fois le contact créé
 		Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel()) ;
 		
 		boolean oldProperty = false ;
 		contactCreated = true ;
+		//indique une modification des propriétés du contact
 		firePropertyChange("contactCreated", oldProperty, contactCreated);
 	}
 }

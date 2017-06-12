@@ -16,10 +16,13 @@ import ressources.Ressources;
 import ressources.Serializer;
 
 //Permet de modifier un contact déjà existant
+
+//La classe hérite de ContactEditPanel
 public class ContactModifyPanel extends ContactEditPanel {
 
-
+	// Contact modifié en ce moment
 	private Contact currentContact;
+	// Indique si le contact a été modifié
 	private boolean contactModified = false ;
 
 	// Constructeur du panel
@@ -46,10 +49,14 @@ public class ContactModifyPanel extends ContactEditPanel {
 		String email = fieldEmail.getText() ;
 		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
 		
+		// Appelle la méthode modifyContact via la CONTACTLIST
 		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
+		// La méthode sérialization prend en paramètre la CONTACTLIST et le fichier de sérialization
 		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
 		boolean oldProperty = false ;
+		//indique que le contact a été modifié
 		contactModified = true ;
+		//indique une modification des propriétés du contact
 		firePropertyChange("contactModified", oldProperty, contactModified);
 	}
 }

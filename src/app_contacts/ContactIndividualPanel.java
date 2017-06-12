@@ -36,12 +36,18 @@ public class ContactIndividualPanel extends JPanel {
 	//Panel accueillant la photo
 	private JPanel picturePanel() {
 		
+		//Création du panel
 		JPanel panel = new JPanel();
+		
+		//Dimensionnement du panel
 		panel.setPreferredSize(new Dimension(450, 300));
+		
+		//ajout du contact actuel sur le panel
 		panel.add(new JLabel(currentContact.getPicture()),BorderLayout.CENTER);
 		return panel;
 	}
 
+	//Panel contenant les informations du contact
 	private JPanel informationPanel() {
 		//Création du panel contenant les informations
 		JPanel panel = new JPanel(new FlowLayout());
@@ -62,20 +68,28 @@ public class ContactIndividualPanel extends JPanel {
 		return panel;
 	}
 
+	//Panel content le modifButton et le deleteButton
 	private JPanel modifyButtonPanel() {
+		
+		//création du panel
 		JPanel panel = new JPanel();
+		//dimensionnement du panel
 		panel.setPreferredSize(new Dimension(450, 90));
-		JButton modifButton = new JButton ("Modifier\n contact");
-
+		//Création du modifButton 
+		JButton modifButton = new JButton ("Modifier");
+		//ajout du listener au modifbutton
 		modifButton.addActionListener(new Modif_Click());
+		//ajout du Font au modifbutton
 		modifButton.setFont(Ressources.DEFAULT_FONT);
+		//ajout du modifbutton au panel
 		panel.add((modifButton), BorderLayout.CENTER);
 
 		return panel;
 	}
-
+	// listener Modif_Click
 	class Modif_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			//Création d'un ContactModifyPanel
 			JPanel modifyPanel = new ContactModifyPanel(currentContact);
 			modifyPanel.addPropertyChangeListener(new PropertyChangeListener()
 			{
@@ -83,12 +97,17 @@ public class ContactIndividualPanel extends JPanel {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt)
 				{
+					//Catching event evt
 					if (evt.getPropertyName().equals("contactModified"))
 					{
+						// Reload IndividualPanel
 						ContactIndividualPanel.this.reload() ;
+						// On supprime le modifyPanel
 						Ressources.CONTACTAPP.removePanel(modifyPanel) ;
+						// On indique que le contact a été modifié
 						contactModified = (boolean) evt.getNewValue() ;
 						boolean oldValue = false ;
+						// On lance un nouvel event pour indiquer au panel parent (contactListPanel) que le contact a été modifié 
 						ContactIndividualPanel.this.firePropertyChange("contactModified", oldValue, contactModified);
 					}
 				}
@@ -98,7 +117,7 @@ public class ContactIndividualPanel extends JPanel {
 		}
 	}
 
-
+	// Méthode permettant de rafraichir le panel
 	private void reload()
 	{
 		if(getComponentCount()>0)

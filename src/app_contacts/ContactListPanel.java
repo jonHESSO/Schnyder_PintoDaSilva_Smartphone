@@ -40,8 +40,8 @@ public class ContactListPanel extends JPanel {
 	
 	private JScrollPane contactListPane()
 	{
-		Object[][] contactData = new Object[Ressources.CONTACTLIST.getContactList().size()][3] ;
-		String[] columnNames = {"Last Name", "First Name", "Image"} ;
+//		Object[][] contactData = new Object[Ressources.CONTACTLIST.getContactList().size()][3] ;
+//		String[] columnNames = {"Last Name", "First Name", "Image"} ;
 		DefaultTableModel model = new DefaultTableModel(){
 			
 

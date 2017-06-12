@@ -89,16 +89,14 @@ public abstract class ContactEditPanel extends JPanel {
 		panel.add(fieldLastName).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		panel.add(fieldNumber).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
 		panel.add(fieldEmail).setPreferredSize(Ressources.CONTACT_TEXTFIELD_DIMENSION);
-	
-		
 		//Bouton d'ajout d'image
-		imageButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		imageButton.addActionListener(new setPictureListener());
 		panel.add(imageButton).setPreferredSize(new Dimension (150,150));
 
 		return panel;
 	}
 
+	
 	// Panel contenant les buttons Ok et Cancel
 	public JPanel buttonPanel() {
 		// Création du panel
@@ -140,12 +138,13 @@ public abstract class ContactEditPanel extends JPanel {
 		}		
 	}
 	
-	//Methode d'action du listener du okButton
+	//Methode d'action du listener du cancelButton
 	public void cancelAction(){
 		Ressources.ACTIVEAPPLICATION.removePanel(Ressources.ACTIVEAPPLICATION.getActivePanel());
 			
 	}
 	
+	// Listener du imageButton
 	class setPictureListener implements ActionListener
 	{
 
@@ -165,10 +164,13 @@ public abstract class ContactEditPanel extends JPanel {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt)
 		{
+			//Catching event evt
 			if (evt.getPropertyName().equals("selectedPicture"))
 					{
 						System.out.println(evt.getNewValue().toString());
+						// On ajoute l'image sélectionnée sur le button
 						imageButton.setIcon((Icon)((ImageIcon)evt.getNewValue()));
+						// On retire le panel de sélection d'image
 						Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel());
 					}
 			
