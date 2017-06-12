@@ -11,13 +11,18 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -56,9 +61,10 @@ public abstract class GalleryIconListPanel extends JPanel
 			}
 			catch (Exception e)
 			{
-				
+				//not a picture, so we don't care
 			}
 		}
+		
 		return pictures ;
 	}
 
@@ -82,6 +88,7 @@ public abstract class GalleryIconListPanel extends JPanel
 			@Override
 			public void run()
 			{
+				
 				JLabel loading = new JLabel("Loading") ;
 				loading.setHorizontalAlignment(SwingConstants.CENTER);;
 				add(loading,BorderLayout.CENTER) ;
@@ -91,6 +98,19 @@ public abstract class GalleryIconListPanel extends JPanel
 
 
 				pictures = getPictureList() ;
+				if(pictures.isEmpty()==true)
+				{
+					removeAll();
+					add(loading,BorderLayout.CENTER) ;
+					int ret = JOptionPane.showConfirmDialog(Ressources.MAINFRAME, "Aucune image, voulez-vous en ajouter ?") ;
+					if (ret == JOptionPane.YES_OPTION) 
+					{
+						copyPictures() ;
+						pictures = getPictureList() ;
+					}
+					
+				}
+				
 				icons = new ArrayList<JLabel>() ;
 				for (int i = 0; i < pictures.size(); i++)
 				{
@@ -118,8 +138,10 @@ public abstract class GalleryIconListPanel extends JPanel
 				add(iconPanel,BorderLayout.CENTER) ;
 				revalidate() ;
 				repaint() ;
+				
 
 			}
+		
 
 			@Override
 			public void cancel()
@@ -129,10 +151,39 @@ public abstract class GalleryIconListPanel extends JPanel
 
 
 		thread.start();
+		
 
 
 
 	}
+	
+	private void copyPictures()
+	{
+		JFileChooser chooser = new JFileChooser();
+		chooser.setMultiSelectionEnabled(true) ;
+		int returnValue = chooser.showOpenDialog(Ressources.MAINFRAME);
+		File[] files = null ;
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+        	 files = chooser.getSelectedFiles();
+        	 System.out.println("selected files : "+files.length);
+        	 for (int j = 0; j < files.length; j++)
+     		{
+     	    	try
+     			{
+     	    		String pathDestination = Ressources.GALLERY_DIRECTORY+"/"+files[j].getName() ;
+     				Files.copy(files[j].toPath(), Paths.get(pathDestination));
+     			} catch (IOException e)
+     			{
+     				e.printStackTrace();
+     			}
+     		}
+        }
+	   
+	    
+		
+	}
+	
+	
 	
 
 	protected abstract void selectionAction() ;

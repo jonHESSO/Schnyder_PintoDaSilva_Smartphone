@@ -26,7 +26,7 @@ public class GamePanel extends JPanel
 	private int currentPlayer ;
 	private TicTacToeAI bot ;
 	private boolean isVSAI ;
-	private String scoresPath = Ressources.TICTACTOE_DIRECTORY ;
+	private String scoresPath = Ressources.TICTACTOE_SERIALISATION ;
 	private TicTacToeStats scores ;
 
 	public GamePanel()
@@ -164,24 +164,24 @@ public class GamePanel extends JPanel
 			break ;
 
 		}
-		JOptionPane.showMessageDialog(null, result);
+		JOptionPane.showMessageDialog(Ressources.MAINFRAME, result,"Resultat", 1);
 
 	}
 	
 	private void saveScore()
 	{
-		Serializer.serializableObject(scores, scoresPath);
+		Serializer.serializableObject(Ressources.TICTACTOES_STATS, scoresPath);
 	}
 	
 	private void saveScoreP2()
 	{
 		if (isVSAI==true)
 		{
-			scores.AIWins();
+			Ressources.TICTACTOES_STATS.AIWins();
 		}
 		else
 		{
-			scores.P2Wins();
+			Ressources.TICTACTOES_STATS.P2Wins();
 		}
 		saveScore() ;
 		
@@ -191,11 +191,11 @@ public class GamePanel extends JPanel
 	{
 		if (isVSAI==true)
 		{
-			scores.P1WinsVAI();
+			Ressources.TICTACTOES_STATS.P1WinsVAI();
 		}
 		else
 		{
-			scores.P1WinsVP();
+			Ressources.TICTACTOES_STATS.P1WinsVP();
 		}
 		saveScore() ;
 	}
@@ -224,7 +224,7 @@ public class GamePanel extends JPanel
 		{
 				Serializer.serializableObject(new TicTacToeStats(), scoresPath);
 		}
-		scores = (TicTacToeStats) Serializer.deserializableObject(scoresPath) ;
+		Ressources.TICTACTOES_STATS = (TicTacToeStats) Serializer.deserializableObject(scoresPath) ;
 
 	}
 

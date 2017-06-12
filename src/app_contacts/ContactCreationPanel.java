@@ -40,7 +40,7 @@ public class ContactCreationPanel extends ContactEditPanel {
 		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
 		
 		Ressources.CONTACTLIST.addContact(lastName, firstName, number, email, picture);
-		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
+		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
 		
 		Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel()) ;
 		

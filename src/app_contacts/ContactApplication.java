@@ -9,6 +9,8 @@ package app_contacts;
 import javax.swing.JPanel;
 
 import ressources.DefaultApplication;
+import ressources.Ressources;
+import ressources.Serializer;
 
 public class ContactApplication extends DefaultApplication
 {
@@ -16,8 +18,13 @@ public class ContactApplication extends DefaultApplication
 	
 	public ContactApplication()
 	{
-			addPanel(new ContactListPanel()) ;
-		
+		Ressources.CONTACTLIST = (ContactList) Serializer.deserializableObject(Ressources.CONTACT_SERIALISATION) ;	
+		addPanel(new ContactListPanel()) ;
+//			if(Ressources.CONTACTLIST==null)
+//			{
+//				Ressources.CONTACTLIST = new ContactList() ;
+//			}
+				
 	}
 	
 
