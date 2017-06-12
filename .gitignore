@@ -5,10 +5,10 @@ ehthumbs.db
 
 #Folders
 bin/
-bin\
-/bin
 
-data/
+data/contact
+data/gallery
+data/tictactoe_stats
 
 # Folder config file
 Desktop.ini
