@@ -17,7 +17,7 @@ public class TicTacToeStatsTest
 
 	public static void main(String[] args)
 	{
-		String scoresPath = Ressources.TICTACTOE_DIRECTORY ;
+		String scoresPath = Ressources.TICTACTOE_SERIALISATION ;
 		TicTacToeStats stats;
 			stats = (TicTacToeStats) Serializer.deserializableObject(scoresPath);
 			stats.showScoresVAI();

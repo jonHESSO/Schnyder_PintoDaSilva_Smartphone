@@ -70,8 +70,8 @@ public interface Kernel32 extends StdCallLibrary {
         	if(ACLineStatus == 1) return "Such charging" ;
         	if(BatteryLifePercent<=(byte)25) return "Wow" ;
         	if(BatteryLifePercent<=(byte)50) return "Much low" ;
-        	if(BatteryLifePercent<=(byte)75) return "Wow" ;
-        	if(BatteryLifePercent<=(byte)100) return "So high" ;
+        	if(BatteryLifePercent<=(byte)75) return "So high" ;
+        	if(BatteryLifePercent<=(byte)100) return "Very charged" ;
         	return null ;	
         	
         }

@@ -47,7 +47,7 @@ public class ContactModifyPanel extends ContactEditPanel {
 		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
 		
 		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
-		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_DIRECTORY);
+		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
 		boolean oldProperty = false ;
 		contactModified = true ;
 		firePropertyChange("contactModified", oldProperty, contactModified);

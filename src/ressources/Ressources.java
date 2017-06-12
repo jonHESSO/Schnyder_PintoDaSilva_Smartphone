@@ -16,6 +16,7 @@ import app_contacts.ContactList;
 import app_gallery.GalleryApplication;
 import app_home.HomeApplication;
 import app_tictactoe.TicTacToeApplication;
+import app_tictactoe.TicTacToeStats;
 import mainFrame.MainFrame;
 
 public class Ressources
@@ -40,8 +41,11 @@ public class Ressources
 	
 	//serialized files directories/paths
 	public static final String GALLERY_DIRECTORY = "data/gallery/";
-	public static final String TICTACTOE_DIRECTORY = "data/tictactoe_stats/scores.ser";
-	public static final String CONTACT_DIRECTORY = "data/contact/contactlist.ser";
+	public static final String TICTACTOE_DIRECTORY = "data/tictactoe_stats/";
+	public static final String CONTACT_DIRECTORY = "data/contact/";
+	
+	public static final String CONTACT_SERIALISATION = "data/contact/contactlist.ser";
+	public static final String TICTACTOE_SERIALISATION = "data/tictactoe_stats/scores.ser";
 	
 	
 	public static final float DEFAULT_PICTURE_RATIO = (float)GALLERY_PICTURE_HEIGHT/DEFAULT_APP_JPANEL_WIDTH ;
@@ -64,7 +68,8 @@ public class Ressources
 	public static final Font CONTACT_FONT_TITLE = new Font("Comic Sans MS", Font.BOLD, 20) ;
 
 	
-	public static ContactList CONTACTLIST = (ContactList) Serializer.deserializableObject(CONTACT_DIRECTORY) ;
+	public static TicTacToeStats TICTACTOES_STATS ;
+	public static ContactList CONTACTLIST  ;
 	
 	public static MainFrame MAINFRAME ;
 	
