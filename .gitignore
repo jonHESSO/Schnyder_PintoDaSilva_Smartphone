@@ -5,6 +5,7 @@ ehthumbs.db
 
 #Folders
 bin/
+doc/
 
 data/contact
 data/gallery

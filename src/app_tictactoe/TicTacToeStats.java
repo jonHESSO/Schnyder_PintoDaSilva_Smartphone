@@ -85,9 +85,9 @@ public class TicTacToeStats implements Serializable
 	 * Gets the  win ratios.
 	 *
 	 * @param scores the score list
-	 * @return the ratios (x wins / y total games)
+	 * @return the total win rate for each day
 	 */
-	private ArrayList<int[]> getRatios(ArrayList<Score> scores)
+	private ArrayList<int[]> getRatiosPerDay(ArrayList<Score> scores)
 	{
 		ArrayList<int[]> ratios = new ArrayList<int[]>() ;
 		int tDay  ;
@@ -133,9 +133,9 @@ public class TicTacToeStats implements Serializable
 	 *
 	 * @return the win ratio vs the AI
 	 */
-	public ArrayList<int[]> winrateVAI()
+	public ArrayList<int[]> winratePerDayVAI()
 	{
-		return getRatios(scoreVAI) ;
+		return getRatiosPerDay(scoreVAI) ;
 	}
 
 	/**
@@ -143,9 +143,9 @@ public class TicTacToeStats implements Serializable
 	 *
 	 * @return the win ratio against Player2
 	 */
-	public ArrayList<int[]> winrateVP()
+	public ArrayList<int[]> winratePerdDayVP()
 	{
-		return getRatios(scoreVP) ;
+		return getRatiosPerDay(scoreVP) ;
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class TicTacToeStats implements Serializable
 	 */
 	public void showRatiosVAI()
 	{
-		showRatios(winrateVAI()) ;
+		showRatios(winratePerDayVAI()) ;
 	}
 
 }

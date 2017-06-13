@@ -1,3 +1,8 @@
+/*
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : June 07, 2017
+ */
 package app_contacts;
 
 import java.awt.BorderLayout;
@@ -29,26 +34,50 @@ import ressources.ContactTextField;
 import ressources.Ressources;
 import ressources.Serializer;
 
+
+/**
+ * The Class ContactEditPanel.
+ * This abstract class is used for the Modification
+ * and creation of contacts
+ * Only the OKAction method is abstract and has a 
+ * different behaviour depending if the contact
+ * is being created or modified
+ */
 public abstract class ContactEditPanel extends JPanel {
 
+	/** The field first name. */
 	// Textfield --> attributs obligatoires pour un contact
 	protected JTextField fieldFirstName = new ContactTextField(15);
+	
+	/** The field last name. */
 	protected JTextField fieldLastName = new ContactTextField(15);
+	
+	/** The field number. */
 	protected JTextField fieldNumber = new ContactTextField(15);
 
+	/** The field email. */
 	// Textfield --> attributs optionnels pour un contact
 	protected JTextField fieldEmail = new ContactTextField(15);
 
+	/** The ok button. */
 	// Ajout des buttons "OK" et "Cancel"
 	protected JButton okButton = new JButton("OK");
+	
+	/** The cancel button. */
 	protected JButton cancelButton = new JButton("Cancel");
+	
+	/** The image button. */
 	protected JButton imageButton = new JButton();
 
+	/** The close now. */
 	protected boolean closeNow = false;
 
+	/** The is active. */
 	private boolean isActive = false ;
 
-	// Panel accueillant le panel avec les JTexfields, celui avec les labels et celui avec les JButtons
+	/**
+	 * Instantiates a new contact edit panel.
+	 */
 	public ContactEditPanel() 
 	{
 
@@ -57,6 +86,10 @@ public abstract class ContactEditPanel extends JPanel {
 	}
 
 
+	/**
+	 * Load panel. Loads everything needed for the panel
+	 * like titles and textfields
+	 */
 	private void loadPanel()
 	{
 		JPanel panel = new JPanel ();
@@ -136,39 +169,74 @@ public abstract class ContactEditPanel extends JPanel {
 		add(panel);
 	}
 
-	// Listener du button de creation de contact
+	/**
+	 * The Class Ok_Click listener 
+	 * It callse the okAction method
+	 */
 	class Ok_Click implements ActionListener {
+		
+		/**
+		 * Instantiates a new ok click.
+		 */
 		public Ok_Click() {
 		}
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			okAction() ;
 		}
 	}
 
-	//Methode d'action du listener du okButton
+	/**
+	 * Ok action. Needs to be implemented in
+	 * sub classes
+	 */
 	public abstract void okAction() ;
 
-	// Listener du button cancel
+	/**
+	 * The Class cancel_Click.
+	 * Closes this panel
+	 */
 	class cancel_Click implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			cancelAction();
 		}		
 	}
 
-	//Methode d'action du listener du cancelButton
+	/**
+	 * Cancel action.
+	 */
 	public void cancelAction(){
 		Ressources.ACTIVEAPPLICATION.removePanel(Ressources.ACTIVEAPPLICATION.getActivePanel());
 
 	}
 
-	// Listener du imageButton
+	/**
+	 *This listener creates an icon list panel, for 
+	 *selecting the contact's icon. When an icon is selected
+	 *the icon list panel closes, and the selected icon is passed
+	 *to this panel and set in the image button
+	 */
 	class setPictureListener implements ActionListener
 	{
 
+		/**
+		 * Action performed.
+		 *
+		 * @param arg0 the arg 0
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0)
 		{
@@ -179,9 +247,19 @@ public abstract class ContactEditPanel extends JPanel {
 
 	}
 
+	/**
+	 * This listener listens for the icon list panel
+	 * and retrieves the selected icon when it is clicked
+	 * The it closes the panel
+	 */
 	class SelectedPictureListener implements PropertyChangeListener
 	{
 
+		/**
+		 * Property change.
+		 *
+		 * @param evt the evt
+		 */
 		@Override
 		public void propertyChange(PropertyChangeEvent evt)
 		{

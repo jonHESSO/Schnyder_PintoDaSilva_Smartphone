@@ -1,5 +1,7 @@
 /*
- * 
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : June 09, 2017
  */
 package ressources;
 

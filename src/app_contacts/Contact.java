@@ -1,5 +1,7 @@
 /*
- * 
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : May 10, 2017
  */
 package app_contacts;
 
@@ -7,7 +9,6 @@ import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Contact.
  */
@@ -37,7 +38,7 @@ public class Contact implements Serializable {
 	 * @param email the email
 	 * @param picture the picture
 	 */
-	// Constructeur pour contact
+
 	public Contact(String lastName, String firstName, String number, String email, ImageIcon picture) {
 		this.lastName = lastName;
 		this.firstName = firstName;

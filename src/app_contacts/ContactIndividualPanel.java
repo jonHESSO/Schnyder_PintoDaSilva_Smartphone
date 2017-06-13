@@ -1,3 +1,8 @@
+/*
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : May 22, 2017
+ */
 package app_contacts;
 
 import java.awt.*;
@@ -15,12 +20,29 @@ import ressources.Serializer;
 import app_contacts.Contact ;
 import app_gallery.PicturePanel;
 
+
+/**
+ * The Class ContactIndividualPanel.
+ * This class shows the full infos
+ * of a contact. It also has buttons
+ * to delete or modify the contact
+ */
 public class ContactIndividualPanel extends JPanel {
 
+	/** The current contact. */
 	private Contact currentContact ;
+	
+	/** The contact modified. */
 	private boolean contactModified = false ;
+	
+	/** The grid panel. */
 	private JPanel gridPanel ;
 
+	/**
+	 * Instantiates a new contact individual panel.
+	 *
+	 * @param currentContact the selected contact
+	 */
 	public ContactIndividualPanel(Contact currentContact)
 	{
 
@@ -33,6 +55,11 @@ public class ContactIndividualPanel extends JPanel {
 		
 	}
 
+	/**
+	 * Button panel.
+	 *
+	 * @return panel the panel containing the buttons
+	 */
 	//Panel content le modifButton et le deleteButton
 	private JPanel buttonPanel() {
 		
@@ -63,8 +90,20 @@ public class ContactIndividualPanel extends JPanel {
 
 		return modifDeletePanel;
 	}
-	// listener Modif_Click
+	
+	/**
+	 * The listener for the modify buttonn.
+	 * When the button is clicked, a new modify
+	 * panel opens, and if the contact is modified,
+	 * it removes the modify panel and reloads this one
+	 */
 	class Modif_Click implements ActionListener {
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			//CrÃ©ation d'un ContactModifyPanel
 			JPanel modifyPanel = new ContactModifyPanel(currentContact);
@@ -94,7 +133,18 @@ public class ContactIndividualPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * The listener for the delete button.
+	 * If the contact is deleted, this panel is removed
+	 * (and the previous panel is automatically reloaded)
+	 */
 	class Delete_Click implements ActionListener {
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		public void actionPerformed(ActionEvent e) {
 			int ret = JOptionPane.showConfirmDialog(Ressources.MAINFRAME,"Etes vous sur ?");
 			if (ret == JOptionPane.YES_OPTION)
@@ -107,7 +157,10 @@ public class ContactIndividualPanel extends JPanel {
 		}
 	}
 
-	// MÃ©thode permettant de rafraichir le panel
+	/**
+	 * Reload. Loads all the components for
+	 * this panel.
+	 */
 	private void reload()
 	{
 		if(getComponentCount()>0)

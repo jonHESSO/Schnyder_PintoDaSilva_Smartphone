@@ -69,24 +69,12 @@ public class Picture implements Serializable
 	public ImageIcon getPicture()
 	{
 		ImageIcon bImage = null ;
-		double ratio = (float)this.originalHeight/this.originalWidth ;
-		int h =this.originalHeight, w =this.originalWidth ;
+		int h, w ;
+		int[] dimensions = getImageDimensions(this.originalHeight, this.originalWidth, Ressources.GALLERY_PICTURE_HEIGHT, Ressources.DEFAULT_APP_JPANEL_WIDTH, Ressources.DEFAULT_PICTURE_RATIO) ;
+		w = dimensions[0] ;
+		h = dimensions[1] ;
 		try
 		{
-			if (this.originalHeight>Ressources.GALLERY_PICTURE_HEIGHT || this.originalWidth>Ressources.DEFAULT_APP_JPANEL_WIDTH) 
-			{
-				//height is higher than the ratio
-				if(ratio>Ressources.DEFAULT_PICTURE_RATIO)
-				{
-					h = Ressources.GALLERY_PICTURE_HEIGHT ;
-					w = (int)(h/ratio) ;
-				}
-				else
-				{
-					w = Ressources.DEFAULT_APP_JPANEL_WIDTH ;
-					h = (int)(w*ratio) ;
-				}
-			}
 			Image scaledImage = ImageIO.read(file).getScaledInstance(w, h, Image.SCALE_SMOOTH) ;
 			bImage = new ImageIcon(scaledImage) ;
 			
@@ -118,25 +106,12 @@ public class Picture implements Serializable
 
 		//parameters used for cropping
 		int x, y, w, h;
-
-		/*  Croppping  */
-		//if portrait
-		if(this.originalHeight > this.originalWidth)
-		{
-			w = this.originalWidth ;
-			h = this.originalWidth ;
-			x = 0;
-			y = (int)(this.originalHeight*0.5 - this.originalWidth*0.5) ;
-		}
-
-		//if landscape or square
-		else
-		{
-			w = this.originalHeight ;
-			h = this.originalHeight ;
-			x = (int)(this.originalWidth*0.5 - this.originalHeight*0.5) ;
-			y = 0;
-		}
+		
+		int[] dimensions = getIconCropDimensions(this.originalHeight, this.originalWidth) ;
+		w = dimensions[0] ;
+		h = dimensions[1] ;
+		x = dimensions[2] ;
+		y = dimensions[3] ;
 
 		//actual cropping and resizing
 		try{
@@ -147,6 +122,69 @@ public class Picture implements Serializable
 			System.out.println(e.getMessage());
 		}
 		return icon ;
+	}
+	
+	/**
+	 * Gets the icon crop dimensions.
+	 *
+	 * @param height the height
+	 * @param width the width
+	 * @return the icon crop w/h dimensions and x/y positions
+	 */
+	public int[] getIconCropDimensions(int height, int width)
+	{
+		int w, h, x, y ;
+		if(height > width)
+		{
+			w = width ;
+			h = width ;
+			x = 0;
+			y = (int)(height*0.5 - width*0.5) ;
+		}
+
+		//if landscape or square
+		else
+		{
+			w = height ;
+			h = height ;
+			x = (int)(width*0.5 - height*0.5) ;
+			y = 0;
+		}
+		int[] dimensions = {w,h,x,y} ;
+		return dimensions ;
+	}
+	
+	/**
+	 * Gets the image resized dimensions.
+	 *
+	 * @param height the height
+	 * @param width the width
+	 * @param maxHeight the max height
+	 * @param maxWidth the max width
+	 * @return the image dimensions
+	 */
+	public int[] getImageDimensions(int height, int width, int maxHeight, int maxWidth, float defaultRatio)
+	{
+		int h = height ;
+		int w = width ;
+		float ratio = (float)height/width ;
+		
+		if (height>maxHeight || width>maxWidth) 
+		{
+			//height is higher than the ratio
+			if(ratio>defaultRatio)
+			{
+				h = maxHeight ;
+				w = (int)(h/ratio) ;
+			}
+			else
+			{
+				w = maxWidth ;
+				h = (int)(w*ratio) ;
+			}
+		}
+		int[] dimensions = {w,h} ;
+		return dimensions ;
 	}
 	
 	/**
