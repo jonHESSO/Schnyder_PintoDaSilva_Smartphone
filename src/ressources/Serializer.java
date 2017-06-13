@@ -10,8 +10,22 @@ import java.io.*;
 
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The abstract Class Serializer.
+ * It contains a method for saving and 
+ * reading files used by the apps. The apps
+ * can just call them to read/save their files
+ */
 public abstract class Serializer
 {
+	
+	/**
+	 * Deserializable object.
+	 *
+	 * @param path the path to the saved object
+	 * @return the saved object
+	 */
 	//methode de deserialisation
 	public static Object deserializableObject(String path) {
 		File file = new File(path) ;
@@ -39,6 +53,13 @@ public abstract class Serializer
 		//retourne l'objet "deserializedPerson"
 		return deserializedObject ;
 	}
+	
+	/**
+	 * Serializable object.
+	 *
+	 * @param object the object to save
+	 * @param path the path where the object must be saved
+	 */
 	//methode de serialisation
 	public static void serializableObject(Object object, String path) {
 		try{

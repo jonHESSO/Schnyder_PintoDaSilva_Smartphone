@@ -11,12 +11,24 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Class Score. It indicates the date of a won game
+ * as well as the winner
+ */
 public class Score implements Serializable
 { 
 	
+	/** The winner. */
 	private String winner ;
+	
+	/** The day number. */
 	private int dayNumber ;	
 	
+	/**
+	 * Instantiates a new score.
+	 *
+	 * @param winner the winner
+	 */
 	public Score(String winner)
 	{
 		this.winner = winner ;
@@ -25,16 +37,31 @@ public class Score implements Serializable
 		this.dayNumber = (int)(new Date().getTime()/(1000*60*60*24)) ;
 	}
 	
+	/**
+	 * Gets the day number.
+	 *
+	 * @return the day number
+	 */
 	public int getDayNumber()
 	{
 		return this.dayNumber ;
 	}
 	
+	/**
+	 * Gets the winner.
+	 *
+	 * @return the winner
+	 */
 	public String getWinner()
 	{
 		return this.winner ;
 	}
 	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	public String toString()
 	{
 		DateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy") ;

@@ -21,10 +21,19 @@ import app_tictactoe.*;
 import ressources.DefaultApplication;
 import ressources.Ressources;
 
+/**
+ * The Class MainFrame. It starts with loading the homeapp
+ * It contains a method for reloading the center panel
+ */
 public class MainFrame extends JFrame
 {
+	
+	/** The center panel. */
 	JPanel centerPanel ;	
 
+	/**
+	 * Instantiates a new main frame.
+	 */
 	public MainFrame()
 	{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -37,15 +46,16 @@ public class MainFrame extends JFrame
 
 
 		setSize(Ressources.DEFAULT_FRAME_DIMENSION);
-		//		add(new GalleryPanel()) ;
-		//		add(new ContactCreationJpanel()) ;
-		//		add(new TicTacToePanel()) ;
+;
 
 		add(new StatusBarPanel(),BorderLayout.NORTH) ;
 		add(new ButtonBarPanel(),BorderLayout.SOUTH) ;
 		add(centerPanel,BorderLayout.CENTER) ;
 	}
 
+	/**
+	 * Reload center panel.
+	 */
 	public void reloadCenterPanel()
 	{
 		centerPanel.removeAll();
@@ -57,6 +67,11 @@ public class MainFrame extends JFrame
 		repaint();
 	}
 	
+	/**
+	 * Adds the custom panel. Mainly used for the multitask panel
+	 *
+	 * @param panel the panel
+	 */
 	public void addCustomPanel(JPanel panel)
 	{
 		centerPanel.removeAll();
@@ -66,11 +81,5 @@ public class MainFrame extends JFrame
 		revalidate();
 		repaint();
 	}
-	
-//	public void activeApplicationChanged(DefaultApplication app){
-//		DefaultApplication previousApp = Ressources.ACTIVEAPPLICATION ;
-//		Ressources.ACTIVEAPPLICATION = app ;
-//		firePropertyChange("activeAppChanged", previousApp, app);
-//	}
 
 }

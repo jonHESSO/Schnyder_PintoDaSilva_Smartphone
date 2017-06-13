@@ -28,28 +28,42 @@ import ressources.DefaultApplication;
 import ressources.DesignButton;
 import ressources.Ressources;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HomePanel.
+ */
 public class HomePanel extends JPanel
 {
+	
+	/** The gallery button. */
 	private JButton galleryButton ;
+	
+	/** The contact button. */
 	private JButton contactButton ;
+	
+	/** The tictactoe button. */
 	private JButton tictactoeButton ;
 	
+	/** The image. */
 	private Image image;
 	
+	/**
+	 * Instantiates a new home panel.
+	 */
 	public HomePanel()
 	{
 		
 		try {
-			image = ImageIO.read(new File("data/Background/HomePanelBackGround.jpg"));
+			image = ImageIO.read(new File(Ressources.DATAPATH+"data/Background/HomePanelBackGround.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
-		galleryButton = new DesignButton(new ImageIcon("data/Icons/App_Icons/Gallery.png")) ;
-		contactButton = new DesignButton(new ImageIcon("data/Icons/App_Icons/Contacts.png")) ;
-		tictactoeButton = new DesignButton(new ImageIcon("data/Icons/App_Icons/Morpion.png")) ;
+		galleryButton = new DesignButton(new ImageIcon(Ressources.DATAPATH+"data/Icons/App_Icons/Gallery.png")) ;
+		contactButton = new DesignButton(new ImageIcon(Ressources.DATAPATH+"data/Icons/App_Icons/Contacts.png")) ;
+		tictactoeButton = new DesignButton(new ImageIcon(Ressources.DATAPATH+"data/Icons/App_Icons/Morpion.png")) ;
 		
 		ActionListener listener = new ButtonListener() ;
 		
@@ -63,9 +77,25 @@ public class HomePanel extends JPanel
 		
 	}
 	
+	/**
+	 * The listener interface for receiving button events.
+	 * The class that is interested in processing a button
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addButtonListener<code> method. When
+	 * the button event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see ButtonEvent
+	 */
 	class ButtonListener implements ActionListener
 	{
 
+		/**
+		 * Action performed.
+		 *
+		 * @param ae the ae
+		 */
 		@Override
 		public void actionPerformed(ActionEvent ae)
 		{
@@ -109,6 +139,11 @@ public class HomePanel extends JPanel
 		
 	}
 	
+	/**
+	 * Paint component.
+	 *
+	 * @param g the g
+	 */
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);

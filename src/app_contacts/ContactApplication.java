@@ -19,10 +19,19 @@ import ressources.Ressources;
 import ressources.Serializer;
 import ressources.SmartPhone;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContactApplication.
+ */
 public class ContactApplication extends DefaultApplication
 {
+	
+	/** The active panel. */
 	JPanel activePanel ;
 
+	/**
+	 * Instantiates a new contact application.
+	 */
 	public ContactApplication()
 	{
 		Ressources.CONTACTLIST = (ContactList) Serializer.deserializableObject(Ressources.CONTACT_SERIALISATION) ;	
@@ -33,12 +42,6 @@ public class ContactApplication extends DefaultApplication
 			Ressources.CONTACTLIST = (ContactList) Serializer.deserializableObject(Ressources.CONTACT_SERIALISATION) ;			
 		}
 		addPanel(new ContactListPanel()) ;
-
-
-		//			if(Ressources.CONTACTLIST==null)
-		//			{
-		//				Ressources.CONTACTLIST = new ContactList() ;
-		//			}
 
 	}
 

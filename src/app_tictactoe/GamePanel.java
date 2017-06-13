@@ -17,18 +17,43 @@ import javax.swing.*;
 import ressources.Ressources;
 import ressources.Serializer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GamePanel. It contains a game, and a grid
+ * displaying the game. Each cell is clickable to add
+ * a move. The player can play against a human, or
+ * againts a computer (pretty easy to beat)
+ */
 public class GamePanel extends JPanel
 {
+	
+	/** The tictactoe app jpanel dimension. */
 	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
 
+	/** The cells. */
 	private JButton[][] cells = new JButton[3][3];
+	
+	/** The game. */
 	protected Game game ;
+	
+	/** The current player. */
 	private int currentPlayer ;
+	
+	/** The bot. */
 	private TicTacToeAI bot ;
+	
+	/** The flag indicating if it is VSAI. */
 	private boolean isVSAI ;
+	
+	/** The scores path. */
 	private String scoresPath = Ressources.TICTACTOE_SERIALISATION ;
+	
+	/** The scores. */
 	private TicTacToeStats scores ;
 
+	/**
+	 * Instantiates a new game panel.
+	 */
 	public GamePanel()
 	{
 		this.currentPlayer = 1 ;
@@ -41,12 +66,17 @@ public class GamePanel extends JPanel
 			{
 				cells[i][j] = new JButton(" ") ;
 				cells[i][j].addMouseListener(new MoveListener());
-				//				cells[i][j].setPreferredSize(Ressources.TICTACTOE_APP_FIELD_DIMENSION) ;
 				add(cells[i][j]);
 			}
 		}
 	}
 
+	/**
+	 * Display move.
+	 *
+	 * @param cell the played cell
+	 * @param currentPlayer the current player
+	 */
 	private void displayMove(int[] cell, int currentPlayer)
 	{
 		String currentPlayerName = null ;
@@ -62,6 +92,11 @@ public class GamePanel extends JPanel
 		this.cells[cell[0]][cell[1]].setText(currentPlayerName);
 	}
 
+	/**
+	 * New game.
+	 *
+	 * @param isVSAI true/false
+	 */
 	public void newGame(boolean isVSAI)
 	{
 		this.currentPlayer = 1 ;
@@ -80,6 +115,11 @@ public class GamePanel extends JPanel
 		}
 	}
 	
+	/**
+	 * Play.
+	 *
+	 * @param cell the played cell
+	 */
 	public void play(int[] cell)
 	{
 		if (isVSAI==true)
@@ -92,6 +132,12 @@ public class GamePanel extends JPanel
 		}
 	}
 
+	/**
+	 * Play move.
+	 *
+	 * @param cell the played cell
+	 * @throws Exception the cell is already played
+	 */
 	private void playMove(int[] cell) throws Exception
 	{
 
@@ -112,6 +158,11 @@ public class GamePanel extends JPanel
 
 	}
 	
+	/**
+	 * Play VS player 2.
+	 *
+	 * @param cell the played cell
+	 */
 	protected void playVSPlayer2(int[] cell)
 	{
 		try
@@ -123,6 +174,11 @@ public class GamePanel extends JPanel
 		}
 	}
 
+	/**
+	 * Play VSAI.
+	 *
+	 * @param cell the played cell
+	 */
 	protected void playVSAI(int[] cell)
 	{
 		try
@@ -138,6 +194,9 @@ public class GamePanel extends JPanel
 		}
 	}
 
+	/**
+	 * Test game status.
+	 */
 	private void testGameStatus()
 	{
 		if (game.getStatus()!=0)
@@ -146,13 +205,23 @@ public class GamePanel extends JPanel
 		}
 	}
 
+	/**
+	 * Display that the game is finished.
+	 */
 	private void displayFinishedGame()
 	{
 		String result = "" ;
 		switch (game.getStatus())
 		{
 		case -1 :
-			result = "Player2 wins" ;
+			if (isVSAI==true)
+			{
+				result = "AI wins" ;
+			}
+			else
+			{
+				result = "Player2 wins" ;
+			}
 			saveScoreP2() ;
 			break ;
 		case 1 : 
@@ -168,11 +237,17 @@ public class GamePanel extends JPanel
 
 	}
 	
+	/**
+	 * Save score.
+	 */
 	private void saveScore()
 	{
 		Serializer.serializableObject(Ressources.TICTACTOES_STATS, scoresPath);
 	}
 	
+	/**
+	 * Save score if  P2/AI wins.
+	 */
 	private void saveScoreP2()
 	{
 		if (isVSAI==true)
@@ -187,6 +262,9 @@ public class GamePanel extends JPanel
 		
 	}
 	
+	/**
+	 * Save score if P1 wins.
+	 */
 	private void saveScoreP1()
 	{
 		if (isVSAI==true)
@@ -200,6 +278,12 @@ public class GamePanel extends JPanel
 		saveScore() ;
 	}
 
+	/**
+	 * Gets the cell index.
+	 *
+	 * @param clickedCell the clicked cell
+	 * @return the cell index [][]
+	 */
 	private int[] getCell(JButton clickedCell)
 	{
 		int[] cell = new int[2];
@@ -217,6 +301,9 @@ public class GamePanel extends JPanel
 		return cell ;
 	}
 	
+	/**
+	 * Load stats.
+	 */
 	private void loadStats()
 	{
 		File stats = new File(scoresPath) ;
@@ -229,8 +316,27 @@ public class GamePanel extends JPanel
 	}
 
 
+	/**
+	 * The listener interface for receiving move events.
+	 * The class that is interested in processing a move
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addMoveListener<code> method. When
+	 * the move event occurs, that object's appropriate
+	 * method is invoked.
+	 * 
+	 * This listener is added to the game panel and plays the
+	 * selected cell when clicked (unless it is already played)
+	 *
+	 * @see MoveEvent
+	 */
 	private class MoveListener extends MouseAdapter{
 
+		/**
+		 * Mouse clicked.
+		 *
+		 * @param e the event
+		 */
 		public void mouseClicked(MouseEvent e)
 		{
 			int[] cell =  getCell((JButton)e.getSource()) ;

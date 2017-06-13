@@ -6,17 +6,33 @@
 
 package app_tictactoe;
 
+/**
+ * The Class Game. This class contains the matrix
+ * with every played move, as well as the methods to play
+ * the game
+ */
 public class Game
 {
+	
+	/** The play field. */
 	private int[][] playField ;
 
+	/** The winner. */
 	//player1 is 1, player2 is -1 
 	private int winner ;
+	
+	/** The game has a winner. */
 	//flags indicating the state of the game
 	private boolean hasWinner ;
+	
+	/** The game is A draw. */
 	private boolean isADraw ;
+	
+	/** The status. */
 	//status indicates if a game is still going [0], won [1] or [-1], or ended in a draw [2]
 	private int status ;
+	
+	/** The game state. */
 	//gameState indicates if a line is won or winnable
 	//it sums the value of each row[0-2], column[3-5] and diagonal[6-7]
 	//if the sum is 0, there is still a free cell
@@ -24,6 +40,9 @@ public class Game
 	//if the sum is 3 or -3, the game is won
 	private int[] gameState ;
 
+	/**
+	 * Instantiates a new game.
+	 */
 	public Game(){
 		this.playField = new int[3][3] ;
 		this.hasWinner = false ;
@@ -32,8 +51,17 @@ public class Game
 		this.gameState = new int[8] ;
 	}
 
+	/**
+	 * Adds the move.
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @param currentPlayer the current player
+	 * @throws Exception the exception
+	 */
 	public void addMove(int row, int col, int currentPlayer) throws Exception
 	{
+		//tries to add the played move to the game
 		if (this.playField[row][col] != 0)
 		{
 			throw new Exception("This field is already played") ;
@@ -46,16 +74,29 @@ public class Game
 		
 	}
 
+	/**
+	 * Gets the winner.
+	 *
+	 * @return the winner
+	 */
 	public int getWinner()
 	{
 		return winner ;
 	}
 	
+	/**
+	 * Gets the play field matrix.
+	 *
+	 * @return the play field
+	 */
 	public int[][] getPlayField()
 	{
 		return this.playField ;
 	}
 
+	/**
+	 * Sets the status.
+	 */
 	private void setStatus()
 	{
 		isADraw = true ;
@@ -86,6 +127,11 @@ public class Game
 		}
 	}
 	
+	/**
+	 * Sets the game state.
+	 * Tests every line to check if there is a winner
+	 * or if the game ended in a draw
+	 */
 	private void setGameState()
 	{
 		int sumRow = 0 ;
@@ -115,11 +161,21 @@ public class Game
 		
 	}
 	
+	/**
+	 * Gets the game state.
+	 *
+	 * @return the game state
+	 */
 	public int[] getGameState()
 	{
 		return this.gameState ;
 	}
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public int getStatus()
 	{
 		if (isADraw==true)
@@ -134,6 +190,9 @@ public class Game
 		return status ;
 	}
 
+	/**
+	 * Show matrix.
+	 */
 	public void showMatrix()
 	{
 		for (int i = 0; i < 3; i++)
