@@ -22,16 +22,35 @@ import javax.swing.*;
 
 import ressources.Ressources;
 
+/**
+ * The Class TicTacToePanel.
+ */
 public class TicTacToePanel extends JPanel
 {
+	
+	/** The game panel. */
 	GamePanel gamePanel = new GamePanel() ;
+	
+	/** The game. */
 	Game game ;
+	
+	/** The is VSAI. */
 	boolean isVSAI ;
+	
+	/** The new game button. */
 	JButton newGame = new JButton("New Game") ;
+	
+	/** The vs AI checkbox. */
 	JCheckBox vsAI = new JCheckBox() ;
+	
+	/**
+	 * Instantiates a new tic tac toe panel.
+	 */
 	public TicTacToePanel() 
 	{
+		//starts without an AI
 		isVSAI=false ;
+
 //		setPreferredSize(new Dimension(300,600)); 
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -41,6 +60,7 @@ public class TicTacToePanel extends JPanel
 		gc.gridx = 0;
 		gc.gridy = 0;
 		add((gamePanel),gc);
+
 		newGame.addActionListener(new NewGameListener());
 		newGame.setFont(Ressources.DEFAULT_FONT);
 		gc.gridx = 0;
@@ -58,8 +78,16 @@ public class TicTacToePanel extends JPanel
 	
 	}
 	
+	/**
+	 * The listener for the new game button. Launches a new game in the GamePanel
+	 */
 	class NewGameListener implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the event
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			gamePanel.newGame(isVSAI); ;
@@ -67,10 +95,21 @@ public class TicTacToePanel extends JPanel
 		
 	}
 	
+	/**
+	 * The VS AI checkbox listener
+	 * Sets the VSAI flag to either true or false
+	 * for the next game
+	 */
 	class vsAIListener implements ActionListener {
 
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//checks if the VSAI checkbox is checked
 			if(vsAI.isSelected())
 			{
 				isVSAI = true ;

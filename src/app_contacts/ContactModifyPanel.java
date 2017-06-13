@@ -48,16 +48,22 @@ public class ContactModifyPanel extends ContactEditPanel {
 		String number = fieldNumber.getText() ;
 		String email = fieldEmail.getText() ;
 		ImageIcon picture = (ImageIcon)imageButton.getIcon() ;
-		
-		// Appelle la méthode modifyContact via la CONTACTLIST
-		Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
-		// La méthode sérialization prend en paramètre la CONTACTLIST et le fichier de sérialization
-		Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
-		boolean oldProperty = false ;
-		//indique que le contact a été modifié
-		contactModified = true ;
-		//indique une modification des propriétés du contact
-		firePropertyChange("contactModified", oldProperty, contactModified);
+		if (firstName.equals(""))
+		{
+			JOptionPane.showMessageDialog(Ressources.MAINFRAME, "Indiquez au moins un prenom");
+		}
+		else
+		{
+			// Appelle la méthode modifyContact via la CONTACTLIST
+			Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
+			// La méthode sérialization prend en paramètre la CONTACTLIST et le fichier de sérialization
+			Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
+			boolean oldProperty = false ;
+			//indique que le contact a été modifié
+			contactModified = true ;
+			//indique une modification des propriétés du contact
+			firePropertyChange("contactModified", oldProperty, contactModified);
+		}
 	}
 }
 

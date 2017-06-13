@@ -1,46 +1,73 @@
 /*
  * Project : Schnyder_PintoDaSilva_Smartphone
  * Author : Jonathan Schnyder
- * Created : Jun 11, 2017
+ * Created : Jun 13, 2017
  */
 
 package ressources;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import app_contacts.ContactList;
 import app_tictactoe.TicTacToeStats;
 import mainFrame.MainFrame;
 
-public class SmartPhone 
-{	
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SmartPhone. It contains the main method
+ * to launch the smartphone. It has a method to verify
+ * that everything used by the smartphone is loaded correctly
+ */
+public class SmartPhone
+{
 
-	public static void main(String[] args)
-	{
-		Ressources.MAINFRAME = new MainFrame() ;
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static void main(String[] args) throws IOException
+	{		
 		verifyDependencies() ;
-		//		Ressources.MAINFRAME.addPropertyChangeListener(new PropertyChangeListener()
-		//		{
-		//			
-		//			@Override
-		//			public void propertyChange(PropertyChangeEvent evt)
-		//			{
-		//				if (evt.getPropertyName().equals("activeAppChanged"))
-		//				{
-		//					Ressources.MAINFRAME.reloadCenterPanel();
-		//				}
-		//			}
-		//		});
+		System.out.println(Ressources.DATAPATH);
+		Ressources.MAINFRAME = new MainFrame() ;
 		Ressources.MAINFRAME.setVisible(true);		
 
 	}
 
-	private static void verifyDependencies()
+	/**
+	 * Verify dependencies. Checks if everything needed exists, and
+	 * tries to create them if they don't. Has fancy little warning
+	 * dialogs.
+	 */
+	public static void verifyDependencies()
 	{
+		//set paths
+		String folderPath = "" ;
+		try
+		{
+			folderPath = new File(".").getCanonicalPath().replace("\\", "/")+"/";
+		} catch (IOException e)
+		{
+			JOptionPane.showMessageDialog(Ressources.MAINFRAME, "Where the hell did you put your programm ?!?");
+		} 
+		Ressources.DATAPATH = folderPath ;
+		Ressources.GALLERY_DIRECTORY = folderPath+"data/gallery/";
+		Ressources.TICTACTOE_DIRECTORY = folderPath+"data/tictactoe_stats/";
+		Ressources.CONTACT_DIRECTORY = folderPath+"data/contact/";
+		
+		Ressources.CONTACT_SERIALISATION = folderPath+"data/contact/contactlist.ser";
+		Ressources.TICTACTOE_SERIALISATION = folderPath+"data/tictactoe_stats/scores.ser";
+		
+		
+		//directories and serialisation files
+		
 		//gallery
 		File galleryDirectory = new File(Ressources.GALLERY_DIRECTORY) ;
 		if (galleryDirectory.exists()== false)
@@ -72,19 +99,5 @@ public class SmartPhone
 		}
 
 	}
-
-	//	static class ActiveAppListener implements PropertyChangeListener
-	//	{
-	//
-	//		@Override
-	//		public void propertyChange(PropertyChangeEvent evt)
-	//		{
-	//			if (evt.getPropertyName().equals("activeAppChanged")||evt.getPropertyName().equals("activePanelChanged")) 
-	//			{
-	//				Ressources.MAINFRAME.reloadCenterPanel();
-	//			}
-	//		}
-	//		
-	//	}
 
 }

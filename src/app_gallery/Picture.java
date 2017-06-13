@@ -16,22 +16,32 @@ import javax.swing.* ;
 
 import ressources.Ressources;
 
+// TODO: Auto-generated Javadoc
 /*
  * This class creates picture objects used by the gallery app
  * It contains a method returning a cropped icon of the actual image
  */
 
+/**
+ * The Class Picture.
+ */
 public class Picture implements Serializable
 {
-	private File file ;
-	private final int originalWidth, originalHeight ;
 	
-	/*
+	/** The file. */
+	private File file ;
+	
+	/** The original height and width. */
+	private final int originalWidth, originalHeight ;
+
+	/**
+	 * Instantiates a new picture.
 	 * public constructor
 	 * uses a file as a parameter
 	 * and saves it with it's width and height
+	 *
+	 * @param file the file
 	 */
-
 	public Picture(File file)
 	{
 		//creates a buffered image from the file
@@ -51,6 +61,11 @@ public class Picture implements Serializable
 		this.file = file ;
 	}
 	
+	/**
+	 * Gets the full picture.
+	 *
+	 * @return the picture as an ImageIcon, resized to the frame's dimensions
+	 */
 	public ImageIcon getPicture()
 	{
 		ImageIcon bImage = null ;
@@ -82,10 +97,12 @@ public class Picture implements Serializable
 		return bImage ;
 	}
 
-	/*
-	 * returns an icon from the image file
-	 * the size is standardized
+	/**
+	 * Gets the icon in a 150x150 standardized size.
+	 *
+	 * @return the icon
 	 */
+
 	public ImageIcon getIcon(){
 
 		ImageIcon icon = null;
@@ -124,7 +141,7 @@ public class Picture implements Serializable
 		//actual cropping and resizing
 		try{
 			BufferedImage imgCropped = bImage.getSubimage(x, y, w, h);
-			icon = new ImageIcon(imgCropped.getScaledInstance(Ressources.GALLERY_ICON_WIDTH, Ressources.GALLERY_ICON_HEIGHT, Image.SCALE_FAST));
+			icon = new ImageIcon(imgCropped.getScaledInstance(Ressources.GALLERY_ICON_WIDTH, Ressources.GALLERY_ICON_HEIGHT, Image.SCALE_SMOOTH));
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
@@ -132,11 +149,21 @@ public class Picture implements Serializable
 		return icon ;
 	}
 	
+	/**
+	 * Gets the file.
+	 *
+	 * @return the file
+	 */
 	public File getFile()
 	{
 		return this.file ;
 	}
 	
+	/**
+	 * To string.
+	 *
+	 * @return the info of the object
+	 */
 	public String toString()
 	{
 		return String.format("%s - width : %s - height : %s",this.file.getName(), this.originalWidth, this.originalHeight) ;

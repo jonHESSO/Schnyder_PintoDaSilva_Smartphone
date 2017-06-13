@@ -8,8 +8,24 @@ package ressources;
 
 import java.io.*;
 
+import javax.swing.JOptionPane;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The abstract Class Serializer.
+ * It contains a method for saving and 
+ * reading files used by the apps. The apps
+ * can just call them to read/save their files
+ */
 public abstract class Serializer
 {
+	
+	/**
+	 * Deserializable object.
+	 *
+	 * @param path the path to the saved object
+	 * @return the saved object
+	 */
 	//methode de deserialisation
 	public static Object deserializableObject(String path) {
 		File file = new File(path) ;
@@ -19,38 +35,49 @@ public abstract class Serializer
 		}
 		try
 		{
-			//creation du lecteur binaire FileInputStream à partir du fichier de serialisation
+			//creation du lecteur binaire FileInputStream ï¿½ partir du fichier de serialisation
 			FileInputStream ffichier = new FileInputStream(path) ;
-			//creation du Buffer à partir du lecteur
+			//creation du Buffer ï¿½ partir du lecteur
 			BufferedInputStream bffichier = new BufferedInputStream(ffichier) ;
-			//creation du lecteur d'objet à partir du buffer
+			//creation du lecteur d'objet ï¿½ partir du buffer
 			ObjectInputStream obffichier = new ObjectInputStream(bffichier) ;
 			//creation de l'objet Personne "deserializedPerson"
 			deserializedObject = obffichier.readObject();
+			bffichier.close();
 		}
 		catch (Exception e)
 		{
-
+			//les erreurs de lecture des fichier de serialisation sont gÃ©rÃ©s au cas par cas dans les applications
 		}
+		
 		//retourne l'objet "deserializedPerson"
 		return deserializedObject ;
 	}
+	
+	/**
+	 * Serializable object.
+	 *
+	 * @param object the object to save
+	 * @param path the path where the object must be saved
+	 */
 	//methode de serialisation
 	public static void serializableObject(Object object, String path) {
 		try{
 			
 		//creation du writer binaire FileOutputStream
 		FileOutputStream fichier = new FileOutputStream(path) ;
-		//creation du buffer à partir du writer
+		//creation du buffer ï¿½ partir du writer
 		BufferedOutputStream bfichier = new BufferedOutputStream(fichier) ;
-		//creation du writer d'objet à partir du buffer
+		//creation du writer d'objet ï¿½ partir du buffer
 		ObjectOutputStream obfichier = new ObjectOutputStream(bfichier) ;
 		//ecriture de l'objet "person" dans le fichier de serialisation
 		obfichier.writeObject(object);
-		//fermeture de l'accès au fichier
+		//fermeture de l'accï¿½s au fichier
 		obfichier.close();
 		}
 		catch (Exception e)
-		{} ;
+		{
+			JOptionPane.showMessageDialog(Ressources.MAINFRAME, "Impossible d'ecrire le fichier :"+path+"\nVÃ©rifiez que le dossier n'est pas en lecture seule");
+		} ;
 	}
 }

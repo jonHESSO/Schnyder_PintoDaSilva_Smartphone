@@ -9,6 +9,11 @@ package app_gallery;
 import app_contacts.ContactListPanel;
 import ressources.DefaultApplication;
 
+/**
+ * The Class GalleryApplication.
+ * Used to launch a new instance of the Gallery
+ * Creates a new GalleryPanel when instantiated
+ */
 public class GalleryApplication extends DefaultApplication
 {
 

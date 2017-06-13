@@ -19,109 +19,121 @@ import ressources.Ressources;
 import ressources.Serializer;
 
 public class ContactListPanel extends JPanel {
-	
-
-	private ContactList list ;	
-	private boolean newActivePanel = false ;
 
 	public ContactListPanel(){
-		
-		
+
+
 		//Ajout des dimensions 
 		this.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
 		setLayout(new FlowLayout());
-
+		//reload permet de charger toute la liste
 		reload() ;
-		firePropertyChange("isActive", false, true);
-		
-		
 
 	}
 	
+	//scrollpane contenant toute la liste de contact
 	private JScrollPane contactListPane()
 	{
-//		Object[][] contactData = new Object[Ressources.CONTACTLIST.getContactList().size()][3] ;
-//		String[] columnNames = {"Last Name", "First Name", "Image"} ;
+		//utilisation d'un modele de table modifié pouvant accueillir des images
 		DefaultTableModel model = new DefaultTableModel(){
-			
 
-		    @Override
-		    public Class<?> getColumnClass(int column) {
-		        switch (column) {
-		            case 2: return ImageIcon.class;
-		            default: return String.class ;
-		        }
-		    }
+
+			@Override
+			//definit le type de contenu pour la column #2 (imageicon)
+			public Class<?> getColumnClass(int column) {
+				switch (column) {
+				case 2: return ImageIcon.class;
+				default: return String.class ;
+				}
+			}
 		};
 		
+		//ajout des en-tetes
 		model.addColumn("First Name") ;
 		model.addColumn("Last Name") ;
 		model.addColumn("Image") ;
+		//ajout des contacts au modele de table, un par un
 		for (int i = 0; i< Ressources.CONTACTLIST.getContactList().size();i++){
+			//array contenant le prenom, le nom et l'icone du contact
 			Object[] currentContactData = {Ressources.CONTACTLIST.getContact(i).getFirstName(),Ressources.CONTACTLIST.getContact(i).getLastName(),Ressources.CONTACTLIST.getContact(i).getPicture()} ;
+			//ajout de la ligne au modele de table
 			model.addRow(currentContactData) ;
 		} 
+		//table contenant les contacts
 		final JTable contactTable = new JTable(model);
+		//modifications graphique de la table
 		contactTable.setShowGrid(false);
 		contactTable.setRowHeight(150);
 		contactTable.setFont(Ressources.CONTACT_FONT_TITLE);
+		//ajout de la tale au scrollpane
 		JScrollPane scrollPane = new JScrollPane(contactTable);
+		//modifications des propriétés de la scrollpane
 		scrollPane.setPreferredSize(new Dimension (480,620));
-		
-		contactTable.setEnabled(false);
 
+		contactTable.setEnabled(false);
+		//ajout d'un listener qui ouvre un panel d'info du contact selectionné
 		contactTable.addMouseListener(new MouseAdapter() {
-			
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		        int row = contactTable.rowAtPoint(e.getPoint());
-		        if (row >= 0) { 
-		        Contact currentContact = Ressources.CONTACTLIST.getContact(row) ;
-		        JPanel individualPanel = new ContactIndividualPanel(currentContact) ;
-		        individualPanel.addPropertyChangeListener(new PropertyChangeListener()
-				{
-					
-					@Override
-					public void propertyChange(PropertyChangeEvent evt)
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = contactTable.rowAtPoint(e.getPoint());
+				if (row >= 0) { 
+					//ouverture du paneau d'info du contact
+					Contact currentContact = Ressources.CONTACTLIST.getContact(row) ;
+					JPanel individualPanel = new ContactIndividualPanel(currentContact) ;
+					//ajout d'un listener sur le panel d'info contact pour savoir si le contact a été modifié ou supprimé
+					individualPanel.addPropertyChangeListener(new PropertyChangeListener()
 					{
-						if (evt.getPropertyName().equals("contactModified"))
+
+						@Override
+						public void propertyChange(PropertyChangeEvent evt)
 						{
-							reload() ;
+							//modification, ce panel est rechargé mais le panel d'info reste actif
+							if (evt.getPropertyName().equals("contactModified"))
+							{	
+								reload() ;
+							}
+							//suppression, on retire le panel d'info du contact et on recharge la liste de contact
+							if (evt.getPropertyName().equals("contactDeleted"))
+							{
+								ContactListPanel.this.reload() ;
+								Ressources.CONTACTAPP.removePanel(individualPanel) ;
+							}
 						}
-						if (evt.getPropertyName().equals("contactDeleted"))
-						{
-							ContactListPanel.this.reload() ;
-							Ressources.CONTACTAPP.removePanel(individualPanel) ;
-						}
-					}
-				});
-		        Ressources.CONTACTAPP.addPanel(individualPanel) ;
-		        }
-		    }
+					});
+					//ajout du panel d'info du contact
+					Ressources.CONTACTAPP.addPanel(individualPanel) ;
+				}
+			}
 		});
-		
-		
+
+		//on récupère le scrollpane complet avec la liste des contact
 		return scrollPane ;
 	}
-	
+
+	//methode generant le panel avec les boutons, pas important
 	private JPanel ButtonPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		JButton creationButton = new JButton ("Nouveau");
-		
+
 		creationButton.setFont(Ressources.DEFAULT_FONT);
 		creationButton.addActionListener(new Create_Click());
 		panel.add((creationButton), BorderLayout.EAST);
-		
+
 		return panel;
 	}
-	
+
+	//listener du bouton de création de contact
 	class Create_Click implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			//ouverture du paneau de création de contact
 			JPanel creationPanel = new ContactCreationPanel() ;
+			//ajout du listener sur le paneau de creationd de contact, pour savoir si un contact a été créé
 			creationPanel.addPropertyChangeListener(new PropertyChangeListener()
 			{
-				
+
 				@Override
+				//si un contact a été créé, on recharge la liste des contacts, et on retire le panel de creation de contact
 				public void propertyChange(PropertyChangeEvent evt)
 				{
 					if (evt.getPropertyName().equals("contactCreated"))
@@ -131,9 +143,12 @@ public class ContactListPanel extends JPanel {
 					}
 				}
 			});
+			//ajout du panel de creation de contact
 			Ressources.CONTACTAPP.addPanel(creationPanel) ;
-			}
 		}
+	}
+	
+	//methode permettant de recharger la liste des contact
 	private void reload()
 	{
 		if(getComponentCount()>0)
@@ -145,5 +160,5 @@ public class ContactListPanel extends JPanel {
 		revalidate() ;
 		repaint() ;
 	}
-	
+
 }

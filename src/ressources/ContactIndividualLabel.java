@@ -1,10 +1,23 @@
+/*
+ * 
+ */
 package ressources;
 
 import java.awt.Dimension;
 
-// Création d'une classe donnant forme aux labels des infos contact
+
+/**
+ * The Class ContactIndividualLabel.
+ * Création d'une classe donnant forme aux labels des infos contact
+ */
+
 public class ContactIndividualLabel extends DefaultTextLabel {
 
+	/**
+	 * Instantiates a new contact individual label.
+	 *
+	 * @param text the text
+	 */
 	public ContactIndividualLabel(String text) {
 		super(text);
 		//Ajout du font par défaut

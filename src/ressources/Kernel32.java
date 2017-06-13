@@ -14,6 +14,12 @@ import com.sun.jna.Native;
 import com.sun.jna.Structure;
 import com.sun.jna.win32.StdCallLibrary;
 
+/**
+ * This class is an easy to use battery interfaces
+ * with many preconstructed methods. It uses the
+ * JNA library
+ */
+
 public interface Kernel32 extends StdCallLibrary {
 
     public Kernel32 INSTANCE = (Kernel32) Native.loadLibrary("Kernel32", Kernel32.class);
