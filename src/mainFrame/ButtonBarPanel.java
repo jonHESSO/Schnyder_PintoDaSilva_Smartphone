@@ -19,23 +19,39 @@ import app_home.HomePanel;
 import ressources.DesignButton;
 import ressources.Ressources;
 
+/**
+ * The Class ButtonBarPanel.
+ */
 public class ButtonBarPanel extends JPanel
 {
+	
+	/** The home button. */
 	private JButton homeButton ;
+	
+	/** The return button. */
 	private JButton returnButton ;
+	
+	/** The multitask button. */
 	private JButton multitaskButton ;
+	
+	/** The multitask is open. */
 	private boolean multitaskIsOpen ;
 
 
+	/**
+	 * Instantiates a new button bar panel.
+	 */
 	public ButtonBarPanel()
 	{
 
 		setPreferredSize(Ressources.BUTTONBAR_PANEL_DIMENSION);
 
-		homeButton = new DesignButton(new ImageIcon("data/Icons/toolBar_Icons/home.png"));
-		returnButton = new DesignButton(new ImageIcon("data/Icons/toolBar_Icons/return.png")) ;
-		multitaskButton = new DesignButton(new ImageIcon("data/Icons/toolBar_Icons/multitask.png")) ;
+		homeButton = new DesignButton(new ImageIcon(Ressources.DATAPATH+"data/Icons/toolBar_Icons/home.png"));
+		returnButton = new DesignButton(new ImageIcon(Ressources.DATAPATH+"data/Icons/toolBar_Icons/return.png")) ;
+		multitaskButton = new DesignButton(new ImageIcon(Ressources.DATAPATH+"data/Icons/toolBar_Icons/multitask.png")) ;
 
+		//adds a listener on the return button
+		//it closes the active panel, unless there is no panel to close (home)
 		returnButton.addActionListener(new ActionListener()
 		{
 
@@ -60,6 +76,8 @@ public class ButtonBarPanel extends JPanel
 			}
 		});
 
+		//adds a listener to the home button
+		//retuns to the homepanel without closing the active applications/panels
 		homeButton.addActionListener(new ActionListener()
 		{
 
@@ -71,6 +89,9 @@ public class ButtonBarPanel extends JPanel
 			}
 		});
 
+		//adds a listener to the multitask button
+		//shows the open apps and allows to launch them
+		//also displays a "close all" button, to close them all  and in the darkness bind them
 		multitaskButton.addActionListener(new ActionListener()
 		{
 
@@ -87,11 +108,28 @@ public class ButtonBarPanel extends JPanel
 
 	}
 
+	/**
+	 * The Class MultiTaskPanel. Has buttons to reopen already
+	 * openened apps, and a button to close everything
+	 */
 	class MultiTaskPanel extends JPanel
 	{
+		
+		/** The gallery button. */
 		JButton galleryButton ;
+		
+		/** The contact button. */
 		JButton contactButton ;
+		
+		/** The tictactoe button. */
 		JButton tictactoeButton ;
+		
+		/** The close all button. */
+		JButton closeAllButton ;
+		
+		/**
+		 * Instantiates a new multi task panel.
+		 */
 		public MultiTaskPanel(){
 			super() ;
 			ActionListener buttonListener = new MultiTaskListener() ;
@@ -113,11 +151,23 @@ public class ButtonBarPanel extends JPanel
 				tictactoeButton.addActionListener(buttonListener);
 				add(tictactoeButton) ;
 			}
+			closeAllButton = new JButton("Tout fermer") ;
+			closeAllButton.addActionListener(buttonListener);
+			add(closeAllButton) ;
+			
 		}
 
+		/**
+		 * the listener for the buttons, to know what app to open
+		 */
 		class MultiTaskListener implements ActionListener
 		{
 
+			/**
+			 * Action performed.
+			 *
+			 * @param e the event
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -132,7 +182,12 @@ public class ButtonBarPanel extends JPanel
 					break ;
 				case "Morpion" :
 					Ressources.ACTIVEAPPLICATION = Ressources.TICTACTOEAPP ;
-					break ;					
+					break ;	
+				case "Tout fermer" :
+					Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
+					Ressources.GALLERYAPP = null ;
+					Ressources.CONTACTAPP = null ;
+					Ressources.TICTACTOEAPP = null ;
 				}
 				multitaskIsOpen = false ;
 				Ressources.MAINFRAME.reloadCenterPanel();

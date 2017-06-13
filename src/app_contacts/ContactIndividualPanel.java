@@ -58,11 +58,11 @@ public class ContactIndividualPanel extends JPanel {
 		panel.setPreferredSize(new Dimension(450, 160));
 		
 		//Ajout des attributs du currentContact
-		panel.add(new ContactIndividualTitle("PrÃ©nom:"));
+		panel.add(new ContactIndividualTitle("Prénom:"));
 		panel.add(new ContactIndividualLabel(currentContact.getFirstName()));
 		panel.add(new ContactIndividualTitle("Nom:"));
 		panel.add(new ContactIndividualLabel(currentContact.getLastName()));
-		panel.add(new ContactIndividualTitle("NumÃ©ro:"));
+		panel.add(new ContactIndividualTitle("Numéro:"));
 		panel.add(new ContactIndividualLabel(currentContact.getNumber()));
 		panel.add(new ContactIndividualTitle("E-Mail:"));
 		panel.add(new ContactIndividualLabel(currentContact.getEmail()));

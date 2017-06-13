@@ -10,18 +10,39 @@ import java.util.Arrays;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TicTacToeAI. It creates a Tic Tac Toe
+ * playing bot. It has a realy basic bahaviour.
+ */
 public class TicTacToeAI
 {
+	
+	/** The current game. */
 	Game currentGame ;
 
+	/**
+	 * Instantiates a new tic tac toe AI.
+	 *
+	 * @param game the game
+	 */
 	public TicTacToeAI(Game game)
 	{
 		this.currentGame = game ;
 	}
 
+	/**
+	 * Gets the best cell. If it can win this turn, it will win.
+	 * If it can prevent the player from winning this turn, it will.
+	 * Else, it just plays the first available cell.
+	 * Future developpment would include optimal play base on played cells
+	 * , not just win condition, or playing a random available cell if no
+	 * win condition is met
+	 *
+	 * @return the best cell
+	 */
 	int[] getBestCell()
 	{
-		int line ;
 
 		//pick the first available cell 
 		int[] bestCell = firstAvailableCell(firstAvailableRow()) ;
@@ -41,6 +62,11 @@ public class TicTacToeAI
 
 	}
 	
+	/**
+	 * Player 1 can win.
+	 *
+	 * @return the line where the player could win
+	 */
 	private int player1CanWin()
 	{
 		int line = -1 ;
@@ -56,6 +82,11 @@ public class TicTacToeAI
 		
 	}
 
+	/**
+	 * AI can win.
+	 *
+	 * @return the line where the AI could win
+	 */
 	private int AICanWin()
 	{
 		int line = -1 ;
@@ -70,6 +101,11 @@ public class TicTacToeAI
 		return line ;
 	}
 
+	/**
+	 * First available row.
+	 *
+	 * @return the first available row index
+	 */
 	private int firstAvailableRow()
 	{
 		int row = 0 ;
@@ -85,6 +121,12 @@ public class TicTacToeAI
 	}
 	
 
+	/**
+	 * First available cell.
+	 *
+	 * @param line the line. The line can be horizontal, vertical or diagonal
+	 * @return int[] the index of first available cell in the line
+	 */
 	private int[] firstAvailableCell(int line)
 	{
 		int[] cell = {-1,-1};
@@ -128,10 +170,6 @@ public class TicTacToeAI
 			}
 			row++ ;
 		}
-//		if (availableCell = true)
-//		{
-//			return cell ;			
-//		}
 		return cell ;
 
 

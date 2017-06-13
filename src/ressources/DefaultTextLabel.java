@@ -8,14 +8,23 @@ package ressources;
 
 import javax.swing.JLabel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DefaultTextLabel.
+ * Nothing fancy agains, just changes the font
+ */
 public class DefaultTextLabel extends JLabel
 {
 
+	/**
+	 * Instantiates a new default text label.
+	 *
+	 * @param text the text
+	 */
 	public DefaultTextLabel(String text)
 	{
 		super(text) ;
 		setFont(Ressources.DEFAULT_FONT);
-//		setForeground(getRandomColor());
 	}
 	
 //	private Color getRandomColor()
