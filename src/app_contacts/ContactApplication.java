@@ -19,16 +19,13 @@ import ressources.Ressources;
 import ressources.Serializer;
 import ressources.SmartPhone;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ContactApplication.
+ * The Class ContactApplication. It starts with a contaclistpanel
+ * It creates a new contact list if no readable one is found
  */
 public class ContactApplication extends DefaultApplication
 {
 	
-	/** The active panel. */
-	JPanel activePanel ;
-
 	/**
 	 * Instantiates a new contact application.
 	 */

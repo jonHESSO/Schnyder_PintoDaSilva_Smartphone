@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+import ressources.DefaultTextLabel;
 import ressources.Ressources;
 
 /**
@@ -42,6 +43,9 @@ public class TicTacToePanel extends JPanel
 	
 	/** The vs AI checkbox. */
 	JCheckBox vsAI = new JCheckBox() ;
+	
+	/** The vs AI label	 */
+	JLabel vsAILabel = new DefaultTextLabel("VS AI") ;
 	
 	/**
 	 * Instantiates a new tic tac toe panel.
@@ -71,8 +75,11 @@ public class TicTacToePanel extends JPanel
 		JPanel newGameAIpanel = new JPanel ();
 		newGameAIpanel.setLayout(new BorderLayout());
 		newGameAIpanel.add((newGame),BorderLayout.WEST);
+		
+		
 		vsAI.addActionListener(new vsAIListener());
-		newGameAIpanel.add((vsAI),BorderLayout.EAST);
+		newGameAIpanel.add((vsAI),BorderLayout.CENTER);
+		newGameAIpanel.add(vsAILabel,BorderLayout.EAST);
 		gamePanel.newGame(isVSAI);
 		add((newGameAIpanel),gc);
 	

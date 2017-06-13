@@ -1,3 +1,8 @@
+/*
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : May 22, 2017
+ */
 package app_contacts;
 
 import java.awt.BorderLayout;
@@ -18,8 +23,17 @@ import javax.swing.table.DefaultTableModel;
 import ressources.Ressources;
 import ressources.Serializer;
 
+
+/**
+ * The Class ContactListPanel.
+ * This class loads the contact list
+ * into a scrollable table
+ */
 public class ContactListPanel extends JPanel {
 
+	/**
+	 * Instantiates a new contact list panel.
+	 */
 	public ContactListPanel(){
 
 
@@ -31,7 +45,11 @@ public class ContactListPanel extends JPanel {
 
 	}
 	
-	//scrollpane contenant toute la liste de contact
+	/**
+	 * Contact list pane.
+	 *
+	 * @return pane the JScrollPane containing all the contacts
+	 */
 	private JScrollPane contactListPane()
 	{
 		//utilisation d'un modele de table modifié pouvant accueillir des images
@@ -111,6 +129,11 @@ public class ContactListPanel extends JPanel {
 		return scrollPane ;
 	}
 
+	/**
+	 * Button panel.
+	 *
+	 * @return the j panel
+	 */
 	//methode generant le panel avec les boutons, pas important
 	private JPanel ButtonPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
@@ -123,8 +146,19 @@ public class ContactListPanel extends JPanel {
 		return panel;
 	}
 
-	//listener du bouton de création de contact
-	class Create_Click implements ActionListener {
+	/**
+	 * listener for the create button
+	 * Opens a new creation panel and
+	 * removes it if a contact is created.
+	 * The it reloads this panel
+	 */
+	private class Create_Click implements ActionListener {
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the event
+		 */
 		public void actionPerformed(ActionEvent e) {
 			//ouverture du paneau de création de contact
 			JPanel creationPanel = new ContactCreationPanel() ;
@@ -148,7 +182,9 @@ public class ContactListPanel extends JPanel {
 		}
 	}
 	
-	//methode permettant de recharger la liste des contact
+	/**
+	 * Loads all the infos for the panel
+	 */
 	private void reload()
 	{
 		if(getComponentCount()>0)

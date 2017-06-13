@@ -1,3 +1,9 @@
+/*
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : June 07, 2017
+ */
+
 package app_contacts;
 
 //Imports
@@ -22,9 +28,10 @@ import com.sun.corba.se.pept.protocol.ServerRequestDispatcher;
 import ressources.Ressources;
 import ressources.Serializer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ContactCreationPanel.
+ * The same as editpanel. The OK Button adds the new
+ * contact to the contac list and then removes this panel
  */
 public class ContactCreationPanel extends ContactEditPanel {
 

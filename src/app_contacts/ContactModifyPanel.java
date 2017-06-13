@@ -1,3 +1,8 @@
+/*
+ * Project : Schnyder_PintoDaSilva_Smartphone
+ * Author : Samuel Pinto Da Silva
+ * Created : May 22, 2017
+ */
 package app_contacts;
 
 import java.awt.BorderLayout;
@@ -15,17 +20,27 @@ import javax.swing.JTextField;
 import ressources.Ressources;
 import ressources.Serializer;
 
+
 //Permet de modifier un contact déjà existant
 
-//La classe hérite de ContactEditPanel
+/**
+ * The Class ContactModifyPanel.
+ * This class extends the ContactEditPanel.
+ * The okaction modifies the seleced contact, and
+ * tells the individual panel which then tells the list
+ * panel that the contact has been modified.
+ */
 public class ContactModifyPanel extends ContactEditPanel {
 
+	/** The current contact. */
 	// Contact modifié en ce moment
 	private Contact currentContact;
-	// Indique si le contact a été modifié
-	private boolean contactModified = false ;
 
-	// Constructeur du panel
+	/**
+	 * Instantiates a new contact modify panel.
+	 *
+	 * @param contact the contact
+	 */
 	public ContactModifyPanel(Contact contact) {
 		super();
 
@@ -39,7 +54,11 @@ public class ContactModifyPanel extends ContactEditPanel {
 		imageButton.setIcon(contact.getPicture());
 	}
 
-	// Listener du cancelButton
+	/**
+	 * Ok action. Modifies the contact, and
+	 * tells the indicidual panel that the contact
+	 * has been modified.
+	 */
 	@Override
 	public void okAction() {
 		//Sauvegarde des modif.
@@ -58,11 +77,8 @@ public class ContactModifyPanel extends ContactEditPanel {
 			Ressources.CONTACTLIST.modifyContact(currentContact, lastName, firstName, number, email, picture);
 			// La méthode sérialization prend en paramètre la CONTACTLIST et le fichier de sérialization
 			Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
-			boolean oldProperty = false ;
-			//indique que le contact a été modifié
-			contactModified = true ;
 			//indique une modification des propriétés du contact
-			firePropertyChange("contactModified", oldProperty, contactModified);
+			firePropertyChange("contactModified", false, true);
 		}
 	}
 }
