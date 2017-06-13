@@ -9,7 +9,10 @@ package app_tictactoe;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -47,15 +50,32 @@ public class TicTacToePanel extends JPanel
 	{
 		//starts without an AI
 		isVSAI=false ;
-		setLayout(new FlowLayout());
-		add(gamePanel) ;
+
+//		setPreferredSize(new Dimension(300,600)); 
+		setLayout(new GridBagLayout());
+		GridBagConstraints gc = new GridBagConstraints();
+		gc.fill = GridBagConstraints.BOTH;
+		gc.insets = new Insets(15,15,15,15);
+		
+		gc.gridx = 0;
+		gc.gridy = 0;
+		add((gamePanel),gc);
+
 		newGame.addActionListener(new NewGameListener());
 		newGame.setFont(Ressources.DEFAULT_FONT);
-		add(newGame);
-		vsAI.addActionListener(new vsAIListener());
-		add(vsAI) ;
-		gamePanel.newGame(isVSAI);
+		gc.gridx = 0;
+		gc.gridy = 1;
 		
+	
+	
+		JPanel newGameAIpanel = new JPanel ();
+		newGameAIpanel.setLayout(new BorderLayout());
+		newGameAIpanel.add((newGame),BorderLayout.WEST);
+		vsAI.addActionListener(new vsAIListener());
+		newGameAIpanel.add((vsAI),BorderLayout.EAST);
+		gamePanel.newGame(isVSAI);
+		add((newGameAIpanel),gc);
+	
 	}
 	
 	/**
