@@ -69,7 +69,7 @@ public abstract class AppManager
 			activeApp = homeApp ;
 
 		}
-		Ressources.MAINFRAME.reloadCenterPanel();
+		SmartPhone.reloadCenterPanel();
 	}
 
 	public static JPanel getActivePanel()

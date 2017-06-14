@@ -77,7 +77,7 @@ public abstract class Serializer
 		}
 		catch (Exception e)
 		{
-			JOptionPane.showMessageDialog(Ressources.MAINFRAME, "Impossible d'ecrire le fichier :"+path+"\nVérifiez que le dossier n'est pas en lecture seule");
+			JOptionPane.showMessageDialog(null, "Impossible d'ecrire le fichier :"+path+"\nVérifiez que le dossier n'est pas en lecture seule");
 		} ;
 	}
 }

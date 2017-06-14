@@ -119,7 +119,7 @@ public abstract class DefaultApplication extends JComponent
 	 */
 	public void activePanelChanged()
 	{
-		Ressources.MAINFRAME.reloadCenterPanel();
+		SmartPhone.reloadCenterPanel();
 	}
 	
 	

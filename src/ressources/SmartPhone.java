@@ -37,9 +37,10 @@ public class SmartPhone
 	public static void main(String[] args) throws IOException
 	{		
 		verifyDependencies() ;
+		AppManager.start();
 		System.out.println(Ressources.DATAPATH);
-		mainFrame = new MainFrame() ;
-		mainFrame.setVisible(true);		
+		Ressources.MAINFRAME = new MainFrame() ;
+		Ressources.MAINFRAME.setVisible(true);		
 
 	}
 
@@ -103,7 +104,7 @@ public class SmartPhone
 	}
 	public static void reloadCenterPanel()
 	{
-		mainFrame.refreshCenterPanel() ;
+		Ressources.MAINFRAME.refreshCenterPanel() ;
 	}
 
 }

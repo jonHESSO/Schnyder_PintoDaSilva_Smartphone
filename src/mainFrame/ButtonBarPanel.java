@@ -19,6 +19,7 @@ import app_home.HomePanel;
 import ressources.AppManager;
 import ressources.DesignButton;
 import ressources.Ressources;
+import ressources.SmartPhone;
 
 /**
  * The Class ButtonBarPanel.
@@ -61,7 +62,7 @@ public class ButtonBarPanel extends JPanel
 			{
 				if(multitaskIsOpen == true)
 				{
-					Ressources.MAINFRAME.reloadCenterPanel();
+					SmartPhone.reloadCenterPanel();
 					multitaskIsOpen = false ;
 				}
 				else
