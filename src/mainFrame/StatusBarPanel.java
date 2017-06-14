@@ -7,12 +7,14 @@
 package mainFrame;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -30,6 +32,8 @@ public class StatusBarPanel extends JPanel implements ActionListener
 	
 	/** The time. */
 	JLabel time ;
+	
+	JLabel batteryIcon ;
 	
 	/** The battery percent. */
 	JLabel batteryPercent ;
@@ -60,12 +64,26 @@ public class StatusBarPanel extends JPanel implements ActionListener
 		
 		Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
 		
-		batteryPercent = new SmallTextLabel(getBatteryPercent()+"  "+getBatteryState());
+		JPanel leftPanel = new JPanel() ;
+		JPanel rightPanel = new JPanel() ;
+		
+		leftPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+		rightPanel.setLayout(new FlowLayout(FlowLayout.TRAILING)) ;
+		
+		
+		batteryPercent = new SmallTextLabel(getBatteryState()+"  "+getBatteryPercent());
 
 		time = new SmallTextLabel(getDate()) ;
 		
-		add(time,BorderLayout.WEST) ;
-		add(batteryPercent,BorderLayout.EAST) ;
+		batteryIcon = new JLabel(batteryStatus.getBatteryStateIcon())		 ;
+		
+		leftPanel.add(time) ;
+		rightPanel.add(batteryPercent) ;
+		rightPanel.add(batteryIcon);
+//		add(time,BorderLayout.WEST) ;
+//		add(batteryPercent,BorderLayout.EAST) ;
+		add(leftPanel,BorderLayout.WEST) ;
+		add(rightPanel,BorderLayout.EAST) ;
 		
 	}
 	
@@ -80,7 +98,8 @@ public class StatusBarPanel extends JPanel implements ActionListener
 		if(ev.getSource()==timer){
 			Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);
 			time.setText(getDate());// this will call at every 1 second
-			batteryPercent.setText(getBatteryPercent()+"  "+getBatteryState());
+			batteryPercent.setText(getBatteryState()+"  "+getBatteryPercent());
+			batteryIcon.setIcon(batteryStatus.getBatteryStateIcon());
 		}
 	}
 

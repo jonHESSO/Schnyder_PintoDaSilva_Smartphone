@@ -7,6 +7,7 @@
 package app_tictactoe;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -47,6 +48,10 @@ public class TicTacToePanel extends JPanel
 	/** The vs AI label	 */
 	JLabel vsAILabel = new DefaultTextLabel("VS AI") ;
 	
+	JPanel background  ;
+	JLabel backgroundLabel ;
+
+	
 	/**
 	 * Instantiates a new tic tac toe panel.
 	 */
@@ -63,14 +68,23 @@ public class TicTacToePanel extends JPanel
 		
 		gc.gridx = 0;
 		gc.gridy = 0;
-		add((gamePanel),gc);
+		
+//		add(background) ;
+//		gamePanel.setBackground(new Color(255, 0, 0, 20));
+//		add(new AlphaContainer(gamePanel),gc) ;
+		background = new JPanel() ;
+		backgroundLabel = new JLabel(new ImageIcon(Ressources.DATAPATH+"data/Icons/tictactoe/grille.png")) ;
+		background.add(backgroundLabel) ;
+		add(background) ;
+//		add(new AlphaContainer(gamePanel),gc) ;
+		add(gamePanel,gc);
 
 		newGame.addActionListener(new NewGameListener());
 		newGame.setFont(Ressources.DEFAULT_FONT);
 		gc.gridx = 0;
 		gc.gridy = 1;
 		
-	
+		
 	
 		JPanel newGameAIpanel = new JPanel ();
 		newGameAIpanel.setLayout(new BorderLayout());
@@ -97,7 +111,8 @@ public class TicTacToePanel extends JPanel
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gamePanel.newGame(isVSAI); ;
+			gamePanel.newGame(isVSAI);
+//			background.repaint();
 		}
 		
 	}

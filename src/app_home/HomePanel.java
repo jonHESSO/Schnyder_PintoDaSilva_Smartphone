@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import app_contacts.ContactApplication;
 import app_gallery.GalleryApplication;
 import app_tictactoe.TicTacToeApplication;
+import ressources.AppManager;
 import ressources.DefaultApplication;
 import ressources.DesignButton;
 import ressources.Ressources;
@@ -102,36 +103,39 @@ public class HomePanel extends JPanel
 //			DefaultApplication oldValue = Ressources.ACTIVEAPPLICATION ;
 			if(ae.getSource()==galleryButton)
 			{
-				if (Ressources.GALLERYAPP == null)
-				{
-					Ressources.GALLERYAPP = new GalleryApplication() ;
-//					Ressources.GALLERYAPP.addPropertyChangeListener(new ActivePanelListener());
-				}
-				Ressources.ACTIVEAPPLICATION = Ressources.GALLERYAPP ;	
-				Ressources.MAINFRAME.reloadCenterPanel();
+				AppManager.setActiveApp("gallery");
+//				if (Ressources.GALLERYAPP == null)
+//				{
+//					Ressources.GALLERYAPP = new GalleryApplication() ;
+////					Ressources.GALLERYAPP.addPropertyChangeListener(new ActivePanelListener());
+//				}
+//				Ressources.ACTIVEAPPLICATION = Ressources.GALLERYAPP ;	
+//				Ressources.MAINFRAME.reloadCenterPanel();
 
 			}
 			if(ae.getSource()==contactButton)
 			{
-				if (Ressources.CONTACTAPP == null)
-				{
-					Ressources.CONTACTAPP = new ContactApplication() ;
-//					Ressources.CONTACTAPP.addPropertyChangeListener(new ActivePanelListener());
-				}
-				Ressources.ACTIVEAPPLICATION = Ressources.CONTACTAPP ;
-				Ressources.MAINFRAME.reloadCenterPanel();
+				AppManager.setActiveApp("contact");
+//				if (Ressources.CONTACTAPP == null)
+//				{
+//					Ressources.CONTACTAPP = new ContactApplication() ;
+////					Ressources.CONTACTAPP.addPropertyChangeListener(new ActivePanelListener());
+//				}
+//				Ressources.ACTIVEAPPLICATION = Ressources.CONTACTAPP ;
+//				Ressources.MAINFRAME.reloadCenterPanel();
 				
 			}
 			if(ae.getSource()==tictactoeButton)
 			{
-				if (Ressources.TICTACTOEAPP == null)
-				{
-					Ressources.TICTACTOEAPP = new TicTacToeApplication() ;
-//					Ressources.TICTACTOEAPP.addPropertyChangeListener(new ActivePanelListener());
-				}
-				Ressources.ACTIVEAPPLICATION = Ressources.TICTACTOEAPP ;
-				Ressources.MAINFRAME.reloadCenterPanel();
-				
+				AppManager.setActiveApp("tictactoe");
+//				if (Ressources.TICTACTOEAPP == null)
+//				{
+//					Ressources.TICTACTOEAPP = new TicTacToeApplication() ;
+////					Ressources.TICTACTOEAPP.addPropertyChangeListener(new ActivePanelListener());
+//				}
+//				Ressources.ACTIVEAPPLICATION = Ressources.TICTACTOEAPP ;
+//				Ressources.MAINFRAME.reloadCenterPanel();
+//				
 			}
 			
 //			firePropertyChange("activeAppChanged", oldValue, Ressources.ACTIVEAPPLICATION);

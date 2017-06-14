@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import app_home.HomeApplication;
+import app_home.HomePanel;
 
 
 /**
@@ -83,7 +84,7 @@ public abstract class DefaultApplication extends JComponent
 	 */
 	public void removePanel(JPanel panel)
 	{
-		if ((Ressources.ACTIVEAPPLICATION instanceof HomeApplication)==false)
+		if ((AppManager.getActivePanel() instanceof HomePanel)==false)
 		{
 
 			openPanels.remove(panel) ;
@@ -93,18 +94,18 @@ public abstract class DefaultApplication extends JComponent
 				switch (className)
 				{
 				case "GalleryApplication":
-					Ressources.GALLERYAPP = null ;
+					AppManager.removeApp("gallery");
 					break;
 				case "ContactApplication":
-					Ressources.CONTACTAPP = null ;
+					AppManager.removeApp("contact");
 					break;
 				case "TicTacToeApplication":
-					Ressources.TICTACTOEAPP = null ;
+					AppManager.removeApp("tictactoe") ;
 					break;
 				default:
 					break;
 				}
-				Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
+				AppManager.setActiveApp("home") ;
 			}
 			activePanelChanged() ;
 		}

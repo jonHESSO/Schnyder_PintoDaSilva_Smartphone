@@ -24,6 +24,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ressources.AppManager;
 import ressources.Ressources;
 
 // TODO: Auto-generated Javadoc
@@ -65,12 +66,12 @@ public class GalleryPanel extends GalleryIconListPanel
 				if(evt.getPropertyName().equals("pictureDeleted"))
 				{
 					deletePicture(pictures.get(selectedIndex)) ;
-					Ressources.GALLERYAPP.removePanel(selectedPicturePanel);
+					AppManager.removeSpecificPanel(selectedPicturePanel);
 				}
 					
 			}
 		});
-		Ressources.GALLERYAPP.addPanel(selectedPicturePanel);
+		AppManager.addPanel(selectedPicturePanel);
 	}
 	
 	

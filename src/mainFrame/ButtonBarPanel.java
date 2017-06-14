@@ -16,6 +16,7 @@ import com.sun.istack.internal.NotNull;
 
 import app_home.HomeApplication;
 import app_home.HomePanel;
+import ressources.AppManager;
 import ressources.DesignButton;
 import ressources.Ressources;
 
@@ -65,12 +66,12 @@ public class ButtonBarPanel extends JPanel
 				}
 				else
 				{
-					if(Ressources.ACTIVEAPPLICATION.getActivePanel() instanceof HomePanel)
+					if(AppManager.getActivePanel() instanceof HomePanel)
 					{
 						System.out.println("Halp");
 					}
 					else{
-						Ressources.ACTIVEAPPLICATION.removePanel(Ressources.ACTIVEAPPLICATION.getActivePanel());
+						AppManager.removeActivePanel();
 					}
 				}
 			}
@@ -84,8 +85,7 @@ public class ButtonBarPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
-				Ressources.MAINFRAME.reloadCenterPanel();
+				AppManager.setActiveApp("home");
 			}
 		});
 
@@ -133,19 +133,19 @@ public class ButtonBarPanel extends JPanel
 		public MultiTaskPanel(){
 			super() ;
 			ActionListener buttonListener = new MultiTaskListener() ;
-			if (Ressources.GALLERYAPP != null)
+			if (AppManager.isAppActive("gallery") == true)
 			{
 				galleryButton = new JButton("Gallery") ;
 				galleryButton.addActionListener(buttonListener);
 				add(galleryButton) ;
 			}
-			if (Ressources.CONTACTAPP != null)
+			if (AppManager.isAppActive("contact") == true)
 			{
 				contactButton = new JButton("Contact") ;
 				contactButton.addActionListener(buttonListener);
 				add(contactButton) ;
 			}
-			if (Ressources.TICTACTOEAPP != null)
+			if (AppManager.isAppActive("morpion") == true)
 			{
 				tictactoeButton = new JButton("Morpion") ;
 				tictactoeButton.addActionListener(buttonListener);
@@ -175,22 +175,22 @@ public class ButtonBarPanel extends JPanel
 				switch (source)
 				{
 				case "Gallery" :
-					Ressources.ACTIVEAPPLICATION = Ressources.GALLERYAPP ;
+					AppManager.setActiveApp("gallery"); ;
 					break ;
 				case "Contact" :
-					Ressources.ACTIVEAPPLICATION = Ressources.CONTACTAPP ;
+					AppManager.setActiveApp("contact"); ;
 					break ;
 				case "Morpion" :
-					Ressources.ACTIVEAPPLICATION = Ressources.TICTACTOEAPP ;
+					AppManager.setActiveApp("tictactoe") ;
 					break ;	
 				case "Tout fermer" :
-					Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
-					Ressources.GALLERYAPP = null ;
-					Ressources.CONTACTAPP = null ;
-					Ressources.TICTACTOEAPP = null ;
+					AppManager.removeApp("gallery");
+					AppManager.removeApp("contact");
+					AppManager.removeApp("tictactoe");
+					AppManager.setActiveApp("home");
 				}
 				multitaskIsOpen = false ;
-				Ressources.MAINFRAME.reloadCenterPanel();
+//				Ressources.MAINFRAME.reloadCenterPanel();
 			}
 
 		}

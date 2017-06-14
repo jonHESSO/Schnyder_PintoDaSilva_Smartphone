@@ -20,6 +20,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import ressources.AppManager;
 import ressources.Ressources;
 import ressources.Serializer;
 
@@ -115,12 +116,12 @@ public class ContactListPanel extends JPanel {
 							if (evt.getPropertyName().equals("contactDeleted"))
 							{
 								ContactListPanel.this.reload() ;
-								Ressources.CONTACTAPP.removePanel(individualPanel) ;
+								AppManager.removeSpecificPanel(individualPanel) ;
 							}
 						}
 					});
 					//ajout du panel d'info du contact
-					Ressources.CONTACTAPP.addPanel(individualPanel) ;
+					AppManager.addPanel(individualPanel) ;
 				}
 			}
 		});
@@ -173,12 +174,12 @@ public class ContactListPanel extends JPanel {
 					if (evt.getPropertyName().equals("contactCreated"))
 					{
 						ContactListPanel.this.reload() ;
-						Ressources.CONTACTAPP.removePanel(creationPanel) ;
+						AppManager.removeSpecificPanel(creationPanel) ;
 					}
 				}
 			});
 			//ajout du panel de creation de contact
-			Ressources.CONTACTAPP.addPanel(creationPanel) ;
+			AppManager.addPanel(creationPanel) ;
 		}
 	}
 	

@@ -29,6 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Insets;
+
+import ressources.AppManager;
 import ressources.ContactIndividualTitle;
 import ressources.ContactTextField;
 import ressources.Ressources;
@@ -219,7 +221,7 @@ public abstract class ContactEditPanel extends JPanel {
 	 * Cancel action.
 	 */
 	public void cancelAction(){
-		Ressources.ACTIVEAPPLICATION.removePanel(Ressources.ACTIVEAPPLICATION.getActivePanel());
+		AppManager.removeActivePanel();
 
 	}
 
@@ -242,7 +244,7 @@ public abstract class ContactEditPanel extends JPanel {
 		{
 			JPanel pictureSelection = new ContactSelectPicturePanel() ;
 			pictureSelection.addPropertyChangeListener(new SelectedPictureListener());
-			Ressources.CONTACTAPP.addPanel(pictureSelection);
+			AppManager.addPanel(pictureSelection);
 		}
 
 	}
@@ -270,7 +272,7 @@ public abstract class ContactEditPanel extends JPanel {
 				// On ajoute l'image sélectionnée sur le button
 				imageButton.setIcon((Icon)((ImageIcon)evt.getNewValue()));
 				// On retire le panel de sélection d'image
-				Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel());
+				AppManager.removeActivePanel();
 			}
 
 		}

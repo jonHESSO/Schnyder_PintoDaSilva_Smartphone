@@ -25,6 +25,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.corba.se.pept.protocol.ServerRequestDispatcher;
 
+import ressources.AppManager;
 import ressources.Ressources;
 import ressources.Serializer;
 
@@ -81,7 +82,7 @@ public class ContactCreationPanel extends ContactEditPanel {
 			Serializer.serializableObject(Ressources.CONTACTLIST, Ressources.CONTACT_SERIALISATION);
 
 			//Ferme le panel une fois le contact créé
-			Ressources.CONTACTAPP.removePanel(Ressources.CONTACTAPP.getActivePanel()) ;
+			AppManager.removeActivePanel(); ;
 
 			//indique une modification des propriétés du contact
 			firePropertyChange("contactCreated", false, true);

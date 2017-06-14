@@ -13,6 +13,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 
+import ressources.AppManager;
 import ressources.ContactIndividualLabel;
 import ressources.ContactIndividualTitle;
 import ressources.Ressources;
@@ -119,7 +120,7 @@ public class ContactIndividualPanel extends JPanel {
 						// Reload IndividualPanel
 						ContactIndividualPanel.this.reload() ;
 						// On supprime le modifyPanel
-						Ressources.CONTACTAPP.removePanel(modifyPanel) ;
+						AppManager.removeSpecificPanel(modifyPanel) ;
 						// On indique que le contact a Ã©tÃ© modifiÃ©
 						contactModified = (boolean) evt.getNewValue() ;
 						boolean oldValue = false ;
@@ -129,7 +130,7 @@ public class ContactIndividualPanel extends JPanel {
 				}
 			});
 
-			Ressources.CONTACTAPP.addPanel(modifyPanel) ;
+			AppManager.addPanel(modifyPanel) ;
 		}
 	}
 	

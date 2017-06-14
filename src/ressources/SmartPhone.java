@@ -25,6 +25,8 @@ import mainFrame.MainFrame;
  */
 public class SmartPhone
 {
+	
+	static MainFrame mainFrame ;
 
 	/**
 	 * The main method.
@@ -36,8 +38,8 @@ public class SmartPhone
 	{		
 		verifyDependencies() ;
 		System.out.println(Ressources.DATAPATH);
-		Ressources.MAINFRAME = new MainFrame() ;
-		Ressources.MAINFRAME.setVisible(true);		
+		mainFrame = new MainFrame() ;
+		mainFrame.setVisible(true);		
 
 	}
 
@@ -98,6 +100,10 @@ public class SmartPhone
 			Serializer.serializableObject(new TicTacToeStats(), Ressources.TICTACTOE_SERIALISATION);
 		}
 
+	}
+	public static void reloadCenterPanel()
+	{
+		mainFrame.refreshCenterPanel() ;
 	}
 
 }

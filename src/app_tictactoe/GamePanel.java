@@ -6,6 +6,7 @@
 
 package app_tictactoe;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.* ;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
+
 
 import ressources.Ressources;
 import ressources.Serializer;
@@ -31,7 +33,12 @@ public class GamePanel extends JPanel
 	private final Dimension TICTACTOE_APP_JPANEL_DIMENSION = new Dimension(300,300) ;
 
 	/** The cells. */
-	private JButton[][] cells = new JButton[3][3];
+//	private JButton[][] cells = new JButton[3][3];
+	private JLabel[][] cells = new JLabel[3][3];
+	
+	JPanel cellPanel ;
+
+
 	
 	/** The game. */
 	protected Game game ;
@@ -56,19 +63,36 @@ public class GamePanel extends JPanel
 	 */
 	public GamePanel()
 	{
+		
 		this.currentPlayer = 1 ;
 		loadStats();
 		setPreferredSize(TICTACTOE_APP_JPANEL_DIMENSION); 
 		setLayout(new GridLayout(3,3));
+		
+		
+		
+
+		
+		
+		
+//		cellPanel = new JPanel() ;
+//		cellPanel.setBackground( new Color(255, 0, 0, 20) );
+//		setOpaque(false);
+//		setBackground(new Color(0,0,0,1));
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				cells[i][j] = new JButton(" ") ;
+				cells[i][j] = new JLabel() ;
+				cells[i][j].setOpaque(false);
+				cells[i][j].setBackground(new Color(0,0,0));
+//				cells[i][j].setBorderPainted(false);
+//				cells[i][j].setContentAreaFilled(false);
 				cells[i][j].addMouseListener(new MoveListener());
 				add(cells[i][j]);
 			}
 		}
+		
 	}
 
 	/**
@@ -79,17 +103,28 @@ public class GamePanel extends JPanel
 	 */
 	private void displayMove(int[] cell, int currentPlayer)
 	{
+		int row = cell[0] ;
+		int column = cell[1] ;
 		String currentPlayerName = null ;
+		ImageIcon icon = null ;
 		switch (currentPlayer)
 		{
 		case -1 :
+			icon = new ImageIcon(Ressources.DATAPATH+"data/Icons/tictactoe/o.png") ;
 			currentPlayerName = "O" ;
 			break ;
 		case 1 :
+			icon = new ImageIcon(Ressources.DATAPATH+"data/Icons/tictactoe/x.png") ;
 			currentPlayerName = "X" ;
 			break ;
 		}
-		this.cells[cell[0]][cell[1]].setText(currentPlayerName);
+//		this.cells[cell[0]][cell[1]].setText(currentPlayerName);
+		this.cells[row][column].setIcon(icon);
+//		this.cells[row][column].setOpaque(false);
+//		this.cells[row][column].repaint() ;
+//		Ressources.MAINFRAME.reloadCenterPanel();
+//		this.repaint();
+//		this.getParent().repaint();
 	}
 
 	/**
@@ -110,7 +145,7 @@ public class GamePanel extends JPanel
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				cells[i][j].setText(" ") ;
+				cells[i][j].setIcon(null) ;
 			}
 		}
 	}
@@ -284,7 +319,7 @@ public class GamePanel extends JPanel
 	 * @param clickedCell the clicked cell
 	 * @return the cell index [][]
 	 */
-	private int[] getCell(JButton clickedCell)
+	private int[] getCell(JLabel clickedCell)
 	{
 		int[] cell = new int[2];
 		for (int i = 0; i < 3; i++)
@@ -339,7 +374,7 @@ public class GamePanel extends JPanel
 		 */
 		public void mouseClicked(MouseEvent e)
 		{
-			int[] cell =  getCell((JButton)e.getSource()) ;
+			int[] cell =  getCell((JLabel)e.getSource()) ;
 			if (game.getStatus()!=0) 
 			{
 				return ;
@@ -350,7 +385,12 @@ public class GamePanel extends JPanel
 			}
 
 
-		}		
+		}
+//	            @Override
+//	            public void mouseEntered(MouseEvent event){
+//	                JButton buton = (JButton)event.getSource();
+//	                buton.setContentAreaFilled(false);  //when hoovered it will show borders and fill area.
+//	        }
 	}
 
 }

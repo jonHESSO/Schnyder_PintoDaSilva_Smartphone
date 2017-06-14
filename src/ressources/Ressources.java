@@ -143,18 +143,20 @@ public class Ressources
 	public static MainFrame MAINFRAME ;
 	
 	/** The activeapplication. */
-	public static DefaultApplication ACTIVEAPPLICATION ;
-	
-	/** The contactapp. */
-	public static DefaultApplication CONTACTAPP ;
-	
-	/** The galleryapp. */
-	public static DefaultApplication GALLERYAPP ;
-	
-	/** The tictactoeapp. */
-	public static DefaultApplication TICTACTOEAPP ;
-	
-	/** The homeapp. */
-	public static DefaultApplication HOMEAPP ;
+//	public static DefaultApplication ACTIVEAPPLICATION ;
+//	
+//	/** The contactapp. */
+//	public static DefaultApplication CONTACTAPP ;
+//	
+//	/** The galleryapp. */
+//	public static DefaultApplication GALLERYAPP ;
+//	
+//	/** The tictactoeapp. */
+//	public static DefaultApplication TICTACTOEAPP ;
+//	
+//	/** The homeapp. */
+//	public static DefaultApplication HOMEAPP ;
+
+//	public static AppManager APPMANAGER;
 	
 }

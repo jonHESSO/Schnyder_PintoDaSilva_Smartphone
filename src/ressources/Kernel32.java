@@ -10,6 +10,8 @@ package ressources;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import com.sun.jna.Native;
 import com.sun.jna.Structure;
 import com.sun.jna.win32.StdCallLibrary;
@@ -80,6 +82,16 @@ public interface Kernel32 extends StdCallLibrary {
         	if(BatteryLifePercent<=(byte)100) return "Very charged" ;
         	return null ;	
         	
+        }
+        
+        public ImageIcon getBatteryStateIcon()
+        {
+        	if(ACLineStatus == 1) return new ImageIcon(Ressources.DATAPATH+"/data/Icons/Battery_Icons/charging.png") ;
+        	if(BatteryLifePercent<=(byte)25) return new ImageIcon(Ressources.DATAPATH+"/data/Icons/Battery_Icons/25.png") ;
+        	if(BatteryLifePercent<=(byte)50) return new ImageIcon(Ressources.DATAPATH+"/data/Icons/Battery_Icons/50.png") ;
+        	if(BatteryLifePercent<=(byte)75) return new ImageIcon(Ressources.DATAPATH+"/data/Icons/Battery_Icons/75.png") ;
+        	if(BatteryLifePercent<=(byte)100)return new ImageIcon(Ressources.DATAPATH+"/data/Icons/Battery_Icons/100.png") ;
+        	return null ;
         }
         
         public Byte getBatteryPercent(){

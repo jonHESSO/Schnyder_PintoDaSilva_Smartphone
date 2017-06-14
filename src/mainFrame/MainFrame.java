@@ -18,6 +18,7 @@ import app_contacts.*;
 import app_gallery.*;
 import app_home.HomeApplication;
 import app_tictactoe.*;
+import ressources.AppManager;
 import ressources.DefaultApplication;
 import ressources.Ressources;
 
@@ -37,12 +38,12 @@ public class MainFrame extends JFrame
 	public MainFrame()
 	{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		Ressources.HOMEAPP = new HomeApplication() ;
-		Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
+//		Ressources.HOMEAPP = new HomeApplication() ;
+//		Ressources.ACTIVEAPPLICATION = Ressources.HOMEAPP ;
 
 		centerPanel = new JPanel() ;
 		centerPanel.setPreferredSize(Ressources.DEFAULT_APP_JPANEL_DIMENSION);
-		reloadCenterPanel() ;
+		refreshCenterPanel() ;
 
 
 		setSize(Ressources.DEFAULT_FRAME_DIMENSION);
@@ -56,11 +57,11 @@ public class MainFrame extends JFrame
 	/**
 	 * Reload center panel.
 	 */
-	public void reloadCenterPanel()
+	public void refreshCenterPanel()
 	{
 		centerPanel.removeAll();
 
-		centerPanel.add(Ressources.ACTIVEAPPLICATION.getActivePanel()) ;
+		centerPanel.add(AppManager.getActivePanel()) ;
 		centerPanel.revalidate();
 		centerPanel.repaint();
 		revalidate();
